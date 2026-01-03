@@ -5,12 +5,12 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Accueil</ion-title>
+        <ion-title>A propos</ion-title>
       </ion-toolbar>
     </ion-header>
     
     <ion-content class="ion-padding">
-      <h1>Page d'accueil</h1>
+      <h1>A propos</h1>
       <p>Contenu ici</p>
     </ion-content>
   </ion-page>
