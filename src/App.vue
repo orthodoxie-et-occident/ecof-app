@@ -2,7 +2,7 @@
   <ion-app>
     <ion-menu content-id="main-content">
       <ion-header>
-        <ion-toolbar>
+        <ion-toolbar color="primary">
           <ion-title>Menu</ion-title>
         </ion-toolbar>
       </ion-header>
