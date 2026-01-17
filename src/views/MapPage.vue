@@ -9,9 +9,7 @@
             </ion-toolbar>
         </ion-header>
 
-        <ion-content class="ion-padding">
-            <h1>Carte des lieux de culte</h1>
-
+        <ion-content class="map-content">
             <!-- Carte uMap -->
             <div class="map-container">
                 <iframe :src="umapUrl" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
@@ -35,17 +33,19 @@ const umapUrl = 'https://umap.openstreetmap.fr/fr/map/ecof-france_1159509?scaleC
 </script>
 
 <style scoped>
-.map-container {
-    width: 100%;
-    height: calc(100vh - 200px);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.map-content {
+    --padding-start: 0;
+    --padding-end: 0;
+    --padding-top: 0;
+    --padding-bottom: 0;
 }
 
-@media (max-width: 768px) {
-    .map-container {
-        height: calc(100vh - 200px)
-    }
+.map-container {
+    width: 100%;
+    height: 100%;
+}
+
+.map-container iframe {
+    display: block;
 }
 </style>

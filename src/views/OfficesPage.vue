@@ -19,7 +19,7 @@
             <ion-list>
                 <ion-item button @click="voirHoraires(1)">
                     <ion-thumbnail slot="start">
-                        <img src="/favicon.png" alt="Cathédrale Saint-Louis" />
+                        <img src="@/assets/img/parishes/Bordeaux.webp" alt="Bordeaux" />
                     </ion-thumbnail>
                     <ion-label>
                         <h2>Paroisse de l'Exaltation de la Sainte Croix et Saint-Paulin de Nole</h2>
@@ -37,7 +37,7 @@
             <ion-list>
                 <ion-item button @click="voirHoraires(3)">
                     <ion-thumbnail slot="start">
-                        <img src="/favicon.png" alt="Église Notre-Dame" />
+                        <img src="@/assets/img/parishes/Montpellier.webp" alt="Montpellier" />
                     </ion-thumbnail>
                     <ion-label>
                         <h2>Paroisse de la Théophanie</h2>
@@ -55,7 +55,7 @@
             <ion-list>
                 <ion-item button @click="voirHoraires(4)">
                     <ion-thumbnail slot="start">
-                        <img src="/favicon.png" alt="Cathédrale Saint-Pierre" />
+                        <img src="@/assets/img/parishes/Amboise.webp" alt="Amboise" />
                     </ion-thumbnail>
                     <ion-label>
                         <h2>Paroisse du Moutier Saint-Martin</h2>
@@ -73,7 +73,7 @@
             <ion-list>
                 <ion-item button @click="voirHoraires(4)">
                     <ion-thumbnail slot="start">
-                        <img src="/favicon.png" alt="Cathédrale Saint-Pierre" />
+                        <img src="@/assets/img/parishes/Grenoble.webp" alt="Grenoble" />
                     </ion-thumbnail>
                     <ion-label>
                         <h2>Paroisse de la Résurrection</h2>
@@ -91,7 +91,7 @@
             <ion-list>
                 <ion-item button @click="voirHoraires(4)">
                     <ion-thumbnail slot="start">
-                        <img src="/favicon.png" alt="Cathédrale Saint-Pierre" />
+                        <img src="@/assets/img/parishes/Nantes.webp" alt="Nantes" />
                     </ion-thumbnail>
                     <ion-label>
                         <h2>Paroisse de la Trinité et Saint-Clair</h2>
@@ -109,7 +109,7 @@
             <ion-list>
                 <ion-item button @click="voirHoraires(4)">
                     <ion-thumbnail slot="start">
-                        <img src="/favicon.png" alt="Cathédrale Saint-Pierre" />
+                        <img src="@/assets/img/parishes/Orleans.webp" alt="Orleans" />
                     </ion-thumbnail>
                     <ion-label>
                         <h2>Paroisse Saint-Avit</h2>
@@ -119,7 +119,7 @@
                 </ion-item>
                 <ion-item button @click="voirHoraires(4)">
                     <ion-thumbnail slot="start">
-                        <img src="/favicon.png" alt="Cathédrale Saint-Pierre" />
+                        <img src="@/assets/img/parishes/StLoup.webp" alt="StLoup" />
                     </ion-thumbnail>
                     <ion-label>
                         <h2>Chapelle Saint-Loup de Sens et Sainte-Radegonde</h2>
@@ -137,7 +137,7 @@
             <ion-list>
                 <ion-item button @click="voirHoraires(4)">
                     <ion-thumbnail slot="start">
-                        <img src="/favicon.png" alt="Cathédrale Saint-Pierre" />
+                        <img src="@/assets/img/parishes/Angers.webp" alt="Angers" />
                     </ion-thumbnail>
                     <ion-label>
                         <h2>Paroisse Saint-Martin d'Anjou</h2>
@@ -155,7 +155,7 @@
             <ion-list>
                 <ion-item button @click="voirHoraires(4)">
                     <ion-thumbnail slot="start">
-                        <img src="/favicon.png" alt="Cathédrale Saint-Pierre" />
+                        <img src="@/assets/img/parishes/Vannes.webp" alt="Vannes" />
                     </ion-thumbnail>
                     <ion-label>
                         <h2>Chapelle Saint-Martin du Moustoir</h2>
@@ -173,7 +173,7 @@
             <ion-list>
                 <ion-item button @click="voirHoraires(4)">
                     <ion-thumbnail slot="start">
-                        <img src="/favicon.png" alt="Cathédrale Saint-Pierre" />
+                        <img src="@/assets/img/parishes/Lyon.webp" alt="Lyon" />
                     </ion-thumbnail>
                     <ion-label>
                         <h2>Paroisse Sainte-Marie et Saint-Jean</h2>
@@ -191,7 +191,7 @@
             <ion-list>
                 <ion-item button @click="voirHoraires(4)">
                     <ion-thumbnail slot="start">
-                        <img src="/favicon.png" alt="Cathédrale Saint-Pierre" />
+                        <img src="@/assets/img/parishes/Paris.webp" alt="Paris" />
                     </ion-thumbnail>
                     <ion-label>
                         <h2>Cathédrale Saint Irénée</h2>
@@ -209,7 +209,7 @@
             <ion-list>
                 <ion-item button @click="voirHoraires(4)">
                     <ion-thumbnail slot="start">
-                        <img src="/favicon.png" alt="Cathédrale Saint-Pierre" />
+                        <img src="@/assets/img/parishes/Poitiers.webp" alt="Poitiers" />
                     </ion-thumbnail>
                     <ion-label>
                         <h2>Paroisse Saint-Savin et Saint-Cyprien</h2>
