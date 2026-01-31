@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "@ionic/vue-router"
 import AboutPage from "../views/AboutPage.vue"
 import CalendarPage from "../views/CalendarPage.vue"
 import MapPage from "../views/MapPage.vue"
-import OfficesPage from "../views/OfficesPage.vue"
+import ParishesPage from "../views/ParishesPage.vue"
 import ParishPage from "../views/ParishPage.vue"
 import PrayersPage from "../views/PrayersPage.vue"
 import SynaxarPage from "../views/SynaxarPage.vue"
@@ -10,15 +10,15 @@ import SynaxarPage from "../views/SynaxarPage.vue"
 const routes = [
   {
     path: "/",
-    redirect: "/offices",
+    redirect: "/paroisses",
   },
   {
-    path: "/offices",
-    name: "Offices",
-    component: OfficesPage,
+    path: "/paroisses",
+    name: "Parishes",
+    component: ParishesPage,
   },
   {
-    path: "/parish",
+    path: "/paroisse/:id/horaires",
     name: "Parish",
     component: ParishPage,
   },

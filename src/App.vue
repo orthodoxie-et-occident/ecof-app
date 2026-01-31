@@ -8,8 +8,8 @@
       </ion-header>
       <ion-content class="ion-padding">
         <ion-list>
-          <ion-item button @click="navigateTo('offices')">
-            <ion-label>Offices</ion-label>
+          <ion-item button @click="navigateTo('paroisses')">
+            <ion-label>Paroisses</ion-label>
           </ion-item>
 
           <ion-item button @click="navigateTo('calendar')">

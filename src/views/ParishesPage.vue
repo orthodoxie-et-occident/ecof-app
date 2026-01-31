@@ -17,7 +17,7 @@
                 </ion-label>
             </ion-list-header>
             <ion-list>
-                <ion-item button @click="voirHoraires(1)">
+                <ion-item button @click="showEvents('bordeaux')">
                     <ion-thumbnail slot="start">
                         <img src="@/assets/img/parishes/Bordeaux.webp" alt="Bordeaux" />
                     </ion-thumbnail>
@@ -35,7 +35,7 @@
                 </ion-label>
             </ion-list-header>
             <ion-list>
-                <ion-item button @click="voirHoraires(3)">
+                <ion-item button @click="showEvents('montpellier')">
                     <ion-thumbnail slot="start">
                         <img src="@/assets/img/parishes/Montpellier.webp" alt="Montpellier" />
                     </ion-thumbnail>
@@ -53,7 +53,7 @@
                 </ion-label>
             </ion-list-header>
             <ion-list>
-                <ion-item button @click="voirHoraires(4)">
+                <ion-item button @click="showEvents('amboise')">
                     <ion-thumbnail slot="start">
                         <img src="@/assets/img/parishes/Amboise.webp" alt="Amboise" />
                     </ion-thumbnail>
@@ -71,7 +71,7 @@
                 </ion-label>
             </ion-list-header>
             <ion-list>
-                <ion-item button @click="voirHoraires(4)">
+                <ion-item button @click="showEvents('grenoble')">
                     <ion-thumbnail slot="start">
                         <img src="@/assets/img/parishes/Grenoble.webp" alt="Grenoble" />
                     </ion-thumbnail>
@@ -89,7 +89,7 @@
                 </ion-label>
             </ion-list-header>
             <ion-list>
-                <ion-item button @click="voirHoraires(4)">
+                <ion-item button @click="showEvents('nantes')">
                     <ion-thumbnail slot="start">
                         <img src="@/assets/img/parishes/Nantes.webp" alt="Nantes" />
                     </ion-thumbnail>
@@ -107,7 +107,7 @@
                 </ion-label>
             </ion-list-header>
             <ion-list>
-                <ion-item button @click="voirHoraires(4)">
+                <ion-item button @click="showEvents('orleans')">
                     <ion-thumbnail slot="start">
                         <img src="@/assets/img/parishes/Orleans.webp" alt="Orleans" />
                     </ion-thumbnail>
@@ -117,7 +117,7 @@
                     </ion-label>
                     <ion-icon :icon="chevronForward" slot="end"></ion-icon>
                 </ion-item>
-                <ion-item button @click="voirHoraires(4)">
+                <ion-item button @click="showEvents('stloup')">
                     <ion-thumbnail slot="start">
                         <img src="@/assets/img/parishes/StLoup.webp" alt="StLoup" />
                     </ion-thumbnail>
@@ -135,7 +135,7 @@
                 </ion-label>
             </ion-list-header>
             <ion-list>
-                <ion-item button @click="voirHoraires(4)">
+                <ion-item button @click="showEvents('angers')">
                     <ion-thumbnail slot="start">
                         <img src="@/assets/img/parishes/Angers.webp" alt="Angers" />
                     </ion-thumbnail>
@@ -153,7 +153,7 @@
                 </ion-label>
             </ion-list-header>
             <ion-list>
-                <ion-item button @click="voirHoraires(4)">
+                <ion-item button @click="showEvents('vannes')">
                     <ion-thumbnail slot="start">
                         <img src="@/assets/img/parishes/Vannes.webp" alt="Vannes" />
                     </ion-thumbnail>
@@ -171,7 +171,7 @@
                 </ion-label>
             </ion-list-header>
             <ion-list>
-                <ion-item button @click="voirHoraires(4)">
+                <ion-item button @click="showEvents('lyon')">
                     <ion-thumbnail slot="start">
                         <img src="@/assets/img/parishes/Lyon.webp" alt="Lyon" />
                     </ion-thumbnail>
@@ -189,7 +189,7 @@
                 </ion-label>
             </ion-list-header>
             <ion-list>
-                <ion-item button @click="voirHoraires(4)">
+                <ion-item button @click="showEvents('paris')">
                     <ion-thumbnail slot="start">
                         <img src="@/assets/img/parishes/Paris.webp" alt="Paris" />
                     </ion-thumbnail>
@@ -207,7 +207,7 @@
                 </ion-label>
             </ion-list-header>
             <ion-list>
-                <ion-item button @click="voirHoraires(4)">
+                <ion-item button @click="showEvents('poitiers')">
                     <ion-thumbnail slot="start">
                         <img src="@/assets/img/parishes/Poitiers.webp" alt="Poitiers" />
                     </ion-thumbnail>
@@ -244,9 +244,9 @@ import { chevronForward } from 'ionicons/icons';
 
 const router = useRouter();
 
-const voirHoraires = (paroisse_id) => {
-    router.push(`/paroisses/${paroisse_id}/horaires`);
-};
+const showEvents = (paroisse_id) => {
+    router.push(`/paroisse/${paroisse_id}/horaires`);
+}
 </script>
 
 <style scoped>
