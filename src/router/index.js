@@ -44,7 +44,7 @@ const routes = [
     component: SynaxarPage,
   },
   {
-    path: "/saint",
+    path: "/saint/:id",
     name: "Saint",
     component: SaintPage,
   },

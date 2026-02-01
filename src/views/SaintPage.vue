@@ -11,13 +11,22 @@
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
-          <div class="example-content">Contenu de la vie</div>
+          <div v-if="loading" class="loading-container">
+            <ion-spinner></ion-spinner>
+          </div>
+          <div v-else-if="saintData?.vie_b" class="example-content">
+            {{ saintData.vie_b }}
+          </div>
+          <div v-else class="no-content">
+            <ion-icon src="/src/assets/icons/file-text.svg" size="large"></ion-icon>
+            <p>Aucune vie brève disponible</p>
+          </div>
         </ion-content>
       </ion-page>
     </ion-tab>
 
-    <ion-tab tab="lectures">
-      <ion-page id="lectures-page">
+    <ion-tab tab="synaxar">
+      <ion-page id="synaxar-page">
         <ion-header>
           <ion-toolbar color="primary">
             <ion-buttons slot="start">
@@ -27,13 +36,22 @@
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
-          <div class="example-content">Contenu de la vie</div>
+          <div v-if="loading" class="loading-container">
+            <ion-spinner></ion-spinner>
+          </div>
+          <div v-else-if="saintData?.vita_long" class="example-content">
+            {{ saintData.vita_long }}
+          </div>
+          <div v-else class="no-content">
+            <ion-icon src="/src/assets/icons/book-a.svg" size="large"></ion-icon>
+            <p>Aucune vie synaxaire disponible</p>
+          </div>
         </ion-content>
       </ion-page>
     </ion-tab>
 
-    <ion-tab tab="calendrier">
-      <ion-page id="calendrier-page">
+    <ion-tab tab="liturgy">
+      <ion-page id="liturgy-page">
         <ion-header>
           <ion-toolbar color="primary">
             <ion-buttons slot="start">
@@ -43,23 +61,32 @@
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
-          <div class="example-content">Contenu de la vie</div>
+          <div v-if="loading" class="loading-container">
+            <ion-spinner></ion-spinner>
+          </div>
+          <div v-else-if="saintData?.vita_liturgy" class="example-content">
+            {{ saintData.vita_liturgy }}
+          </div>
+          <div v-else class="no-content">
+            <ion-icon src="/src/assets/icons/scroll-text.svg" size="large"></ion-icon>
+            <p>Aucune vie liturgique disponible</p>
+          </div>
         </ion-content>
       </ion-page>
     </ion-tab>
 
     <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="saints">
+      <ion-tab-button tab="saints" :disabled="!saintData?.vie_b && !loading">
         <ion-icon src="/src/assets/icons/file-text.svg"></ion-icon>
         Vie brève
       </ion-tab-button>
 
-      <ion-tab-button tab="lectures">
+      <ion-tab-button tab="synaxar" :disabled="!saintData?.vita_long && !loading">
         <ion-icon src="/src/assets/icons/book-a.svg"></ion-icon>
         Vie synaxaire
       </ion-tab-button>
 
-      <ion-tab-button tab="calendrier">
+      <ion-tab-button tab="liturgy" :disabled="!saintData?.vita_liturgy && !loading">
         <ion-icon src="/src/assets/icons/scroll-text.svg"></ion-icon>
         Vie liturgique
       </ion-tab-button>
@@ -68,6 +95,8 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 import {
   IonContent,
   IonHeader,
@@ -80,6 +109,63 @@ import {
   IonToolbar,
   IonButtons,
   IonMenuButton,
-  IonIcon
+  IonIcon,
+  IonSpinner
 } from '@ionic/vue';
+
+const route = useRoute();
+const saintData = ref(null);
+const loading = ref(true);
+
+const fetchSaintData = async () => {
+  loading.value = true;
+  try {
+    const saintId = route.params.id;
+    const response = await fetch(`https://ecof-api-production.up.railway.app/api/vita/${saintId}`);
+    const data = await response.json();
+    saintData.value = data;
+  } catch (error) {
+    console.error('Erreur lors du chargement des données du saint:', error);
+  } finally {
+    loading.value = false;
+  }
+};
+
+onMounted(() => {
+  fetchSaintData();
+});
 </script>
+
+<style scoped>
+.example-content {
+  line-height: 1.8;
+  text-align: justify;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.no-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  color: var(--ion-color-medium);
+  text-align: center;
+}
+
+.no-content ion-icon {
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.no-content p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+</style>
