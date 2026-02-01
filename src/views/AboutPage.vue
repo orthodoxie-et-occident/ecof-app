@@ -45,7 +45,7 @@
           <p>Pour toute question ou suggestion, vous pouvez nous contacter&nbsp;:</p>
           <ul>
             <li>
-              E-mail : <a href="mailto:contact@ecof.info">contact@ecof.info</a>
+              E-mail : <a href="mailto:contact@ecof.info">contact@ecof.app</a>
             </li>
           </ul>
         </ion-card-content>
