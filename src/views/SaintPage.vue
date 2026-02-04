@@ -18,7 +18,7 @@
             {{ saintData.vie_b }}
           </div>
           <div v-else class="no-content">
-            <ion-icon src="/src/assets/icons/file-text.svg" size="large"></ion-icon>
+            <ion-icon :src="fileTextIcon" size="large"></ion-icon>
             <p>Aucune vie brève disponible</p>
           </div>
         </ion-content>
@@ -43,7 +43,7 @@
             {{ saintData.vita_long }}
           </div>
           <div v-else class="no-content">
-            <ion-icon src="/src/assets/icons/book-a.svg" size="large"></ion-icon>
+            <ion-icon :src="bookAIcon" size="large"></ion-icon>
             <p>Aucune vie synaxaire disponible</p>
           </div>
         </ion-content>
@@ -68,7 +68,7 @@
             {{ saintData.vita_liturgy }}
           </div>
           <div v-else class="no-content">
-            <ion-icon src="/src/assets/icons/scroll-text.svg" size="large"></ion-icon>
+            <ion-icon :src="scrollTextIcon" size="large"></ion-icon>
             <p>Aucune vie liturgique disponible</p>
           </div>
         </ion-content>
@@ -77,17 +77,17 @@
 
     <ion-tab-bar slot="bottom">
       <ion-tab-button tab="saints" :disabled="!saintData?.vie_b && !loading">
-        <ion-icon src="/src/assets/icons/file-text.svg"></ion-icon>
+        <ion-icon :src="fileTextIcon"></ion-icon>
         Vie brève
       </ion-tab-button>
 
       <ion-tab-button tab="synaxar" :disabled="!saintData?.vita_long && !loading">
-        <ion-icon src="/src/assets/icons/book-a.svg"></ion-icon>
+        <ion-icon :src="bookAIcon"></ion-icon>
         Vie synaxaire
       </ion-tab-button>
 
       <ion-tab-button tab="liturgy" :disabled="!saintData?.vita_liturgy && !loading">
-        <ion-icon src="/src/assets/icons/scroll-text.svg"></ion-icon>
+        <ion-icon :src="scrollTextIcon"></ion-icon>
         Vie liturgique
       </ion-tab-button>
     </ion-tab-bar>
@@ -112,6 +112,10 @@ import {
   IonIcon,
   IonSpinner
 } from '@ionic/vue';
+
+import fileTextIcon from '@/assets/icons/file-text.svg';
+import bookAIcon from '@/assets/icons/book-a.svg';
+import scrollTextIcon from '@/assets/icons/scroll-text.svg';
 
 const route = useRoute();
 const saintData = ref(null);
