@@ -15,65 +15,59 @@
         <ion-spinner></ion-spinner>
       </div>
 
-      <!-- Segment (tabs horizontaux) -->
-      <ion-segment v-else v-model="selectedTab" @ionChange="segmentChanged">
-        <ion-segment-button value="vie_b" :disabled="!saintData?.vie_b">
-          <ion-icon :src="fileTextIcon"></ion-icon>
-          <ion-label>Vie brève</ion-label>
-        </ion-segment-button>
+      <template v-else>
+        <!-- Segment -->
+        <ion-segment v-model="selectedTab">
+          <ion-segment-button v-if="saintData?.vie_b" value="vie_b">
+            <ion-icon :src="fileTextIcon"></ion-icon>
+            <ion-label>Vie brève</ion-label>
+          </ion-segment-button>
 
-        <ion-segment-button value="vita_long" :disabled="!saintData?.vita_long">
-          <ion-icon :src="bookAIcon"></ion-icon>
-          <ion-label>Vie synaxaire</ion-label>
-        </ion-segment-button>
+          <ion-segment-button v-if="saintData?.vita_long" value="vita_long">
+            <ion-icon :src="bookAIcon"></ion-icon>
+            <ion-label>Vie synaxaire</ion-label>
+          </ion-segment-button>
 
-        <ion-segment-button value="vita_liturgy" :disabled="!saintData?.vita_liturgy">
-          <ion-icon :src="scrollTextIcon"></ion-icon>
-          <ion-label>Vie liturgique</ion-label>
-        </ion-segment-button>
-      </ion-segment>
+          <ion-segment-button v-if="saintData?.vita_liturgy" value="vita_liturgy">
+            <ion-icon :src="scrollTextIcon"></ion-icon>
+            <ion-label>Vie liturgique</ion-label>
+          </ion-segment-button>
+        </ion-segment>
 
-      <!-- Contenu dynamique -->
-      <div class="ion-padding">
-        <!-- Vie brève -->
-        <div v-if="selectedTab === 'vie_b'">
-          <div v-if="saintData?.vie_b" class="example-content">
-            {{ saintData.vie_b }}
+        <!-- Contenu dynamique -->
+        <div class="ion-padding">
+          <!-- Vie brève -->
+          <div v-if="selectedTab === 'vie_b'">
+            <div v-if="saintData?.vie_b" class="example-content">
+              {{ saintData.vie_b }}
+            </div>
+            <div v-else class="no-content">
+              <ion-icon :src="fileTextIcon" size="large"></ion-icon>
+              <p>Aucune hagiographie disponible</p>
+            </div>
           </div>
-          <div v-else class="no-content">
-            <ion-icon :src="fileTextIcon" size="large"></ion-icon>
-            <p>Aucune vie brève disponible</p>
+
+          <!-- Vie synaxaire -->
+          <div v-else-if="selectedTab === 'vita_long'">
+            <div v-if="saintData?.vita_long" class="example-content">
+              {{ saintData.vita_long }}
+            </div>
+          </div>
+
+          <!-- Vie liturgique -->
+          <div v-else-if="selectedTab === 'vita_liturgy'">
+            <div v-if="saintData?.vita_liturgy" class="example-content">
+              {{ saintData.vita_liturgy }}
+            </div>
           </div>
         </div>
-
-        <!-- Vie synaxaire -->
-        <div v-if="selectedTab === 'vita_long'">
-          <div v-if="saintData?.vita_long" class="example-content">
-            {{ saintData.vita_long }}
-          </div>
-          <div v-else class="no-content">
-            <ion-icon :src="bookAIcon" size="large"></ion-icon>
-            <p>Aucune vie synaxaire disponible</p>
-          </div>
-        </div>
-
-        <!-- Vie liturgique -->
-        <div v-if="selectedTab === 'vita_liturgy'">
-          <div v-if="saintData?.vita_liturgy" class="example-content">
-            {{ saintData.vita_liturgy }}
-          </div>
-          <div v-else class="no-content">
-            <ion-icon :src="scrollTextIcon" size="large"></ion-icon>
-            <p>Aucune vie liturgique disponible</p>
-          </div>
-        </div>
-      </div>
+      </template>
     </ion-content>
   </ion-page>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import {
   IonContent,
@@ -87,6 +81,8 @@ import {
   IonSpinner,
   IonSegment,
   IonSegmentButton,
+  IonSegmentView, // ← Ajouter
+  IonSegmentContent, // ← Ajouter
   IonLabel,
 } from "@ionic/vue";
 
@@ -122,10 +118,6 @@ const fetchSaintData = async () => {
   }
 };
 
-const segmentChanged = (event) => {
-  selectedTab.value = event.detail.value;
-};
-
 onMounted(() => {
   fetchSaintData();
 });
@@ -150,19 +142,23 @@ onMounted(() => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 3rem 1rem;
-  color: var(--ion-color-medium);
+  padding: 4rem 2rem;
+  margin: 2rem 0;
   text-align: center;
 }
 
 .no-content ion-icon {
+  font-size: 56px;
   margin-bottom: 1rem;
-  opacity: 0.5;
+  opacity: 0.3;
+  color: var(--ion-color-medium);
 }
 
 .no-content p {
   margin: 0;
   font-size: 0.95rem;
+  color: var(--ion-color-medium);
+  font-weight: 400;
 }
 
 ion-segment {
