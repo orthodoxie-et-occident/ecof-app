@@ -11,32 +11,33 @@
     
     <ion-content class="ion-padding">
       
-      <!-- Barre de recherche -->
+      <!-- Search bar -->
       <ion-searchbar 
         v-model="searchTerm"
         placeholder="Recherche"
         @ionInput="handleSearch"
       ></ion-searchbar>
 
-      <!-- Message de chargement -->
+      <!-- Loading indicator -->
       <div v-if="loading" class="ion-text-center ion-margin">
         <ion-spinner></ion-spinner>
         <p>Chargement des saints...</p>
       </div>
 
-      <!-- Message d'erreur -->
+      <!-- Error message -->
       <ion-card v-if="error" color="danger">
         <ion-card-content>
           {{ error }}
         </ion-card-content>
       </ion-card>
 
-      <!-- Liste des saints -->
+      <!-- List of saints -->
       <ion-list v-if="!loading && !error">
         <ion-item 
           v-for="(item, index) in filteredSaints" 
           :key="index"
           button
+          detail
           @click="showSaintDetail(item)"
         >
           <ion-label>
@@ -45,16 +46,13 @@
         </ion-item>
       </ion-list>
 
-      <!-- Message si aucun résultat -->
-      <div v-if="!loading && filteredSaints.length === 0" class="ion-text-center ion-margin">
-        <p>Aucun résultat</p>
-      </div>
     </ion-content>
   </ion-page>
 </template>
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
+import { useRouter } from 'vue-router';
 import { 
   IonPage, 
   IonHeader, 
@@ -72,6 +70,7 @@ import {
   IonCardContent
 } from '@ionic/vue';
 
+const router = useRouter()
 const saints = ref([]);
 const loading = ref(false);
 const error = ref(null);
@@ -117,8 +116,7 @@ const handleSearch = (event) => {
 
 // Afficher les détails d'un saint (à personnaliser)
 const showSaintDetail = (item) => {
-  console.log('Saint sélectionné:', item);
-  // Vous pouvez implémenter une modal ou une navigation ici
+  router.push(`/saint/${item.vies_id}`);
 };
 
 // Chargement au montage du composant
