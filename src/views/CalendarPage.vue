@@ -43,8 +43,8 @@
       <div v-if="!loading && calendarData" class="section">
         <h3 class="section-title">Saints du jour</h3>
         <ion-list>
-          <ion-item 
-            v-for="saint in calendarData.synaxar" 
+          <ion-item
+            v-for="saint in calendarData.synaxar"
             :key="saint.id"
             button
             detail
@@ -52,7 +52,11 @@
             :class="{ 'principal-saint': saint.principal === 1 }"
           >
             <ion-label>
-              <h2 :style="saint.principal === 1 ? 'font-weight: bold; color: var(--ion-color-primary)' : ''">
+              <h2
+                :style="
+                  saint.principal === 1 ? 'font-weight: bold; color: var(--ion-color-primary)' : ''
+                "
+              >
                 {{ saint.prefixe }} {{ saint.saint }}
               </h2>
             </ion-label>
@@ -63,13 +67,13 @@
       <!-- Lectures du jour -->
       <div v-if="!loading && calendarData && hasReadings" class="section">
         <h3 class="section-title">Lectures du jour</h3>
-        
+
         <!-- Lectures temporales -->
         <div v-if="calendarData.readings.temporal.length > 0">
           <h4 class="subsection-title">Temporal</h4>
           <ion-list>
-            <ion-item 
-              v-for="reading in calendarData.readings.temporal" 
+            <ion-item
+              v-for="reading in calendarData.readings.temporal"
               :key="reading.id"
               button
               detail
@@ -86,8 +90,8 @@
         <div v-if="calendarData.readings.sanctoral.length > 0">
           <h4 class="subsection-title">Sanctoral</h4>
           <ion-list>
-            <ion-item 
-              v-for="reading in calendarData.readings.sanctoral" 
+            <ion-item
+              v-for="reading in calendarData.readings.sanctoral"
               :key="reading.id"
               button
               detail
@@ -158,17 +162,19 @@ const hasReadings = computed(() => {
 
 const fetchCalendarData = async () => {
   if (!dateParam.value) return;
-  
+
   loading.value = true;
   error.value = null;
-  
+
   try {
-    const response = await fetch(`https://ecof-api-production.up.railway.app/api/calendar/${dateParam.value}`);
-    
+    const response = await fetch(
+      `https://ecof-api-production.up.railway.app/api/calendar/${dateParam.value}`,
+    );
+
     if (!response.ok) {
       throw new Error(`Erreur HTTP: ${response.status}`);
     }
-    
+
     calendarData.value = await response.json();
   } catch (err) {
     error.value = `Erreur lors du chargement des données: ${err.message}`;

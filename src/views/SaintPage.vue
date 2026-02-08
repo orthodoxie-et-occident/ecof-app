@@ -40,6 +40,15 @@
           <div v-if="selectedTab === 'vie_b'">
             <div v-if="saintData?.vie_b" class="example-content">
               {{ saintData.vie_b }}
+
+              <!-- Image illustrative -->
+              <div v-if="saintData?.img" class="saint-image-container">
+                <img
+                  :src="saintData.img"
+                  :alt="`Icône de ${saintData.saint}`"
+                  class="saint-image"
+                />
+              </div>
             </div>
             <div v-else class="no-content">
               <ion-icon :src="fileTextIcon" size="large"></ion-icon>
@@ -128,6 +137,21 @@ onMounted(() => {
   padding-top: 1rem;
 }
 
+.saint-image-container {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.saint-image {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
 .loading-container {
   display: flex;
   justify-content: center;
@@ -157,5 +181,12 @@ onMounted(() => {
   font-size: 0.95rem;
   color: var(--ion-color-medium);
   font-weight: 400;
+}
+
+/* Responsive pour mobile */
+@media (max-width: 768px) {
+  .saint-image {
+    max-width: 100%;
+  }
 }
 </style>
