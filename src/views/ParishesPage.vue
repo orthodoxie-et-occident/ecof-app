@@ -12,6 +12,24 @@
     <ion-content class="ion-padding">
       <ion-list-header>
         <ion-label>
+          <h2>14 - Calvados</h2>
+        </ion-label>
+      </ion-list-header>
+      <ion-list>
+        <ion-item button @click="showEvents('lisieux')">
+          <ion-thumbnail slot="start">
+            <img :src="lisieuxImg" alt="Lisieux" />
+          </ion-thumbnail>
+          <ion-label>
+            <h2>Paroisse Notre-Dame en Normandie</h2>
+            <p>Le Mesnil-Germain</p>
+          </ion-label>
+          <ion-icon :icon="chevronForward" slot="end"></ion-icon>
+        </ion-item>
+      </ion-list>
+
+      <ion-list-header>
+        <ion-label>
           <h2>33 - Gironde</h2>
         </ion-label>
       </ion-list-header>
@@ -252,6 +270,7 @@ import vannesImg from "@/assets/img/parishes/Vannes.webp";
 import lyonImg from "@/assets/img/parishes/Lyon.webp";
 import parisImg from "@/assets/img/parishes/Paris.webp";
 import poitiersImg from "@/assets/img/parishes/Poitiers.webp";
+import lisieuxImg from "@/assets/img/parishes/Lisieux.webp";
 
 const router = useRouter();
 
