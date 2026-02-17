@@ -10,37 +10,36 @@
         <ion-list>
           <ion-item button @click="navigateTo('paroisses')">
             <ion-label>Paroisses</ion-label>
-            <ion-icon slot="end" :src="churchIcon"></ion-icon>
+            <img :src="parishImage" class="menu-img" />
           </ion-item>
 
           <ion-item button @click="navigateTo('calendar')">
             <ion-label>Calendrier</ion-label>
-            <ion-icon slot="end" :src="calendarIcon"></ion-icon>
+            <img :src="calendarImage" class="menu-img" />
           </ion-item>
 
           <ion-item button @click="navigateTo('map')">
             <ion-label>Carte</ion-label>
-            <ion-icon slot="end" :src="mapIcon"></ion-icon>
+            <img :src="mapImage" class="menu-img" />
           </ion-item>
 
           <ion-item button @click="navigateTo('prayers')">
             <ion-label>Prières</ion-label>
-            <ion-icon slot="end" :src="prayersIcon"></ion-icon>
+            <img :src="prayerImage" class="menu-img" />
           </ion-item>
 
           <ion-item button @click="navigateTo('synaxar')">
             <ion-label>Synaxaire</ion-label>
-            <ion-icon slot="end" :src="synaxarIcon"></ion-icon>
+            <img :src="synaxarImage" class="menu-img" />
           </ion-item>
 
           <ion-item button @click="navigateTo('about')">
             <ion-label>À propos</ion-label>
-            <ion-icon slot="end" :src="aboutIcon"></ion-icon>
+            <img :src="aboutImage" class="menu-img" />
           </ion-item>
         </ion-list>
       </ion-content>
     </ion-menu>
-
     <ion-router-outlet id="main-content" />
   </ion-app>
 </template>
@@ -57,17 +56,17 @@ import {
   IonList,
   IonItem,
   IonLabel,
-  IonIcon,
   menuController,
 } from "@ionic/vue";
 import { useRouter } from "vue-router";
 
-import churchIcon from "@/assets/icons/church.svg";
-import calendarIcon from "@/assets/icons/calendar-days.svg";
-import mapIcon from "@/assets/icons/map-pin.svg";
-import prayersIcon from "@/assets/icons/book-marked.svg";
-import synaxarIcon from "@/assets/icons/book-a.svg";
-import aboutIcon from "@/assets/icons/info.svg";
+import churchImage from "@/assets/img/layout/church.png";
+import synaxarImage from "@/assets/img/layout/saints.png";
+import parishImage from "@/assets/img/layout/ange.png";
+import aboutImage from "@/assets/img/layout/nd-labeur.png";
+import prayerImage from "@/assets/img/layout/seraphim.png";
+import mapImage from "@/assets/img/layout/parish.png";
+import calendarImage from "@/assets/img/layout/christ.png";
 
 const router = useRouter();
 
@@ -76,3 +75,17 @@ const navigateTo = async (routePath) => {
   router.push(`/${routePath}`);
 };
 </script>
+
+<style scoped>
+ion-menu ion-item {
+  --min-height: 80px;
+}
+
+.menu-img {
+  position: absolute;
+  bottom: 0px;
+  right: 4px;
+  height: 70px;
+  object-fit: contain;
+}
+</style>
