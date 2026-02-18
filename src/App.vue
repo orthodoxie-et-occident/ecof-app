@@ -60,12 +60,11 @@ import {
 } from "@ionic/vue";
 import { useRouter } from "vue-router";
 
-import churchImage from "@/assets/img/layout/church.png";
 import synaxarImage from "@/assets/img/layout/saints.png";
 import parishImage from "@/assets/img/layout/ange.png";
 import aboutImage from "@/assets/img/layout/nd-labeur.png";
 import prayerImage from "@/assets/img/layout/seraphim.png";
-import mapImage from "@/assets/img/layout/parish.png";
+import mapImage from "@/assets/img/layout/pins.png";
 import calendarImage from "@/assets/img/layout/christ.png";
 
 const router = useRouter();
