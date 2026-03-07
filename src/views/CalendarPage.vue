@@ -23,6 +23,7 @@
           :value="selectedDate"
           @ionChange="handleDateChange"
           locale="fr-FR"
+          :first-day-of-week="1"
           :format-options="{
             date: { day: '2-digit', month: '2-digit', year: 'numeric' },
           }"
