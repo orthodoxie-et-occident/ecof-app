@@ -33,8 +33,9 @@ import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, Io
 }
 
 h1 {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
   color: var(--ion-color-primary);
 }
 
@@ -56,8 +57,8 @@ h1 {
 }
 
 .priere-texte {
-  font-size: 1.1rem;
   line-height: 1.8;
+  text-align: justify;
 }
 
 .priere-texte p {

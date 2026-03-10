@@ -95,9 +95,6 @@ const formatTime = (dateString) => new Date(dateString).toLocaleTimeString("fr-F
 </script>
 
 <style scoped>
-ion-content {
-  --background: #ffffff;
-}
 
 .events-wrapper {
   padding: 8px 0 40px;

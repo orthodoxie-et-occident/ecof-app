@@ -142,7 +142,6 @@ watch(dateParam, fetchCalendarData)
 
 <style scoped>
 .date-item {
-  --background: var(--ion-color-light);
   --border-radius: 10px;
   margin-bottom: 8px;
 }
