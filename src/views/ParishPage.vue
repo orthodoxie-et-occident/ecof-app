@@ -95,7 +95,6 @@ const formatTime = (dateString) => new Date(dateString).toLocaleTimeString("fr-F
 </script>
 
 <style scoped>
-
 .events-wrapper {
   padding: 8px 0 40px;
 }

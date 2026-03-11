@@ -10,38 +10,31 @@
     </ion-header>
 
     <ion-content>
-      <!-- Loading indicator -->
       <div v-if="loading" class="loading-container">
         <ion-spinner></ion-spinner>
       </div>
 
       <template v-else>
-        <!-- Segment -->
         <ion-segment v-model="selectedTab">
           <ion-segment-button v-if="saintData?.vie_b" value="vie_b">
             <ion-icon :src="fileTextIcon"></ion-icon>
             <ion-label>Vie brève</ion-label>
           </ion-segment-button>
-
           <ion-segment-button v-if="saintData?.vita_long" value="vita_long">
             <ion-icon :src="bookAIcon"></ion-icon>
             <ion-label>Synaxaire</ion-label>
           </ion-segment-button>
-
           <ion-segment-button v-if="saintData?.vita_liturgy" value="vita_liturgy">
             <ion-icon :src="scrollTextIcon"></ion-icon>
             <ion-label>Vie liturgique</ion-label>
           </ion-segment-button>
         </ion-segment>
 
-        <!-- Contenu dynamique -->
         <div class="ion-padding">
-          <!-- Vie brève -->
+          <!-- Vie brève (markdown) -->
           <div v-if="selectedTab === 'vie_b'">
-            <div v-if="saintData?.vie_b" class="example-content">
-              {{ saintData.vie_b }}
-
-              <!-- Image illustrative -->
+            <div v-if="saintData?.vie_b">
+              <MarkdownSection :html="saintData.vie_b" />
               <div v-if="saintData?.img" class="saint-image-container">
                 <img :src="saintData.img" :alt="`Icône de ${saintData.saint}`" class="saint-image" />
               </div>
@@ -52,18 +45,14 @@
             </div>
           </div>
 
-          <!-- Vie synaxaire -->
+          <!-- Vita long (HTML depuis serveur) -->
           <div v-else-if="selectedTab === 'vita_long'">
-            <div v-if="saintData?.vita_long" class="example-content">
-              {{ saintData.vita_long }}
-            </div>
+            <MarkdownSection :html="saintData.vita_long" />
           </div>
 
-          <!-- Vie liturgique -->
+          <!-- Vita liturgy (HTML depuis serveur) -->
           <div v-else-if="selectedTab === 'vita_liturgy'">
-            <div v-if="saintData?.vita_liturgy" class="example-content">
-              {{ saintData.vita_liturgy }}
-            </div>
+            <MarkdownSection :html="saintData.vita_liturgy" />
           </div>
         </div>
       </template>
@@ -76,6 +65,7 @@ import { ref, onMounted } from "vue"
 import { useRoute } from "vue-router"
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonBackButton, IonIcon, IonSpinner, IonSegment, IonSegmentButton, IonLabel } from "@ionic/vue"
 
+import MarkdownSection from "@/components/MarkdownSection.vue"
 import fileTextIcon from "@/assets/icons/file-text.svg"
 import bookAIcon from "@/assets/icons/book-a.svg"
 import scrollTextIcon from "@/assets/icons/scroll-text.svg"
@@ -93,14 +83,9 @@ const fetchSaintData = async () => {
     const data = await response.json()
     saintData.value = data
 
-    // Sélectionner automatiquement le premier onglet disponible
-    if (data.vie_b) {
-      selectedTab.value = "vie_b"
-    } else if (data.vita_long) {
-      selectedTab.value = "vita_long"
-    } else if (data.vita_liturgy) {
-      selectedTab.value = "vita_liturgy"
-    }
+    if (data.vie_b) selectedTab.value = "vie_b"
+    else if (data.vita_long) selectedTab.value = "vita_long"
+    else if (data.vita_liturgy) selectedTab.value = "vita_liturgy"
   } catch (error) {
     console.error("Erreur lors du chargement des données du saint:", error)
   } finally {
@@ -108,23 +93,14 @@ const fetchSaintData = async () => {
   }
 }
 
-onMounted(() => {
-  fetchSaintData()
-})
+onMounted(fetchSaintData)
 </script>
 
 <style scoped>
-.example-content {
-  line-height: 1.8;
-  text-align: justify;
-  padding-top: 1rem;
-}
-
 .saint-image-container {
   margin-top: 1.5rem;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .saint-image {
@@ -148,7 +124,6 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   padding: 4rem 2rem;
-  margin: 2rem 0;
   text-align: center;
 }
 
@@ -163,10 +138,8 @@ onMounted(() => {
   margin: 0;
   font-size: 0.95rem;
   color: var(--ion-color-medium);
-  font-weight: 400;
 }
 
-/* Responsive pour mobile */
 @media (max-width: 768px) {
   .saint-image {
     max-width: 100%;
