@@ -174,6 +174,7 @@ const formatTime = (dateString) => new Date(dateString).toLocaleTimeString("fr-F
   color: #666;
   margin: 0;
   line-height: 1.5;
+  white-space: pre-line; /* interprète les \n sans v-html */
 }
 
 /* ── États ── */
