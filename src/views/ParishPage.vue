@@ -3,7 +3,7 @@
     <ion-header>
       <ion-toolbar color="primary">
         <ion-buttons slot="start">
-          <ion-back-button default-href="/paroisses"></ion-back-button>
+          <ion-back-button text="Retour" default-href="/paroisses"></ion-back-button>
         </ion-buttons>
         <ion-title>{{ paroisseName }}</ion-title>
       </ion-toolbar>

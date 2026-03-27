@@ -3,7 +3,7 @@
     <ion-header>
       <ion-toolbar color="primary">
         <ion-buttons slot="start">
-          <ion-back-button default-href="/prayers"></ion-back-button>
+          <ion-back-button text="Retour" default-href="/prayers"></ion-back-button>
         </ion-buttons>
         <ion-title>Prière de Saint Éphrem</ion-title>
       </ion-toolbar>
