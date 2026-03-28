@@ -31,7 +31,7 @@ let hintTimeout = null
 onIonViewWillEnter(() => {
   if (window.matchMedia("(pointer: coarse)").matches) {
     showHint.value = true
-    hintTimeout = setTimeout(() => (showHint.value = false), 3000)
+    hintTimeout = setTimeout(() => (showHint.value = false), 10000)
   }
 })
 
