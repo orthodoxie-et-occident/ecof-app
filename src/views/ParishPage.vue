@@ -72,7 +72,7 @@ async function fetchEvents() {
     const response = await fetch(`https://ecof-api-production.up.railway.app/api/parish/${parishId}`)
     if (!response.ok) throw new Error("Impossible de récupérer les événements")
     const data = await response.json()
-    events.value = (data.events || []).sort((a, b) => new Date(a.start) - new Date(b.start))
+    events.value = (data.events || []).sort((a, b) => a.start.localeCompare(b.start))
   } catch (err) {
     error.value = err.message
   } finally {
@@ -82,16 +82,16 @@ async function fetchEvents() {
 
 const groupedEvents = computed(() =>
   events.value.reduce((acc, event) => {
-    const key = new Date(event.start).toISOString().split("T")[0]
+    const key = event.start.split("T")[0]
     if (!acc[key]) acc[key] = []
     acc[key].push(event)
     return acc
   }, {}),
 )
 
-const getDayName = (dateStr) => new Date(dateStr).toLocaleDateString("fr-FR", { weekday: "long" })
+const getDayName = (dateStr) => new Date(`${dateStr}T00:00:00`).toLocaleDateString("fr-FR", { weekday: "long" })
 
-const getFullDate = (dateStr) => new Date(dateStr).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })
+const getFullDate = (dateStr) => new Date(`${dateStr}T00:00:00`).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })
 
 const formatTime = (dateString) => new Date(dateString).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })
 </script>
@@ -101,7 +101,6 @@ const formatTime = (dateString) => new Date(dateString).toLocaleTimeString("fr-F
   padding: 8px 0 40px;
 }
 
-/* ── Header de date ── */
 .day-header {
   display: flex;
   align-items: baseline;
@@ -123,7 +122,6 @@ const formatTime = (dateString) => new Date(dateString).toLocaleTimeString("fr-F
   text-transform: capitalize;
 }
 
-/* ── Ligne d'événement ── */
 .event-row {
   display: flex;
   gap: 16px;
@@ -131,7 +129,6 @@ const formatTime = (dateString) => new Date(dateString).toLocaleTimeString("fr-F
   border-bottom: 1px solid #f0f0f0;
 }
 
-/* ── Colonne heure ── */
 .event-time {
   display: flex;
   flex-direction: column;
@@ -153,7 +150,6 @@ const formatTime = (dateString) => new Date(dateString).toLocaleTimeString("fr-F
   color: #bbb;
 }
 
-/* ── Contenu ── */
 .event-content {
   flex: 1;
 }
@@ -176,10 +172,9 @@ const formatTime = (dateString) => new Date(dateString).toLocaleTimeString("fr-F
   color: #666;
   margin: 0;
   line-height: 1.5;
-  white-space: pre-line; /* interprète les \n sans v-html */
+  white-space: pre-line;
 }
 
-/* ── États ── */
 .state-container {
   display: flex;
   flex-direction: column;
