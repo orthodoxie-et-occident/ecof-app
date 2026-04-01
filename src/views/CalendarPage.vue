@@ -57,21 +57,25 @@
         <h3 class="section-title">Lectures du jour</h3>
 
         <div v-if="calendarData.readings.temporal.length > 0">
-          <h4 class="subsection-title">Temporal</h4>
-          <ion-list>
-            <ion-item v-for="reading in calendarData.readings.temporal" :key="reading.id" button detail @click="navigateToReading(reading.id)">
-              <ion-label>{{ reading.book_txt }}</ion-label>
-            </ion-item>
-          </ion-list>
+          <div v-for="block in calendarData.readings.temporal" :key="block.block_title">
+            <h4 class="subsection-title">{{ block.block_title }}</h4>
+            <ion-list>
+              <ion-item v-for="reading in block.readings" :key="reading.id" button detail @click="navigateToReading(reading.id)">
+                <ion-label>{{ reading.book_txt }}</ion-label>
+              </ion-item>
+            </ion-list>
+          </div>
         </div>
 
         <div v-if="calendarData.readings.sanctoral.length > 0">
-          <h4 class="subsection-title">Sanctoral</h4>
-          <ion-list>
-            <ion-item v-for="reading in calendarData.readings.sanctoral" :key="reading.id" button detail @click="navigateToReading(reading.id)">
-              <ion-label>{{ reading.book_txt }}</ion-label>
-            </ion-item>
-          </ion-list>
+          <div v-for="block in calendarData.readings.sanctoral" :key="block.block_title">
+            <h4 class="subsection-title">{{ block.block_title }}</h4>
+            <ion-list>
+              <ion-item v-for="reading in block.readings" :key="reading.id" button detail @click="navigateToReading(reading.id)">
+                <ion-label>{{ reading.book_txt }}</ion-label>
+              </ion-item>
+            </ion-list>
+          </div>
         </div>
       </div>
     </ion-content>
@@ -140,7 +144,7 @@ const fetchCalendarData = async () => {
   loading.value = true
   error.value = null
   try {
-    const response = await fetch(`https://ecof-api-production.up.railway.app/api/calendar/${dateParam.value}`)
+    const response = await fetch(`https://ecof-api-production.up.railway.app/api/calendarv2/${dateParam.value}`)
     if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`)
     calendarData.value = await response.json()
   } catch (err) {
