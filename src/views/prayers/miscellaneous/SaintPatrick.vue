@@ -3,15 +3,15 @@
     <ion-header>
       <ion-toolbar color="primary">
         <ion-buttons slot="start">
-          <ion-back-button text="" default-href="/prayers"></ion-back-button>
+          <ion-back-button text="" default-href="/prayers/miscellaneous"></ion-back-button>
         </ion-buttons>
-        <ion-title>Prière de Saint Patrick</ion-title>
+        <ion-title>Prière de saint Patrick</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content class="ion-padding">
       <div class="priere-container">
-        <h1>Prière de Saint Patrick</h1>
+        <h1>Prière de saint Patrick</h1>
 
         <ion-accordion-group class="about-accordion">
           <ion-accordion>

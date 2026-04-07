@@ -11,10 +11,10 @@
 
     <ion-content class="ion-padding">
       <ion-list>
-        <ion-item button v-for="priere in prieres" :key="priere.id" :router-link="priere.route" detail>
+        <ion-item button v-for="section in sections" :key="section.id" :router-link="section.disabled ? undefined : section.route" :detail="!section.disabled" :disabled="section.disabled">
           <ion-label>
-            <h2>{{ priere.titre }}</h2>
-            <p>{{ priere.auteur }}</p>
+            <h2>{{ section.titre }}</h2>
+            <p>{{ section.description }}</p>
           </ion-label>
         </ion-item>
       </ion-list>
@@ -25,24 +25,20 @@
 <script setup>
 import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonList, IonItem, IonLabel } from "@ionic/vue"
 
-const prieres = [
+const sections = [
   {
     id: 1,
-    titre: "Prière de Saint Éphrem",
-    auteur: "Saint Éphrem le Syrien",
-    route: "/prayers/saint-ephrem",
+    titre: "Prières des Heures",
+    description: "Office divin pour les différentes heures de la journée",
+    route: "/prayers/hours",
+    disabled: true,
   },
   {
     id: 2,
-    titre: "Prière de Saint Patrick",
-    auteur: "Saint Patrick, archevêque d'Armagh, apôtre de l'Irlande",
-    route: "/prayers/saint-patrick",
+    titre: "Prières diverses",
+    description: "Prières des saints ou pour des occasions particulières",
+    route: "/prayers/miscellaneous",
+    disabled: false,
   },
 ]
 </script>
-
-<style scoped>
-ion-item {
-  --padding-start: 16px;
-}
-</style>
