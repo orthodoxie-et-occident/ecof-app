@@ -46,11 +46,12 @@ const menuItems = [
 
 const ionRouter = useIonRouter()
 
-useBackButton(-1, () => {
-  if (ionRouter.canGoBack()) {
-    ionRouter.back()
-  } else {
+useBackButton(10, () => {
+  const rootRoutes = ["/", "/calendar", "/map", "/prayers", "/synaxar", "/about"]
+  if (rootRoutes.includes(route.path)) {
     App.exitApp()
+  } else {
+    ionRouter.back()
   }
 })
 
