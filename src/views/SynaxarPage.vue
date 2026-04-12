@@ -112,7 +112,10 @@ const loadMore = async (event) => {
 }
 
 const showSaintDetail = (item) => {
-  ionRouter.push(`/saint/${item.vies_id}`)
+  ionRouter.push({
+    name: "Saint",
+    params: { id: item.vies_id },
+  })
 }
 
 onIonViewWillEnter(fetchSaints)

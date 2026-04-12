@@ -17,7 +17,7 @@
         </ion-list>
       </ion-content>
     </ion-menu>
-    <ion-router-outlet id="main-content" :swipe-gesture="false" />
+    <ion-router-outlet id="main-content" />
   </ion-app>
 </template>
 
@@ -47,12 +47,22 @@ const menuItems = [
 const ionRouter = useIonRouter()
 
 useBackButton(10, () => {
-  const rootRoutes = ["/", "/calendar", "/map", "/prayers", "/synaxar", "/about"]
-  if (rootRoutes.includes(route.path)) {
+  const path = ionRouter.route?.value?.path || window.location.pathname
+
+  // 1. EXIT UNIQUEMENT SUR HOME
+  if (path === "/") {
     App.exitApp()
-  } else {
-    ionRouter.back()
+    return
   }
+
+  // 2. BACK IONIC PROPRE
+  if (ionRouter.canGoBack()) {
+    ionRouter.back()
+    return
+  }
+
+  // 3. FALLBACK SAFE (évite blocage)
+  ionRouter.push("/")
 })
 
 onMounted(async () => {

@@ -3,7 +3,7 @@
     <ion-header>
       <ion-toolbar color="primary">
         <ion-buttons slot="start">
-          <ion-back-button text="" default-href="/synaxar"></ion-back-button>
+          <ion-back-button text="" />
         </ion-buttons>
         <ion-title>{{ saintData?.saint || "Saint" }}</ion-title>
       </ion-toolbar>

@@ -3,7 +3,7 @@
     <ion-header>
       <ion-toolbar color="primary">
         <ion-buttons slot="start">
-          <ion-back-button text="" default-href="/calendar"></ion-back-button>
+          <ion-back-button text="" />
         </ion-buttons>
         <ion-title>Lecture</ion-title>
       </ion-toolbar>

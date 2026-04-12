@@ -73,7 +73,10 @@ const paroissesByDept = {
 }
 
 const showEvents = (id, nom) => {
-  ionRouter.push(`/parish/${id}?nom=${encodeURIComponent(nom)}`)
+  ionRouter.push({
+    path: `/parish/${id}`,
+    query: { nom },
+  })
 }
 </script>
 
