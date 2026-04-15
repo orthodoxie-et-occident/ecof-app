@@ -9,35 +9,70 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content class="map-content">
-      <div class="map-container">
-        <iframe :src="umapUrl" width="100%" height="100%" allowfullscreen title="Carte des lieux de culte ECOF"></iframe>
-        <div class="map-hint" v-if="showHint">✌️ 2 doigts pour naviguer</div>
-      </div>
+    <ion-content class="map-content" :scroll-y="false">
+      <div ref="mapContainer" class="map-container"></div>
     </ion-content>
   </ion-page>
 </template>
 
 <script setup>
-import { ref } from "vue"
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, onIonViewWillEnter, onIonViewWillLeave } from "@ionic/vue"
+import { ref, onMounted, nextTick } from "vue"
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, onIonViewWillEnter } from "@ionic/vue"
 
-const umapUrl =
-  "https://umap.openstreetmap.fr/fr/map/ecof-france_1159509?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&editMode=disabled&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=none&captionBar=false&captionMenus=true"
+import maplibregl from "maplibre-gl"
 
-const showHint = ref(false)
-let hintTimeout = null
+const mapContainer = ref(null)
+let map = null
 
-onIonViewWillEnter(() => {
-  if (window.matchMedia("(pointer: coarse)").matches) {
-    showHint.value = true
-    hintTimeout = setTimeout(() => (showHint.value = false), 10000)
-  }
+onMounted(async () => {
+  await nextTick()
+
+  map = new maplibregl.Map({
+    container: mapContainer.value,
+
+    style: {
+      version: 8,
+      sources: {
+        osm: {
+          type: "raster",
+          tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+          tileSize: 256,
+          attribution: "© OpenStreetMap contributors",
+        },
+      },
+      layers: [
+        {
+          id: "osm",
+          type: "raster",
+          source: "osm",
+        },
+      ],
+    },
+
+    center: [2.35, 48.85],
+    zoom: 5,
+  })
+
+  map.addControl(
+    new maplibregl.NavigationControl({
+      showCompass: false,
+    }),
+  )
+
+  map.dragRotate.disable()
+  map.touchZoomRotate.disableRotation()
+
+  map.on("load", () => {
+    setTimeout(() => {
+      map.resize()
+    }, 100)
+  })
 })
 
-onIonViewWillLeave(() => {
-  clearTimeout(hintTimeout)
-  showHint.value = false
+onIonViewWillEnter(() => {
+  setTimeout(() => {
+    if (map) map.resize()
+  }, 100)
 })
 </script>
 
@@ -50,30 +85,14 @@ onIonViewWillLeave(() => {
 }
 
 .map-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.map-container iframe {
-  border: none;
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.map-hint {
   position: absolute;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.55);
-  color: white;
-  font-size: 12px;
-  padding: 5px 12px;
-  border-radius: 20px;
-  pointer-events: none;
-  white-space: nowrap;
-  backdrop-filter: blur(4px);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+ion-content::part(scroll) {
+  height: 100%;
 }
 </style>

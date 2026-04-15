@@ -25,6 +25,7 @@
     "@ionic/vue": "^8.8.3",
     "@ionic/vue-router": "^8.8.3",
     "ionicons": "^8.0.13",
+    "maplibre-gl": "^5.23.0",
     "vue": "^3.5.32",
     "vue-router": "^5.0.4"
   },
