@@ -44,7 +44,7 @@
 
 <script setup>
 import { ref } from "vue"
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, onIonViewWillEnter } from "@ionic/vue"
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonButton, IonMenuButton, IonTitle, IonContent, onIonViewWillEnter } from "@ionic/vue"
 import maplibregl from "maplibre-gl"
 import { Protocol } from "pmtiles"
 import { layers, namedFlavor } from "@protomaps/basemaps"
