@@ -10,14 +10,23 @@
     </ion-header>
 
     <ion-content class="ion-padding">
-      <ion-list>
-        <ion-item button v-for="article in articles" :key="article.id" :router-link="article.route" router-direction="forward" detail>
+      <!-- CHARGEMENT -->
+      <div v-if="loading" class="ion-text-center ion-padding">
+        <ion-spinner name="crescent" />
+      </div>
+
+      <!-- ERREUR -->
+      <ion-note v-else-if="error" color="danger" class="ion-padding"> Impossible de charger les articles : {{ error }} </ion-note>
+
+      <!-- LISTE -->
+      <ion-list v-else>
+        <ion-item button v-for="article in articles" :key="article.slug" :router-link="`/articles/${article.slug}`" router-direction="forward" detail>
           <ion-label>
             <!-- TITRE -->
-            <h2>{{ article.titre }}</h2>
+            <h2>{{ article.title }}</h2>
 
             <!-- AUTEUR + DATE -->
-            <p>👤 {{ article.auteur }} • 📅 {{ article.date }}</p>
+            <p>👤 {{ article.author }} • 📅 {{ formatDate(article.published_at) }}</p>
 
             <!-- SLUG (pastille) -->
             <ion-badge color="medium">
@@ -31,34 +40,36 @@
 </template>
 
 <script setup>
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonList, IonItem, IonLabel, IonBadge } from "@ionic/vue"
+import { ref, onMounted } from "vue"
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonList, IonItem, IonLabel, IonBadge, IonSpinner, IonNote } from "@ionic/vue"
 
-const articles = [
-  {
-    id: 1,
-    titre: "Premier article",
-    auteur: "Alice Martin",
-    date: "15/05/2026",
-    slug: "premier-article",
-    route: "/articles/premier-article",
-  },
-  {
-    id: 2,
-    titre: "Deuxième article",
-    auteur: "Bob Dupont",
-    date: "14/05/2026",
-    slug: "deuxieme-article",
-    route: "/articles/deuxieme-article",
-  },
-  {
-    id: 3,
-    titre: "Troisième article",
-    auteur: "Admin",
-    date: "12/05/2026",
-    slug: "troisieme-article",
-    route: "/articles/troisieme-article",
-  },
-]
+const articles = ref([])
+const loading = ref(true)
+const error = ref(null)
+
+function formatDate(isoString) {
+  return new Intl.DateTimeFormat("fr-FR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  }).format(new Date(isoString))
+}
+
+onMounted(async () => {
+  try {
+    const response = await fetch("https://ecof-api-production.up.railway.app/api/news")
+
+    if (!response.ok) {
+      throw new Error(`${response.status} ${response.statusText}`)
+    }
+
+    articles.value = await response.json()
+  } catch (err) {
+    error.value = err.message
+  } finally {
+    loading.value = false
+  }
+})
 </script>
 
 <style scoped>
