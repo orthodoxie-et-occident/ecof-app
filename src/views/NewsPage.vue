@@ -3,80 +3,81 @@
     <ion-header>
       <ion-toolbar color="primary">
         <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
+          <ion-back-button text="" default-href="/articles"></ion-back-button>
         </ion-buttons>
-        <ion-title>À propos</ion-title>
+        <ion-title>Articles</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content class="ion-padding">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Sources</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <p>
-            Les ressources utilisées pour cette application s'appuient sur la tradition liturgique de l'<a href="https://eglise-catholique-orthodoxe-de-france.fr/" target="_blank"
-              >Église catholique orthodoxe de France</a
-            >.
-          </p>
-          <p>Les lectures quotidiennes font usage de traductions libres de droits de la Bible&nbsp;:</p>
-          <ul>
-            <li><em>Bible Segond 1910</em>, en utilisant le vocable «&nbsp;le Seigneur&nbsp;» de préférence à «&nbsp;l'Éternel&nbsp;».</li>
-            <li><em>Bible Crampon 1923</em>, pour certains livres de l'Ancien Testament absents des Bibles protestantes, en remplaçant le vouvoiement de Dieu par le tutoiement.</li>
-          </ul>
-        </ion-card-content>
-      </ion-card>
+      <ion-list>
+        <ion-item button v-for="article in articles" :key="article.id" :router-link="article.route" router-direction="forward" detail>
+          <ion-label>
+            <!-- TITRE -->
+            <h2>{{ article.titre }}</h2>
 
-      <!-- Contact -->
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Contact</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <p>Pour toute question ou suggestion, vous pouvez nous contacter&nbsp;:</p>
-          <ul>
-            <li>E-mail : <a href="mailto:contact@ecof.app">contact@ecof.app</a></li>
-          </ul>
-        </ion-card-content>
-      </ion-card>
+            <!-- AUTEUR + DATE -->
+            <p>👤 {{ article.auteur }} • 📅 {{ article.date }}</p>
+
+            <!-- SLUG (pastille) -->
+            <ion-badge color="medium">
+              {{ article.slug }}
+            </ion-badge>
+          </ion-label>
+        </ion-item>
+      </ion-list>
     </ion-content>
   </ion-page>
 </template>
 
 <script setup>
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent } from "@ionic/vue"
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonList, IonItem, IonLabel, IonBadge } from "@ionic/vue"
+
+const articles = [
+  {
+    id: 1,
+    titre: "Premier article",
+    auteur: "Alice Martin",
+    date: "15/05/2026",
+    slug: "premier-article",
+    route: "/articles/premier-article",
+  },
+  {
+    id: 2,
+    titre: "Deuxième article",
+    auteur: "Bob Dupont",
+    date: "14/05/2026",
+    slug: "deuxieme-article",
+    route: "/articles/deuxieme-article",
+  },
+  {
+    id: 3,
+    titre: "Troisième article",
+    auteur: "Admin",
+    date: "12/05/2026",
+    slug: "troisieme-article",
+    route: "/articles/troisieme-article",
+  },
+]
 </script>
 
 <style scoped>
-ion-card {
-  margin-bottom: 16px;
+ion-item {
+  --padding-start: 16px;
 }
 
-ion-card-content {
-  line-height: 1.6;
+h2 {
+  font-weight: 600;
+  margin-bottom: 4px;
 }
 
-ion-card-content p {
-  margin-bottom: 12px;
+p {
+  margin: 0;
+  opacity: 0.7;
+  font-size: 0.9em;
 }
 
-ion-card-content ul,
-ion-card-content ol {
-  padding-left: 20px;
-  margin-top: 8px;
-}
-
-ion-card-content li {
-  margin-bottom: 8px;
-}
-
-a {
-  color: var(--ion-color-primary);
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
+ion-badge {
+  margin-top: 6px;
 }
 </style>
