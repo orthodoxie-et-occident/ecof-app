@@ -143,7 +143,7 @@ const fetchCalendarData = async () => {
   loading.value = true
   error.value = null
   try {
-    const response = await fetch(`https://ecof-api-production.up.railway.app/api/calendarv2/${dateParam.value}`)
+    const response = await fetch(`https://ecof-api-production.up.railway.app/api/calendar/${dateParam.value}`)
     if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`)
     calendarData.value = await response.json()
   } catch (err) {
