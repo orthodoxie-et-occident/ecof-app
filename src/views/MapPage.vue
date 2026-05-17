@@ -231,7 +231,7 @@ onIonViewWillLeave(() => {
 /* ── Carte POI ── */
 .card {
   position: absolute;
-  bottom: 24px;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
   left: 16px;
   right: 16px;
   background: #fff;
