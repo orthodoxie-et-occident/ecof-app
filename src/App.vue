@@ -6,7 +6,7 @@
           <ion-title>Menu</ion-title>
         </ion-toolbar>
       </ion-header>
-      <ion-content class="ion-padding">
+      <ion-content>
         <ion-list>
           <ion-menu-toggle auto-hide="false" v-for="item in menuItems" :key="item.route">
             <ion-item button :router-link="item.route" router-direction="root">
