@@ -10,54 +10,29 @@
     </ion-header>
 
     <ion-content class="ion-padding">
-
       <div v-if="loading" class="ion-text-center ion-padding">
         <ion-spinner name="crescent" />
       </div>
 
-      <ion-note v-else-if="error" color="danger" class="ion-padding">
-        Impossible de charger les articles : {{ error }}
-      </ion-note>
+      <ion-note v-else-if="error" color="danger" class="ion-padding"> Impossible de charger les articles : {{ error }} </ion-note>
 
       <ion-list v-else>
-        <ion-item
-          button
-          detail
-          v-for="article in articles"
-          :key="article.id"
-          :router-link="`/news/${article.id}`"
-          router-direction="forward"
-        >
+        <ion-item button detail v-for="article in articles" :key="article.id" :router-link="`/news/${article.id}`" router-direction="forward">
           <ion-label>
             <h2>{{ article.title }}</h2>
             <p>{{ article.author }} • {{ formatDate(article.published_at) }}</p>
             <ion-badge color="primary">{{ article.slug }}</ion-badge>
+            <ion-badge color="light" v-if="isNew(article.published_at)">Nouveau</ion-badge>
           </ion-label>
         </ion-item>
       </ion-list>
-
     </ion-content>
   </ion-page>
 </template>
 
 <script setup>
 import { ref } from "vue"
-import {
-  IonPage,
-  IonHeader,
-  IonToolbar,
-  IonButtons,
-  IonMenuButton,
-  IonTitle,
-  IonContent,
-  IonList,
-  IonItem,
-  IonLabel,
-  IonBadge,
-  IonSpinner,
-  IonNote,
-  onIonViewWillEnter,
-} from "@ionic/vue"
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonList, IonItem, IonLabel, IonBadge, IonSpinner, IonNote, onIonViewWillEnter } from "@ionic/vue"
 
 const articles = ref([])
 const loading = ref(true)
@@ -69,6 +44,12 @@ function formatDate(isoString) {
     month: "2-digit",
     year: "numeric",
   }).format(new Date(isoString))
+}
+
+function isNew(isoString) {
+  const sevenDaysAgo = new Date()
+  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7)
+  return new Date(isoString) > sevenDaysAgo
 }
 
 onIonViewWillEnter(async () => {
@@ -104,5 +85,6 @@ p {
 
 ion-badge {
   margin-top: 6px;
+  margin-right: 4px;
 }
 </style>
