@@ -9,7 +9,7 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content class="ion-padding">
+    <ion-content>
       <ion-card>
         <ion-card-header>
           <ion-card-title>Sources</ion-card-title>

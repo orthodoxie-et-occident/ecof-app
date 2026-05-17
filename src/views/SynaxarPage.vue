@@ -9,7 +9,7 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content class="ion-padding">
+    <ion-content>
       <ion-searchbar v-model="searchTerm" placeholder="Recherche" :debounce="300"></ion-searchbar>
 
       <div v-if="loading" class="ion-text-center ion-margin">

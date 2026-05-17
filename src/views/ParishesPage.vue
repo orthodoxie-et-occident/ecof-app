@@ -9,7 +9,7 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content class="ion-padding">
+    <ion-content>
       <template v-for="(paroisses, departement) in paroissesByDept" :key="departement">
         <ion-list-header>
           <ion-label

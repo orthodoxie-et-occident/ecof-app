@@ -9,72 +9,70 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content class="ion-padding">
-      <ion-item lines="none" class="date-item">
-        <ion-icon :icon="calendarOutline" slot="start" color="medium"></ion-icon>
-        <ion-label color="medium">{{ formattedDate }}</ion-label>
-        <ion-datetime-button datetime="datetime" slot="end"></ion-datetime-button>
-      </ion-item>
+    <ion-content>
+      <div class="ion-padding">
+        <ion-item lines="none" class="date-item">
+          <ion-icon :icon="calendarOutline" slot="start" color="medium"></ion-icon>
+          <ion-label color="medium">{{ formattedDate }}</ion-label>
+          <ion-datetime-button datetime="datetime" slot="end"></ion-datetime-button>
+        </ion-item>
 
-      <ion-modal :keep-contents-mounted="true" ref="modal">
-        <ion-datetime
-          id="datetime"
-          presentation="date"
-          :value="selectedDate"
-          @ionChange="handleDateChange"
-          locale="fr-FR"
-          :first-day-of-week="1"
-          :format-options="{
-            date: { day: '2-digit', month: '2-digit', year: 'numeric' },
-          }"
-        ></ion-datetime>
-      </ion-modal>
+        <ion-modal :keep-contents-mounted="true" ref="modal">
+          <ion-datetime
+            id="datetime"
+            presentation="date"
+            :value="selectedDate"
+            @ionChange="handleDateChange"
+            locale="fr-FR"
+            :first-day-of-week="1"
+            :format-options="{
+              date: { day: '2-digit', month: '2-digit', year: 'numeric' },
+            }"
+          ></ion-datetime>
+        </ion-modal>
 
-      <!-- Chargement -->
-      <div v-if="loading" class="ion-text-center ion-padding">
-        <ion-spinner></ion-spinner>
-      </div>
-
-      <!-- Erreur -->
-      <ion-item v-if="error" color="danger">
-        <ion-label class="ion-text-wrap">{{ error }}</ion-label>
-      </ion-item>
-
-      <!-- Saints du jour -->
-      <div v-if="!loading && calendarData" class="section">
-        <h3 class="section-title">Saints du jour</h3>
-        <ion-list>
-          <ion-item v-for="saint in calendarData.synaxar" :key="saint.id" button detail @click="navigateToSaint(saint.id)">
-            <ion-label>
-              <h2>{{ saint.prefixe }} {{ saint.saint }}</h2>
-            </ion-label>
-          </ion-item>
-        </ion-list>
-      </div>
-
-      <!-- Lectures du jour -->
-      <div v-if="!loading && calendarData && hasReadings" class="section">
-        <h3 class="section-title">Lectures du jour</h3>
-
-        <div v-if="calendarData.readings.temporal.length > 0">
-          <div v-for="block in calendarData.readings.temporal" :key="block.block_title">
-            <h4 class="subsection-title">{{ block.block_title }}</h4>
-            <ion-list>
-              <ion-item v-for="reading in block.readings" :key="reading.id" button detail @click="navigateToReading(reading.id)">
-                <ion-label>{{ reading.book_txt }}</ion-label>
-              </ion-item>
-            </ion-list>
-          </div>
+        <div v-if="loading" class="ion-text-center ion-padding">
+          <ion-spinner></ion-spinner>
         </div>
 
-        <div v-if="calendarData.readings.sanctoral.length > 0">
-          <div v-for="block in calendarData.readings.sanctoral" :key="block.block_title">
-            <h4 class="subsection-title">{{ block.block_title }}</h4>
-            <ion-list>
-              <ion-item v-for="reading in block.readings" :key="reading.id" button detail @click="navigateToReading(reading.id)">
-                <ion-label>{{ reading.book_txt }}</ion-label>
-              </ion-item>
-            </ion-list>
+        <ion-item v-if="error" color="danger">
+          <ion-label class="ion-text-wrap">{{ error }}</ion-label>
+        </ion-item>
+
+        <div v-if="!loading && calendarData" class="section">
+          <h3 class="section-title">Saints du jour</h3>
+          <ion-list>
+            <ion-item v-for="saint in calendarData.synaxar" :key="saint.id" button detail @click="navigateToSaint(saint.id)">
+              <ion-label>
+                <h2>{{ saint.prefixe }} {{ saint.saint }}</h2>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </div>
+
+        <div v-if="!loading && calendarData && hasReadings" class="section">
+          <h3 class="section-title">Lectures du jour</h3>
+
+          <div v-if="calendarData.readings.temporal.length > 0">
+            <div v-for="block in calendarData.readings.temporal" :key="block.block_title">
+              <h4 class="subsection-title">{{ block.block_title }}</h4>
+              <ion-list>
+                <ion-item v-for="reading in block.readings" :key="reading.id" button detail @click="navigateToReading(reading.id)">
+                  <ion-label>{{ reading.book_txt }}</ion-label>
+                </ion-item>
+              </ion-list>
+            </div>
+          </div>
+
+          <div v-if="calendarData.readings.sanctoral.length > 0">
+            <div v-for="block in calendarData.readings.sanctoral" :key="block.block_title">
+              <h4 class="subsection-title">{{ block.block_title }}</h4>
+              <ion-list>
+                <ion-item v-for="reading in block.readings" :key="reading.id" button detail @click="navigateToReading(reading.id)">
+                  <ion-label>{{ reading.book_txt }}</ion-label>
+                </ion-item>
+              </ion-list>
+            </div>
           </div>
         </div>
       </div>

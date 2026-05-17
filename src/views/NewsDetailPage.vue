@@ -9,16 +9,18 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content class="ion-padding">
-      <div v-if="loading" class="ion-text-center ion-padding">
-        <ion-spinner name="crescent" />
+    <ion-content>
+      <div class="ion-padding">
+        <div v-if="loading" class="ion-text-center ion-padding">
+          <ion-spinner name="crescent" />
+        </div>
+
+        <ion-note v-else-if="error" color="danger" class="ion-padding"> Impossible de charger l'article : {{ error }} </ion-note>
+
+        <template v-else-if="article">
+          <MarkdownSection :html="article.text" />
+        </template>
       </div>
-
-      <ion-note v-else-if="error" color="danger" class="ion-padding"> Impossible de charger l'article : {{ error }} </ion-note>
-
-      <template v-else-if="article">
-        <MarkdownSection :html="article.text" />
-      </template>
     </ion-content>
   </ion-page>
 </template>
