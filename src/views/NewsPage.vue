@@ -41,7 +41,7 @@ const error = ref(null)
 function formatDate(isoString) {
   return new Intl.DateTimeFormat("fr-FR", {
     day: "2-digit",
-    month: "2-digit",
+    month: "long",
     year: "numeric",
   }).format(new Date(isoString))
 }
@@ -75,6 +75,12 @@ ion-item {
 h2 {
   font-weight: 600;
   margin-bottom: 4px;
+  white-space: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+h2::-webkit-scrollbar {
+  display: none;
 }
 
 p {

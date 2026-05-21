@@ -22,8 +22,8 @@
     "@capacitor/ios": "^8.3.4",
     "@capacitor/keyboard": "8.0.3",
     "@capacitor/status-bar": "8.0.2",
-    "@ionic/vue": "^8.8.7",
-    "@ionic/vue-router": "^8.8.7",
+    "@ionic/vue": "^8.8.8",
+    "@ionic/vue-router": "^8.8.8",
     "@protomaps/basemaps": "^5.7.2",
     "ionicons": "^8.0.13",
     "maplibre-gl": "^5.24.0",
@@ -41,7 +41,7 @@
     "oxfmt": "^0.51.0",
     "oxlint": "^1.66.0",
     "terser": "^5.47.1",
-    "vite": "^8.0.13",
-    "vitest": "^4.1.6"
+    "vite": "^8.0.14",
+    "vitest": "^4.1.7"
   }
 }
