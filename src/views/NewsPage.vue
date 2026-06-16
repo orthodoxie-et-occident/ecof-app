@@ -72,15 +72,17 @@ ion-item {
   --padding-start: 16px;
 }
 
+ion-label {
+  min-width: 0;
+}
+
 h2 {
   font-weight: 600;
   margin-bottom: 4px;
-  white-space: nowrap;
+  max-width: 100%;
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
-}
-h2::-webkit-scrollbar {
-  display: none;
 }
 
 p {
