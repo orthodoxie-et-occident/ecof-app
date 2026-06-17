@@ -19,7 +19,7 @@
       <ion-list v-else>
         <ion-item button detail v-for="article in articles" :key="article.id" :router-link="`/news/${article.id}`" router-direction="forward">
           <ion-label>
-            <h2>{{ article.title }}</h2>
+            <h2 class="article-title">{{ article.title }}</h2>
             <p>{{ article.author }} • {{ formatDate(article.published_at) }}</p>
             <ion-badge color="primary">{{ article.slug }}</ion-badge>
             <ion-badge color="light" v-if="isNew(article.published_at)">Nouveau</ion-badge>
@@ -73,11 +73,11 @@ ion-item {
 }
 
 ion-label {
-  min-width: 0;
+  min-width: 0; /* sécurité : autorise ion-label à se rétrécir dans le flex container interne */
 }
 
-h2 {
-  font-weight: 600;
+h2.article-title {
+  font-weight: 400;
   margin-bottom: 4px;
   max-width: 100%;
   overflow: hidden;
