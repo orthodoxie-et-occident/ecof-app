@@ -114,6 +114,7 @@ const selectedDate = ref(toLocalISO())
 const calendarData = ref(null)
 const loading = ref(false)
 const error = ref(null)
+const loadedDate = ref(null)
 
 const formattedDate = computed(() => {
   if (!selectedDate.value) return ""
@@ -144,6 +145,7 @@ const fetchCalendarData = async () => {
     const response = await fetch(`https://ecof-api-production.up.railway.app/api/calendar/${dateParam.value}`)
     if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`)
     calendarData.value = await response.json()
+    loadedDate.value = dateParam.value
   } catch (err) {
     error.value = `Erreur lors du chargement des données: ${err.message}`
   } finally {
@@ -160,7 +162,9 @@ const handleDateChange = (event) => {
   modal.value.$el.dismiss()
 }
 
-onIonViewWillEnter(fetchCalendarData)
+onIonViewWillEnter(() => {
+  if (loadedDate.value !== dateParam.value) fetchCalendarData()
+})
 
 watch(dateParam, fetchCalendarData)
 </script>

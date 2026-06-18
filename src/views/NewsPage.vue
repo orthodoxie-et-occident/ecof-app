@@ -21,7 +21,7 @@
           <ion-label>
             <h2 class="article-title">{{ article.title }}</h2>
             <p>{{ article.author }} • {{ formatDate(article.published_at) }}</p>
-            <ion-badge color="primary">{{ article.slug }}</ion-badge>
+            <ion-badge class="slug-badge">{{ article.slug }}</ion-badge>
             <ion-badge color="light" v-if="isNew(article.published_at)">Nouveau</ion-badge>
           </ion-label>
         </ion-item>
@@ -100,5 +100,10 @@ p {
 ion-badge {
   margin-top: 6px;
   margin-right: 4px;
+}
+
+.slug-badge {
+  --background: var(--ion-color-primary-tint);
+  --color: var(--ion-color-primary-contrast);
 }
 </style>
