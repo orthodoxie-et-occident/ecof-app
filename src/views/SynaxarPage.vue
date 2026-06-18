@@ -66,6 +66,7 @@ const loading = ref(true)
 const error = ref(null)
 const searchTerm = ref("")
 const displayCount = ref(PAGE_SIZE)
+const hasFetched = ref(false)
 
 const removeAccents = (str) =>
   str
@@ -85,6 +86,7 @@ const fetchSaints = async () => {
       ...item,
       _normalized: item.saint ? removeAccents(item.saint) : "",
     }))
+    hasFetched.value = true
   } catch (err) {
     error.value = err.message
   } finally {
@@ -118,5 +120,7 @@ const showSaintDetail = (item) => {
   })
 }
 
-onIonViewWillEnter(fetchSaints)
+onIonViewWillEnter(() => {
+  if (!hasFetched.value) fetchSaints()
+})
 </script>
