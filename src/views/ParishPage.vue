@@ -24,34 +24,25 @@
       </div>
 
       <div v-else class="events-wrapper">
-        <!-- Bandeau "À noter" : un seul événement par ligne, même sur plusieurs jours -->
-        <div v-if="multiDayEvents.length" class="highlight-section">
-          <p class="section-label">À noter</p>
-          <div v-for="event in multiDayEvents" :key="event.uid" class="highlight-card" :class="{ ongoing: event.isOngoing }">
-            <p class="highlight-title">{{ event.title }}</p>
-            <p class="highlight-range">
-              {{ formatRange(event.start, event.end) }}
-              <span class="highlight-status" :class="{ ongoing: event.isOngoing }">· {{ event.status }}</span>
-            </p>
-            <p v-if="event.location" class="event-meta">{{ event.location }}</p>
-            <p v-if="event.description" class="event-desc">{{ event.description }}</p>
-          </div>
-        </div>
-
-        <!-- Agenda jour par jour : uniquement les événements sur un seul jour -->
         <div v-for="(group, date) in groupedEvents" :key="date" class="day-group">
           <div class="day-header">
             <span class="day-name">{{ getDayName(date) }}</span>
             <span class="day-date">{{ getFullDate(date) }}</span>
           </div>
 
-          <div v-for="event in group" :key="event.uid" class="event-row">
+          <div v-for="event in group" :key="event.uid" class="event-row" :class="{ 'event-row--multiday': event.isMultiDay }">
             <div class="event-time">
-              <span>{{ formatTime(event.start) }}</span>
-              <span class="time-end">{{ formatTime(event.end) }}</span>
+              <template v-if="event.isMultiDay">
+                <span class="day-badge">{{ event.currentDay }}/{{ event.totalDays }}</span>
+              </template>
+              <template v-else>
+                <span>{{ formatTime(event.start) }}</span>
+                <span class="time-end">{{ formatTime(event.end) }}</span>
+              </template>
             </div>
             <div class="event-content">
               <p class="event-title">{{ event.title }}</p>
+              <p v-if="event.isMultiDay" class="event-range">{{ formatRange(event.start, event.end) }}</p>
               <p v-if="event.location" class="event-meta">{{ event.location }}</p>
               <p v-if="event.description" class="event-desc">{{ event.description }}</p>
             </div>
@@ -72,9 +63,6 @@ const events = ref([])
 const loading = ref(true)
 const error = ref(null)
 const paroisseName = computed(() => route.query.nom || "Horaires")
-
-// Au-delà de ce nombre de mois, un événement multi-jours n'apparaît plus dans le bandeau "À noter"
-const HIGHLIGHT_WINDOW_MONTHS = 3
 
 onIonViewWillEnter(async () => {
   await fetchEvents()
@@ -100,18 +88,11 @@ async function fetchEvents() {
 // sans passer par un objet Date (pour éviter tout décalage de fuseau horaire)
 const dateKey = (isoString) => isoString.split("T")[0]
 
-const todayKey = () => {
-  const now = new Date()
-  const yy = now.getFullYear()
-  const mm = String(now.getMonth() + 1).padStart(2, "0")
-  const dd = String(now.getDate()).padStart(2, "0")
-  return `${yy}-${mm}-${dd}`
-}
-
-// Décale une clé "YYYY-MM-DD" d'un nombre de mois donné
-const addMonths = (key, months) => {
+// Avance une clé "YYYY-MM-DD" d'un jour, en restant en calendrier local
+const nextDateKey = (key) => {
   const [y, m, d] = key.split("-").map(Number)
-  const date = new Date(y, m - 1 + months, d)
+  const date = new Date(y, m - 1, d)
+  date.setDate(date.getDate() + 1)
   const yy = date.getFullYear()
   const mm = String(date.getMonth() + 1).padStart(2, "0")
   const dd = String(date.getDate()).padStart(2, "0")
@@ -127,60 +108,49 @@ const daysDiff = (keyFrom, keyTo) => {
   return Math.round((b - a) / 86400000)
 }
 
-// Agenda jour par jour : uniquement les événements qui se déroulent sur un seul jour.
-// Les événements multi-jours sont gérés séparément dans le bandeau "À noter".
+// Construit l'agenda jour par jour. Les événements multi-jours sont répétés sur
+// chaque jour qu'ils couvrent (comme un événement classique) et placés en tête
+// de chaque jour tant qu'ils sont actifs.
 const groupedEvents = computed(() => {
   const acc = {}
 
   for (const event of events.value) {
     const startKey = dateKey(event.start)
     const endKey = dateKey(event.end)
-    if (startKey !== endKey) continue
+    const isMultiDay = startKey !== endKey
 
-    if (!acc[startKey]) acc[startKey] = []
-    acc[startKey].push(event)
+    if (!isMultiDay) {
+      if (!acc[startKey]) acc[startKey] = []
+      acc[startKey].push({ ...event, isMultiDay: false })
+      continue
+    }
+
+    const totalDays = daysDiff(startKey, endKey) + 1
+    let key = startKey
+    while (true) {
+      if (!acc[key]) acc[key] = []
+      acc[key].push({
+        ...event,
+        isMultiDay: true,
+        currentDay: daysDiff(startKey, key) + 1,
+        totalDays,
+      })
+      if (key === endKey) break
+      key = nextDateKey(key)
+    }
   }
 
   for (const key in acc) {
-    acc[key].sort((a, b) => a.start.localeCompare(b.start))
+    acc[key].sort((a, b) => {
+      if (a.isMultiDay !== b.isMultiDay) return a.isMultiDay ? -1 : 1
+      return a.start.localeCompare(b.start)
+    })
   }
 
   return acc
 })
 
-// Bandeau "À noter" : une seule ligne par événement multi-jours, avec un statut relatif.
-// On exclut les événements déjà terminés et ceux qui démarrent trop loin dans le futur.
-const multiDayEvents = computed(() => {
-  const today = todayKey()
-  const limit = addMonths(today, HIGHLIGHT_WINDOW_MONTHS)
-
-  return events.value
-    .filter((event) => dateKey(event.start) !== dateKey(event.end))
-    .map((event) => ({
-      ...event,
-      startKey: dateKey(event.start),
-      endKey: dateKey(event.end),
-    }))
-    .filter((event) => event.endKey >= today && event.startKey <= limit)
-    .map((event) => {
-      const totalDays = daysDiff(event.startKey, event.endKey) + 1
-      const isOngoing = event.startKey <= today && today <= event.endKey
-
-      let status
-      if (isOngoing) {
-        const currentDay = daysDiff(event.startKey, today) + 1
-        status = totalDays > 1 ? `En cours · jour ${currentDay}/${totalDays}` : "En cours"
-      } else {
-        const daysUntil = daysDiff(today, event.startKey)
-        status = daysUntil === 1 ? "Demain" : `Dans ${daysUntil} jours`
-      }
-
-      return { ...event, totalDays, isOngoing, status }
-    })
-    .sort((a, b) => a.start.localeCompare(b.start))
-})
-
-const hasContent = computed(() => multiDayEvents.value.length > 0 || Object.keys(groupedEvents.value).length > 0)
+const hasContent = computed(() => Object.keys(groupedEvents.value).length > 0)
 
 const getDayName = (dateStr) => new Date(`${dateStr}T00:00:00`).toLocaleDateString("fr-FR", { weekday: "long" })
 
@@ -191,65 +161,16 @@ const formatTime = (dateString) => new Date(dateString).toLocaleTimeString("fr-F
 const formatRange = (start, end) => {
   const s = new Date(start)
   const e = new Date(end)
-  const sameMonth = s.getMonth() === e.getMonth() && s.getFullYear() === e.getFullYear()
-  const startStr = s.toLocaleDateString("fr-FR", sameMonth ? { day: "numeric" } : { day: "numeric", month: "short" })
-  const endStr = e.toLocaleDateString("fr-FR", { day: "numeric", month: "short" })
-  return `${startStr} → ${endStr}`
+  const dateOpts = { day: "numeric", month: "short" }
+  const startDate = s.toLocaleDateString("fr-FR", dateOpts)
+  const endDate = e.toLocaleDateString("fr-FR", dateOpts)
+  return `${startDate} ${formatTime(start)} → ${endDate} ${formatTime(end)}`
 }
 </script>
 
 <style scoped>
 .events-wrapper {
   padding: 8px 0 40px;
-}
-
-.highlight-section {
-  padding: 4px 0 12px;
-  border-bottom: 6px solid #f7f7f7;
-}
-
-.section-label {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--ion-color-primary);
-  margin: 0;
-  padding: 12px 16px 8px;
-}
-
-.highlight-card {
-  margin: 0 16px 10px;
-  padding: 10px 12px;
-  border: 1px solid #eee;
-  border-radius: 10px;
-  background: #fafafa;
-}
-
-.highlight-card.ongoing {
-  border-color: var(--ion-color-primary);
-  background: rgba(var(--ion-color-primary-rgb), 0.06);
-}
-
-.highlight-title {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #1a1a1a;
-  margin: 0 0 4px;
-  line-height: 1.35;
-}
-
-.highlight-range {
-  font-size: 0.78rem;
-  color: #999;
-  margin: 0 0 4px;
-}
-
-.highlight-status {
-  font-weight: 600;
-  color: #999;
-}
-
-.highlight-status.ongoing {
-  color: var(--ion-color-primary);
 }
 
 .day-header {
@@ -280,6 +201,12 @@ const formatRange = (start, end) => {
   border-bottom: 1px solid #f0f0f0;
 }
 
+.event-row--multiday {
+  background: rgba(var(--ion-color-primary-rgb), 0.06);
+  border-left: 3px solid var(--ion-color-primary);
+  padding-left: 13px;
+}
+
 .event-time {
   display: flex;
   flex-direction: column;
@@ -301,14 +228,35 @@ const formatRange = (start, end) => {
   color: #bbb;
 }
 
+.day-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ion-color-primary);
+  background: #fff;
+  padding: 2px 6px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
 .event-content {
   flex: 1;
+  min-width: 0;
 }
 
 .event-title {
   font-size: 0.9rem;
   font-weight: 500;
   color: #1a1a1a;
+  margin: 0 0 4px;
+}
+
+.event-row--multiday .event-title {
+  color: var(--ion-color-primary);
+}
+
+.event-range {
+  font-size: 0.78rem;
+  color: #999;
   margin: 0 0 4px;
 }
 
