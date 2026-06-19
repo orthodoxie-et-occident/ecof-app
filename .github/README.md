@@ -71,7 +71,7 @@ flowchart LR
 ### Installation
 
 ```bash
-git clone https://github.com/<your-org>/ecof-app.git
+git clone https://github.com/jrc0de/ecof-app.git
 cd ecof-app
 npm install
 ```
