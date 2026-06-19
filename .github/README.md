@@ -108,4 +108,4 @@ npm run fmt:check    # check formatting without writing
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](../LICENSE).
