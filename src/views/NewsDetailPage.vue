@@ -49,7 +49,7 @@ onIonViewWillEnter(async () => {
   try {
     const id = route.params.id
 
-    const res = await fetch(`https://ecof-api-production.up.railway.app/api/news/${id}`)
+    const res = await fetch(`https://api.ecof.app/news/${id}`)
 
     if (!res.ok) {
       throw new Error(`${res.status} ${res.statusText}`)

@@ -91,7 +91,7 @@ const fetchSaintData = async () => {
   try {
     const saintId = route.params.id
 
-    const response = await fetch(`https://ecof-api-production.up.railway.app/api/vita/${saintId}`)
+    const response = await fetch(`https://api.ecof.app/vita/${saintId}`)
 
     const data = await response.json()
 

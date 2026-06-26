@@ -107,7 +107,7 @@ onIonViewDidEnter(async () => {
         mapInstance.addImage(d.key, data, { pixelRatio: 2 })
       }
 
-      const raw = await fetch("https://ecof-api-production.up.railway.app/api/map-data").then((r) => r.json())
+      const raw = await fetch("https://api.ecof.app/map-data").then((r) => r.json())
 
       mapInstance.addSource("poi", {
         type: "geojson",

@@ -60,7 +60,7 @@ const fetchReadingData = async () => {
   try {
     const readingId = route.params.id
 
-    const response = await fetch(`https://ecof-api-production.up.railway.app/api/reading/${readingId}`)
+    const response = await fetch(`https://api.ecof.app/reading/${readingId}`)
 
     if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`)
 

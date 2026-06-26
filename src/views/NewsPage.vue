@@ -64,7 +64,7 @@ async function fetchArticles() {
   loading.value = true
   error.value = null
   try {
-    const res = await fetch("https://ecof-api-production.up.railway.app/api/news")
+    const res = await fetch("https://api.ecof.app/news")
     if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
     articles.value = await res.json()
     hasFetched.value = true

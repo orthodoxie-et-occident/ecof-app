@@ -177,14 +177,13 @@ const fetchCalendarData = async () => {
   error.value = null
 
   try {
-    const response = await fetch(`https://ecof-api-production.up.railway.app/api/calendar/${dateParam.value}`)
+    const response = await fetch(`https://api.ecof.app/calendar/${dateParam.value}`)
 
-    if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`)
-
+    if (!response.ok) throw new Error(`${response.status}`)
     calendarData.value = await response.json()
     loadedDate.value = dateParam.value
   } catch (err) {
-    error.value = `Erreur lors du chargement des données: ${err.message}`
+    error.value = `Erreur ${err.message} - Impossible de récupérer le calendrier`
   } finally {
     loading.value = false
   }
