@@ -18,9 +18,14 @@
       </div>
 
       <div v-else-if="error" class="state-container">
-        <p class="error-text">
-          {{ error }}
-        </p>
+        <div class="error-card">
+          <ion-icon :icon="cloudOfflineOutline" class="error-icon"></ion-icon>
+          <p class="error-title">Connexion impossible</p>
+          <ion-button fill="outline" color="primary" @click="fetchSaints">
+            <ion-icon :icon="refreshOutline" slot="start"></ion-icon>
+            Réessayer
+          </ion-button>
+        </div>
       </div>
 
       <ion-list v-else>
@@ -54,10 +59,13 @@ import {
   IonItem,
   IonLabel,
   IonSpinner,
+  IonButton,
+  IonIcon,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
   onIonViewWillEnter,
 } from "@ionic/vue"
+import { cloudOfflineOutline, refreshOutline } from "ionicons/icons"
 
 const PAGE_SIZE = 40
 
@@ -83,10 +91,7 @@ const fetchSaints = async () => {
 
   try {
     const response = await fetch("https://api.ecof.app/synaxar")
-
-    if (!response.ok) {
-      throw new Error("Erreur lors du chargement des données")
-    }
+    if (!response.ok) throw new Error("Erreur lors du chargement des données")
 
     const data = await response.json()
 
@@ -97,19 +102,16 @@ const fetchSaints = async () => {
 
     hasFetched.value = true
   } catch (err) {
-    error.value = err.message
+    console.error(err.message)
+    error.value = true
   } finally {
     loading.value = false
   }
 }
 
 const filteredSaints = computed(() => {
-  if (!searchTerm.value.trim()) {
-    return saints.value
-  }
-
+  if (!searchTerm.value.trim()) return saints.value
   const q = removeAccents(searchTerm.value)
-
   return saints.value.filter((item) => item._normalized.includes(q))
 })
 
@@ -136,9 +138,7 @@ const showSaintDetail = (item) => {
 }
 
 onIonViewWillEnter(() => {
-  if (!hasFetched.value) {
-    fetchSaints()
-  }
+  if (!hasFetched.value) fetchSaints()
 })
 </script>
 
@@ -154,7 +154,25 @@ onIonViewWillEnter(() => {
   font-size: 0.9rem;
 }
 
-.error-text {
-  color: var(--ion-color-danger);
+.error-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.error-icon {
+  font-size: 56px;
+  color: var(--ion-color-medium);
+  opacity: 0.4;
+}
+
+.error-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ion-color-dark);
 }
 </style>

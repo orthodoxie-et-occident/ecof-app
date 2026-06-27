@@ -19,7 +19,14 @@
       </div>
 
       <div v-else-if="error" class="state-container">
-        <p class="error-text">Impossible de charger l'article : {{ error }}</p>
+        <div class="error-card">
+          <ion-icon :icon="cloudOfflineOutline" class="error-icon"></ion-icon>
+          <p class="error-title">Connexion impossible</p>
+          <ion-button fill="outline" color="primary" @click="fetchArticle">
+            <ion-icon :icon="refreshOutline" slot="start"></ion-icon>
+            Réessayer
+          </ion-button>
+        </div>
       </div>
 
       <div v-else-if="article" class="ion-padding">
@@ -32,7 +39,8 @@
 <script setup>
 import { ref } from "vue"
 import { useRoute } from "vue-router"
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonSpinner, onIonViewWillEnter } from "@ionic/vue"
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
+import { cloudOfflineOutline, refreshOutline } from "ionicons/icons"
 import MarkdownSection from "@/components/MarkdownSection.vue"
 
 const route = useRoute()
@@ -41,27 +49,25 @@ const article = ref(null)
 const loading = ref(true)
 const error = ref(null)
 
-onIonViewWillEnter(async () => {
+async function fetchArticle() {
   loading.value = true
   error.value = null
   article.value = null
 
   try {
     const id = route.params.id
-
     const res = await fetch(`https://api.ecof.app/news/${id}`)
-
-    if (!res.ok) {
-      throw new Error(`${res.status} ${res.statusText}`)
-    }
-
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
     article.value = await res.json()
   } catch (err) {
-    error.value = err.message
+    console.error(err.message)
+    error.value = true
   } finally {
     loading.value = false
   }
-})
+}
+
+onIonViewWillEnter(fetchArticle)
 </script>
 
 <style scoped>
@@ -76,7 +82,25 @@ onIonViewWillEnter(async () => {
   font-size: 0.9rem;
 }
 
-.error-text {
-  color: var(--ion-color-danger);
+.error-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.error-icon {
+  font-size: 56px;
+  color: var(--ion-color-medium);
+  opacity: 0.4;
+}
+
+.error-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ion-color-dark);
 }
 </style>

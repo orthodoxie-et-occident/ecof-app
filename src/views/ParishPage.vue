@@ -16,7 +16,14 @@
       </div>
 
       <div v-else-if="error" class="state-container">
-        <p class="error-text">{{ error }}</p>
+        <div class="error-card">
+          <ion-icon :icon="cloudOfflineOutline" class="error-icon"></ion-icon>
+          <p class="error-title">Connexion impossible</p>
+          <ion-button fill="outline" color="primary" @click="fetchEvents">
+            <ion-icon :icon="refreshOutline" slot="start"></ion-icon>
+            Réessayer
+          </ion-button>
+        </div>
       </div>
 
       <div v-else-if="!hasContent" class="state-container">
@@ -56,7 +63,8 @@
 <script setup>
 import { ref, computed } from "vue"
 import { useRoute } from "vue-router"
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonSpinner, onIonViewWillEnter } from "@ionic/vue"
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
+import { cloudOfflineOutline, refreshOutline } from "ionicons/icons"
 
 const route = useRoute()
 const events = ref([])
@@ -78,17 +86,15 @@ async function fetchEvents() {
     const data = await response.json()
     events.value = (data.events || []).sort((a, b) => a.start.localeCompare(b.start))
   } catch (err) {
-    error.value = err.message
+    console.error(err.message)
+    error.value = true
   } finally {
     loading.value = false
   }
 }
 
-// Clé "YYYY-MM-DD" extraite directement de la chaîne ISO,
-// sans passer par un objet Date (pour éviter tout décalage de fuseau horaire)
 const dateKey = (isoString) => isoString.split("T")[0]
 
-// Avance une clé "YYYY-MM-DD" d'un jour, en restant en calendrier local
 const nextDateKey = (key) => {
   const [y, m, d] = key.split("-").map(Number)
   const date = new Date(y, m - 1, d)
@@ -99,7 +105,6 @@ const nextDateKey = (key) => {
   return `${yy}-${mm}-${dd}`
 }
 
-// Nombre de jours calendaires entre deux clés "YYYY-MM-DD"
 const daysDiff = (keyFrom, keyTo) => {
   const [y1, m1, d1] = keyFrom.split("-").map(Number)
   const [y2, m2, d2] = keyTo.split("-").map(Number)
@@ -108,9 +113,6 @@ const daysDiff = (keyFrom, keyTo) => {
   return Math.round((b - a) / 86400000)
 }
 
-// Construit l'agenda jour par jour. Les événements multi-jours sont répétés sur
-// chaque jour qu'ils couvrent (comme un événement classique) et placés en tête
-// de chaque jour tant qu'ils sont actifs.
 const groupedEvents = computed(() => {
   const acc = {}
 
@@ -285,7 +287,25 @@ const formatRange = (start, end) => {
   font-size: 0.9rem;
 }
 
-.error-text {
-  color: var(--ion-color-danger);
+.error-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.error-icon {
+  font-size: 56px;
+  color: var(--ion-color-medium);
+  opacity: 0.4;
+}
+
+.error-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ion-color-dark);
 }
 </style>

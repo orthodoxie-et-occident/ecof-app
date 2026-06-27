@@ -1,3 +1,4 @@
+```vue
 <template>
   <ion-page>
     <ion-header>
@@ -18,9 +19,14 @@
 
       <!-- ERROR -->
       <div v-else-if="error" class="state-container">
-        <p class="error-text">
-          {{ error }}
-        </p>
+        <div class="error-card">
+          <ion-icon :icon="cloudOfflineOutline" class="error-icon"></ion-icon>
+          <p class="error-title">Connexion impossible</p>
+          <ion-button fill="outline" color="primary" @click="fetchReadingData">
+            <ion-icon :icon="refreshOutline" slot="start"></ion-icon>
+            Réessayer
+          </ion-button>
+        </div>
       </div>
 
       <!-- CONTENT -->
@@ -45,7 +51,8 @@
 <script setup>
 import { ref } from "vue"
 import { useRoute } from "vue-router"
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonSpinner, onIonViewWillEnter } from "@ionic/vue"
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
+import { cloudOfflineOutline, refreshOutline } from "ionicons/icons"
 
 const route = useRoute()
 
@@ -59,16 +66,13 @@ const fetchReadingData = async () => {
 
   try {
     const readingId = route.params.id
-
     const response = await fetch(`https://api.ecof.app/reading/${readingId}`)
-
     if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`)
-
     const data = await response.json()
-
     readingData.value = data[0] || null
   } catch (err) {
-    error.value = err.message
+    console.error(err.message)
+    error.value = true
   } finally {
     loading.value = false
   }
@@ -109,7 +113,26 @@ onIonViewWillEnter(fetchReadingData)
   font-size: 0.9rem;
 }
 
-.error-text {
-  color: var(--ion-color-danger);
+.error-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.error-icon {
+  font-size: 56px;
+  color: var(--ion-color-medium);
+  opacity: 0.4;
+}
+
+.error-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ion-color-dark);
 }
 </style>
+```

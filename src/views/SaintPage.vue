@@ -18,6 +18,17 @@
         <p>Chargement...</p>
       </div>
 
+      <div v-else-if="error" class="state-container">
+        <div class="error-card">
+          <ion-icon :icon="cloudOfflineOutline" class="error-icon"></ion-icon>
+          <p class="error-title">Connexion impossible</p>
+          <ion-button fill="outline" color="primary" @click="fetchSaintData">
+            <ion-icon :icon="refreshOutline" slot="start"></ion-icon>
+            Réessayer
+          </ion-button>
+        </div>
+      </div>
+
       <template v-else>
         <ion-segment v-model="selectedTab">
           <ion-segment-button v-if="saintData?.vie_b" value="vie_b">
@@ -71,7 +82,8 @@
 <script setup>
 import { ref } from "vue"
 import { useRoute } from "vue-router"
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonBackButton, IonIcon, IonSpinner, IonSegment, IonSegmentButton, IonLabel, onIonViewWillEnter } from "@ionic/vue"
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonBackButton, IonIcon, IonSpinner, IonButton, IonSegment, IonSegmentButton, IonLabel, onIonViewWillEnter } from "@ionic/vue"
+import { cloudOfflineOutline, refreshOutline } from "ionicons/icons"
 
 import MarkdownSection from "@/components/MarkdownSection.vue"
 
@@ -83,18 +95,18 @@ const route = useRoute()
 
 const saintData = ref(null)
 const loading = ref(true)
+const error = ref(null)
 const selectedTab = ref("vie_b")
 
 const fetchSaintData = async () => {
   loading.value = true
+  error.value = null
 
   try {
     const saintId = route.params.id
-
     const response = await fetch(`https://api.ecof.app/vita/${saintId}`)
-
+    if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`)
     const data = await response.json()
-
     saintData.value = data
 
     if (data.vie_b) {
@@ -104,8 +116,9 @@ const fetchSaintData = async () => {
     } else if (data.vita_liturgy) {
       selectedTab.value = "vita_liturgy"
     }
-  } catch (error) {
-    console.error("Erreur lors du chargement des données du saint:", error)
+  } catch (err) {
+    console.error(err.message)
+    error.value = true
   } finally {
     loading.value = false
   }
@@ -124,6 +137,28 @@ onIonViewWillEnter(fetchSaintData)
   gap: 10px;
   color: #aaa;
   font-size: 0.9rem;
+}
+
+.error-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.error-icon {
+  font-size: 56px;
+  color: var(--ion-color-medium);
+  opacity: 0.4;
+}
+
+.error-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ion-color-dark);
 }
 
 .saint-image-container {

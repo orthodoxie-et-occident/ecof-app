@@ -47,9 +47,14 @@
 
         <!-- ERROR -->
         <div v-else-if="error" class="state-container">
-          <p class="error-text">
-            {{ error }}
-          </p>
+          <div class="error-card">
+            <ion-icon :icon="cloudOfflineOutline" class="error-icon"></ion-icon>
+            <p class="error-title">Connexion impossible</p>
+            <ion-button fill="outline" color="primary" @click="fetchCalendarData">
+              <ion-icon :icon="refreshOutline" slot="start"></ion-icon>
+              Réessayer
+            </ion-button>
+          </div>
         </div>
 
         <!-- CONTENU -->
@@ -128,10 +133,11 @@ import {
   IonLabel,
   IonSpinner,
   IonIcon,
+  IonButton,
   onIonViewWillEnter,
 } from "@ionic/vue"
 
-import { calendarOutline } from "ionicons/icons"
+import { calendarOutline, cloudOfflineOutline, refreshOutline } from "ionicons/icons"
 import { ref, computed, watch } from "vue"
 import { useIonRouter } from "@ionic/vue"
 
@@ -183,7 +189,8 @@ const fetchCalendarData = async () => {
     calendarData.value = await response.json()
     loadedDate.value = dateParam.value
   } catch (err) {
-    error.value = `Erreur ${err.message} - Impossible de récupérer le calendrier`
+    console.error(`Erreur ${err.message}`)
+    error.value = true
   } finally {
     loading.value = false
   }
@@ -255,7 +262,25 @@ ion-item {
   font-size: 0.9rem;
 }
 
-.error-text {
-  color: var(--ion-color-danger);
+.error-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.error-icon {
+  font-size: 56px;
+  color: var(--ion-color-medium);
+  opacity: 0.4;
+}
+
+.error-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ion-color-dark);
 }
 </style>

@@ -16,7 +16,14 @@
       </div>
 
       <div v-else-if="error" class="state-container">
-        <p class="error-text">Impossible de charger les actualités : {{ error }}</p>
+        <div class="error-card">
+          <ion-icon :icon="cloudOfflineOutline" class="error-icon"></ion-icon>
+          <p class="error-title">Connexion impossible</p>
+          <ion-button fill="outline" color="primary" @click="fetchArticles">
+            <ion-icon :icon="refreshOutline" slot="start"></ion-icon>
+            Réessayer
+          </ion-button>
+        </div>
       </div>
 
       <ion-list v-else>
@@ -39,7 +46,8 @@
 
 <script setup>
 import { ref } from "vue"
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonList, IonItem, IonLabel, IonBadge, IonSpinner, IonNote, onIonViewWillEnter } from "@ionic/vue"
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonList, IonItem, IonLabel, IonBadge, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
+import { cloudOfflineOutline, refreshOutline } from "ionicons/icons"
 
 const articles = ref([])
 const loading = ref(true)
@@ -69,7 +77,8 @@ async function fetchArticles() {
     articles.value = await res.json()
     hasFetched.value = true
   } catch (err) {
-    error.value = err.message
+    console.error(err.message)
+    error.value = true
   } finally {
     loading.value = false
   }
@@ -125,7 +134,25 @@ ion-badge {
   font-size: 0.9rem;
 }
 
-.error-text {
-  color: var(--ion-color-danger);
+.error-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.error-icon {
+  font-size: 56px;
+  color: var(--ion-color-medium);
+  opacity: 0.4;
+}
+
+.error-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ion-color-dark);
 }
 </style>
