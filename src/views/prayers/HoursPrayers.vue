@@ -11,30 +11,17 @@
 
     <ion-content>
       <div class="timeline">
-
-        <div class="day-sep">
-          <span class="day-sep-text">{{ labelJour1 }}</span>
-        </div>
-
-        <template v-for="slot in slots" :key="slot.debut">
-
-          <div v-if="slot.sep" class="day-sep">
-            <span class="day-sep-text">{{ labelJour2 }}</span>
+        <template v-for="(slot, i) in slotsAffiches" :key="slot.uid">
+          <!-- Bandeau de jour : affiché quand la date change (ou en tête de liste) -->
+          <div v-if="i === 0 || slot.dateObj.toDateString() !== slotsAffiches[i - 1].dateObj.toDateString()" class="day-sep">
+            <span class="day-sep-text">{{ fmtDate(slot.dateObj) }}</span>
           </div>
 
-          <div class="scale">
-
+          <div class="scale" :class="{ 'scale-active': i === nbPasses }">
             <div class="ruler">
               <div class="ruler-inner">
-                <div
-                  v-for="offset in [0, 1, 2]"
-                  :key="offset"
-                  class="r-tick"
-                  :style="{ top: (offset * 36) + 'px' }"
-                >
-                  <span class="r-label" :class="{ major: offset === 0 }">
-                    {{ (slot.debut + offset) % 24 }}h
-                  </span>
+                <div v-for="offset in [0, 1, 2]" :key="offset" class="r-tick" :style="{ top: offset * 36 + 'px' }">
+                  <span class="r-label" :class="{ major: offset === 0 }"> {{ (slot.debut + offset) % 24 }}h </span>
                   <span class="r-dash" :class="offset === 0 ? 'major' : 'minor'"></span>
                 </div>
               </div>
@@ -44,30 +31,24 @@
               <div
                 class="prayer-block"
                 :class="{
-                  active:   slot.debut === debutEnCours,
-                  disabled: slot.disabled
+                  active: i === nbPasses,
+                  past: i < nbPasses,
+                  disabled: slot.disabled && i === nbPasses,
                 }"
-                @click="!slot.disabled && $router.push(slot.route)"
+                @click="$router.push(slot.route)"
               >
                 <div class="prayer-inner">
                   <div class="prayer-titre">
-                    <span v-if="slot.debut === debutEnCours" class="cur-dot" aria-label="En cours" />
+                    <span v-if="i === nbPasses" class="cur-dot" aria-label="En cours" />
                     {{ slot.titre }}
                   </div>
                   <div class="prayer-sous">{{ slot.sous }}</div>
                 </div>
-                <ion-icon
-                  v-if="!slot.disabled"
-                  :icon="chevronForward"
-                  class="chevron-nav"
-                  aria-hidden="true"
-                />
+                <ion-icon :icon="chevronForward" class="chevron-nav" aria-hidden="true" />
               </div>
             </div>
-
           </div>
         </template>
-
       </div>
     </ion-content>
   </ion-page>
@@ -75,41 +56,61 @@
 
 <script setup>
 import { computed } from "vue"
-import {
-  IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton,
-  IonTitle, IonContent, IonIcon,
-} from "@ionic/vue"
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonIcon } from "@ionic/vue"
 import { chevronForward } from "ionicons/icons"
 
-const JOURS = ["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"]
-const MOIS  = ["janvier","février","mars","avril","mai","juin","juillet",
-               "août","septembre","octobre","novembre","décembre"]
+const JOURS = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"]
+const MOIS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
 
 function fmtDate(d) {
   return `${JOURS[d.getDay()]} ${d.getDate()} ${MOIS[d.getMonth()]}`
 }
 
 const maintenant = new Date()
-const demain     = new Date(maintenant)
-demain.setDate(demain.getDate() + 1)
 
-const labelJour1 = fmtDate(maintenant)
-const labelJour2 = fmtDate(demain)
-
-const slots = [
-  { debut: 18, titre: "Vêpres",    sous: "Au coucher du soleil",             route: "/prayers/hours/vespers",  disabled: true,  sep: false },
-  { debut: 21, titre: "Complies",  sous: "3ème heure de la nuit",            route: "/prayers/hours/compline", disabled: false, sep: false },
-  { debut:  0, titre: "Nocturnes", sous: "6ème heure de la nuit",            route: "/prayers/hours/vigils",   disabled: false, sep: true  },
-  { debut:  3, titre: "Laudes",    sous: "Lever du soleil, 9ème heure",      route: "/prayers/hours/lauds",    disabled: false, sep: false },
-  { debut:  6, titre: "Prime",     sous: "1ère heure du jour",               route: "/prayers/hours/prime",    disabled: false, sep: false },
-  { debut:  9, titre: "Tierce",    sous: "3ème heure du jour",               route: "/prayers/hours/tierce",   disabled: false, sep: false },
-  { debut: 12, titre: "Sexte",     sous: "6ème heure du jour, midi",         route: "/prayers/hours/sext",     disabled: false, sep: false },
-  { debut: 15, titre: "None",      sous: "9ème heure du jour",               route: "/prayers/hours/none",     disabled: false, sep: false },
+const OFFICES = [
+  { debut: 18, titre: "Vêpres", sous: "Au coucher du soleil", route: "/prayers/hours/vespers", disabled: true },
+  { debut: 21, titre: "Complies", sous: "3ème heure de la nuit", route: "/prayers/hours/compline", disabled: false },
+  { debut: 0, titre: "Nocturnes", sous: "6ème heure de la nuit", route: "/prayers/hours/vigils", disabled: false },
+  { debut: 3, titre: "Laudes", sous: "Lever du soleil, 9ème heure", route: "/prayers/hours/lauds", disabled: false },
+  { debut: 6, titre: "Prime", sous: "1ère heure du jour", route: "/prayers/hours/prime", disabled: false },
+  { debut: 9, titre: "Tierce", sous: "3ème heure du jour", route: "/prayers/hours/tierce", disabled: false },
+  { debut: 12, titre: "Sexte", sous: "6ème heure du jour, midi", route: "/prayers/hours/sext", disabled: false },
+  { debut: 15, titre: "None", sous: "9ème heure du jour", route: "/prayers/hours/none", disabled: false },
 ]
 
-const debutEnCours = computed(() => {
+function buildSlots(nbCycles = 3) {
+  const result = []
+  for (let cycle = 0; cycle < nbCycles; cycle++) {
+    OFFICES.forEach((o) => {
+      const decalage = o.debut < 18 ? cycle + 1 : cycle
+      const date = new Date(maintenant)
+      date.setDate(date.getDate() + decalage)
+      result.push({ ...o, cycle, dateObj: date, uid: `${cycle}-${o.debut}` })
+    })
+  }
+  return result
+}
+
+const tousSlots = buildSlots(3)
+
+const indexEnCours = computed(() => {
   const h = new Date().getHours()
-  return slots.find(s => h >= s.debut && h < s.debut + 3)?.debut ?? null
+  const idx = tousSlots.findIndex((s) => s.cycle === 0 && h >= s.debut && h < s.debut + 3)
+  return idx >= 0 ? idx : 0
+})
+
+const debutEnCours = computed(() => tousSlots[indexEnCours.value]?.debut ?? null)
+
+const slotsAffiches = computed(() => {
+  const idx = indexEnCours.value
+  const start = Math.max(0, idx - 2)
+  return tousSlots.slice(start, start + 8)
+})
+
+const nbPasses = computed(() => {
+  const idx = indexEnCours.value
+  return Math.min(2, idx)
 })
 </script>
 
@@ -120,7 +121,7 @@ const debutEnCours = computed(() => {
 
 /* ── Séparateur de jour ── */
 .day-sep {
-  padding: 7px 14px 7px 14px;
+  padding: 12px 14px 14px 14px;
   background: var(--ion-color-step-50);
   border-top: 2px solid var(--ion-color-primary);
   border-bottom: 0.5px solid var(--ion-color-step-150);
@@ -131,16 +132,17 @@ const debutEnCours = computed(() => {
 }
 
 .day-sep-text {
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--ion-color-primary);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
 }
 
 /* ── Ligne scale ── */
 .scale {
   display: flex;
+  border-bottom: 1.5px solid var(--ion-color-step-300);
 }
 
 /* ── Réglette ── */
@@ -148,6 +150,11 @@ const debutEnCours = computed(() => {
   width: 52px;
   flex-shrink: 0;
   position: relative;
+  background: var(--ion-color-step-50);
+}
+
+.scale-active .ruler {
+  background: transparent;
 }
 
 .ruler-inner {
@@ -163,7 +170,6 @@ const debutEnCours = computed(() => {
   align-items: center;
   justify-content: flex-end;
   gap: 4px;
-  /* aligner le centre du tick sur la graduation, pas en dessous */
   transform: translateY(-50%);
 }
 
@@ -186,8 +192,13 @@ const debutEnCours = computed(() => {
   border-radius: 1px;
   background: var(--ion-color-step-300);
 }
-.r-dash.major { width: 10px; background: var(--ion-color-step-500); }
-.r-dash.minor { width: 6px; }
+.r-dash.major {
+  width: 10px;
+  background: var(--ion-color-step-500);
+}
+.r-dash.minor {
+  width: 6px;
+}
 
 /* ── Contenu ── */
 .content-col {
@@ -197,21 +208,25 @@ const debutEnCours = computed(() => {
 
 .prayer-block {
   height: 108px;
-  border-bottom: 0.5px solid var(--ion-color-step-100);
   display: flex;
-  /* texte ancré en haut, aligné sur la graduation de début */
   align-items: flex-start;
-  padding-top: 10px;
+  padding-top: 14px;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
-.prayer-block.active {
-  background: color-mix(in srgb, var(--ion-color-primary) 8%, transparent);
+.scale.scale-active {
+  background: color-mix(in srgb, var(--ion-color-primary) 16%, transparent);
+}
+
+.prayer-block.past {
+  opacity: 0.45;
 }
 
 .prayer-block.disabled {
   opacity: 0.38;
   cursor: default;
+  pointer-events: none;
 }
 
 .prayer-inner {
