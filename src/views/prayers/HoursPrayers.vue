@@ -81,10 +81,18 @@ const OFFICES = [
 
 function buildSlots(nbCycles = 3) {
   const result = []
+  // La journée liturgique commence à 18h.
+  // Si on est avant 18h, la journée liturgique courante a commencé HIER soir.
+  // On recule donc la base d'un jour pour que cycle 0 parte de la bonne date.
+  const h = maintenant.getHours()
+  const base = new Date(maintenant)
+  if (h < 18) base.setDate(base.getDate() - 1)
+
   for (let cycle = 0; cycle < nbCycles; cycle++) {
     OFFICES.forEach((o) => {
+      // Les offices 0h–15h tombent le lendemain calendaire du début de leur journée liturgique
       const decalage = o.debut < 18 ? cycle + 1 : cycle
-      const date = new Date(maintenant)
+      const date = new Date(base)
       date.setDate(date.getDate() + decalage)
       result.push({ ...o, cycle, dateObj: date, uid: `${cycle}-${o.debut}` })
     })
