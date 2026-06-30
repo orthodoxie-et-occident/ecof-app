@@ -35,7 +35,7 @@
                   past: i < nbPasses,
                   disabled: slot.disabled && i === nbPasses,
                 }"
-                @click="$router.push(slot.route)"
+                @click="!slot.disabled && $router.push(slot.route)"
               >
                 <div class="prayer-inner">
                   <div class="prayer-titre">
@@ -70,27 +70,24 @@ const maintenant = new Date()
 
 const OFFICES = [
   { debut: 18, titre: "Vêpres", sous: "Au coucher du soleil", route: "/prayers/hours/vespers", disabled: true },
-  { debut: 21, titre: "Complies", sous: "3ème heure de la nuit", route: "/prayers/hours/compline", disabled: false },
-  { debut: 0, titre: "Nocturnes", sous: "6ème heure de la nuit", route: "/prayers/hours/vigils", disabled: false },
-  { debut: 3, titre: "Laudes", sous: "Lever du soleil, 9ème heure", route: "/prayers/hours/lauds", disabled: false },
-  { debut: 6, titre: "Prime", sous: "1ère heure du jour", route: "/prayers/hours/prime", disabled: false },
-  { debut: 9, titre: "Tierce", sous: "3ème heure du jour", route: "/prayers/hours/tierce", disabled: false },
-  { debut: 12, titre: "Sexte", sous: "6ème heure du jour, midi", route: "/prayers/hours/sext", disabled: false },
-  { debut: 15, titre: "None", sous: "9ème heure du jour", route: "/prayers/hours/none", disabled: false },
+  { debut: 21, titre: "Complies", sous: "3ème heure de la nuit", route: "/prayers/hours/compline", disabled: true },
+  { debut: 0, titre: "Nocturnes", sous: "6ème heure de la nuit", route: "/prayers/hours/vigils", disabled: true },
+  { debut: 3, titre: "Laudes", sous: "Lever du soleil, 9ème heure", route: "/prayers/hours/lauds", disabled: true },
+  { debut: 6, titre: "Prime", sous: "1ère heure du jour", route: "/prayers/hours/prime", disabled: true },
+  { debut: 9, titre: "Tierce", sous: "3ème heure du jour", route: "/prayers/hours/tierce", disabled: true },
+  { debut: 12, titre: "Sexte", sous: "6ème heure du jour, midi", route: "/prayers/hours/sext", disabled: true },
+  { debut: 15, titre: "None", sous: "9ème heure du jour", route: "/prayers/hours/none", disabled: true },
 ]
 
 function buildSlots(nbCycles = 3) {
   const result = []
-  // La journée liturgique commence à 18h.
-  // Si on est avant 18h, la journée liturgique courante a commencé HIER soir.
-  // On recule donc la base d'un jour pour que cycle 0 parte de la bonne date.
   const h = maintenant.getHours()
   const base = new Date(maintenant)
   if (h < 18) base.setDate(base.getDate() - 1)
 
-  for (let cycle = 0; cycle < nbCycles; cycle++) {
+  // Démarre à cycle -1 pour avoir toujours 2 offices passés disponibles
+  for (let cycle = -1; cycle < nbCycles; cycle++) {
     OFFICES.forEach((o) => {
-      // Les offices 0h–15h tombent le lendemain calendaire du début de leur journée liturgique
       const decalage = o.debut < 18 ? cycle + 1 : cycle
       const date = new Date(base)
       date.setDate(date.getDate() + decalage)
@@ -105,7 +102,7 @@ const tousSlots = buildSlots(3)
 const indexEnCours = computed(() => {
   const h = new Date().getHours()
   const idx = tousSlots.findIndex((s) => s.cycle === 0 && h >= s.debut && h < s.debut + 3)
-  return idx >= 0 ? idx : 0
+  return idx >= 0 ? idx : tousSlots.findIndex((s) => s.cycle === 0)
 })
 
 const debutEnCours = computed(() => tousSlots[indexEnCours.value]?.debut ?? null)
@@ -116,10 +113,8 @@ const slotsAffiches = computed(() => {
   return tousSlots.slice(start, start + 8)
 })
 
-const nbPasses = computed(() => {
-  const idx = indexEnCours.value
-  return Math.min(2, idx)
-})
+// Toujours 2 blocs passés (cycle -1 garantit qu'ils existent)
+const nbPasses = computed(() => 2)
 </script>
 
 <style scoped>
