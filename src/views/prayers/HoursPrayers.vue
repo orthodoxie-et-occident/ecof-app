@@ -12,15 +12,10 @@
     <ion-content>
       <div class="timeline">
         <template v-for="(slot, i) in slotsAffiches" :key="slot.uid">
-          <!-- Bandeau de jour : affiché quand la date change (ou en tête de liste) -->
-          <div v-if="i === 0 || slot.dateObj.toDateString() !== slotsAffiches[i - 1].dateObj.toDateString()" class="day-sep">
-            <span class="day-sep-text">{{ fmtDate(slot.dateObj) }}</span>
-          </div>
-
           <div class="scale" :class="{ 'scale-active': i === nbPasses }">
             <div class="ruler">
               <div class="ruler-inner">
-                <div v-for="offset in [0, 1, 2]" :key="offset" class="r-tick" :style="{ top: offset * 36 + 'px' }">
+                <div v-for="offset in [0, 1, 2]" :key="offset" v-show="!(i === 0 && offset === 0)" class="r-tick" :style="{ top: offset * 36 + 'px' }">
                   <span class="r-label" :class="{ major: offset === 0 }"> {{ (slot.debut + offset) % 24 }}h </span>
                   <span class="r-dash" :class="offset === 0 ? 'major' : 'minor'"></span>
                 </div>
@@ -40,6 +35,7 @@
                   </div>
                   <div class="prayer-sous">{{ slot.sous }}</div>
                 </div>
+                <span class="day-badge">{{ fmtBadge(slot.dateObj) }}</span>
                 <ion-icon :icon="chevronForward" class="chevron-nav" aria-hidden="true" />
               </div>
             </div>
@@ -55,11 +51,10 @@ import { computed } from "vue"
 import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonIcon } from "@ionic/vue"
 import { chevronForward } from "ionicons/icons"
 
-const JOURS = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"]
-const MOIS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
+const JOURS_COURT = ["dim", "lun", "mar", "mer", "jeu", "ven", "sam"]
 
-function fmtDate(d) {
-  return `${JOURS[d.getDay()]} ${d.getDate()} ${MOIS[d.getMonth()]}`
+function fmtBadge(d) {
+  return `${JOURS_COURT[d.getDay()]} ${d.getDate()}`
 }
 
 function fmtISO(d) {
@@ -88,7 +83,6 @@ function buildSlots(nbCycles = 3) {
   const base = new Date(maintenant)
   if (h < 18) base.setDate(base.getDate() - 1)
 
-  // Démarre à cycle -1 pour avoir toujours 2 offices passés disponibles
   for (let cycle = -1; cycle < nbCycles; cycle++) {
     OFFICES.forEach((o) => {
       const decalage = o.debut < 18 ? cycle + 1 : cycle
@@ -113,36 +107,15 @@ const debutEnCours = computed(() => tousSlots[indexEnCours.value]?.debut ?? null
 const slotsAffiches = computed(() => {
   const idx = indexEnCours.value
   const start = Math.max(0, idx - 2)
-  return tousSlots.slice(start, start + 8)
+  return tousSlots.slice(start, start + 6)
 })
 
-// Toujours 2 blocs passés (cycle -1 garantit qu'ils existent)
 const nbPasses = computed(() => 2)
 </script>
 
 <style scoped>
 .timeline {
   padding-bottom: env(safe-area-inset-bottom);
-}
-
-/* ── Séparateur de jour ── */
-.day-sep {
-  padding: 12px 14px 14px 14px;
-  background: var(--ion-color-step-50);
-  border-top: 2px solid var(--ion-color-primary);
-  border-bottom: 0.5px solid var(--ion-color-step-150);
-}
-
-.day-sep:first-child {
-  border-top: none;
-}
-
-.day-sep-text {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--ion-color-primary);
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
 }
 
 /* ── Ligne scale ── */
@@ -213,6 +186,7 @@ const nbPasses = computed(() => 2)
 }
 
 .prayer-block {
+  position: relative;
   height: 108px;
   display: flex;
   align-items: flex-start;
@@ -260,10 +234,28 @@ const nbPasses = computed(() => 2)
   color: var(--ion-color-medium);
 }
 
+/* ── Badge jour/date ── */
+.day-badge {
+  position: absolute;
+  top: 10px;
+  right: 34px;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--ion-color-medium);
+  background: var(--ion-color-step-100);
+  border-radius: 6px;
+  padding: 3px 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
 .chevron-nav {
   font-size: 16px;
   color: var(--ion-color-medium);
   margin-right: 12px;
+  margin-top: 10px;
   flex-shrink: 0;
 }
 </style>
