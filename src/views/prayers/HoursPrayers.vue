@@ -68,14 +68,14 @@ function fmtDate(d) {
 const maintenant = new Date()
 
 const OFFICES = [
-  { debut: 18, titre: "Vêpres", sous: "Au coucher du soleil (environ 18h)", route: "/prayers/hours/vespers", disabled: true },
-  { debut: 21, titre: "Complies", sous: "A la 3ème heure de la nuit (environ 21h)", route: "/prayers/hours/compline", disabled: true },
-  { debut: 0, titre: "Nocturnes", sous: "A la 6ème heure de la nuit (environ minuit)", route: "/prayers/hours/vigils", disabled: true },
-  { debut: 3, titre: "Laudes", sous: "Au lever du soleil, à la 9ème heure de la nuit (environ 3h)", route: "/prayers/hours/lauds", disabled: true },
-  { debut: 6, titre: "Prime", sous: "A la 1ère heure du jour (environ 6h)", route: "/prayers/hours/prime", disabled: true },
-  { debut: 9, titre: "Tierce", sous: "A la 3ème heure du jour (environ 9h)", route: "/prayers/hours/tierce", disabled: true },
-  { debut: 12, titre: "Sexte", sous: "A la 6ème heure du jour (environ midi)", route: "/prayers/hours/sext", disabled: true },
-  { debut: 15, titre: "None", sous: "A la 9ème heure du jour (environ 15h)", route: "/prayers/hours/none", disabled: true },
+  { debut: 18, titre: "Vêpres", sous: "Au coucher du soleil (environ 18h)", route: "/prayers/hours/vespers", disabled: false },
+  { debut: 21, titre: "Complies", sous: "A la 3ème heure de la nuit (environ 21h)", route: "/prayers/hours/compline", disabled: false },
+  { debut: 0, titre: "Nocturnes", sous: "A la 6ème heure de la nuit (environ minuit)", route: "/prayers/hours/vigils", disabled: false },
+  { debut: 3, titre: "Laudes", sous: "Au lever du soleil, à la 9ème heure de la nuit (environ 3h)", route: "/prayers/hours/lauds", disabled: false },
+  { debut: 6, titre: "Prime", sous: "A la 1ère heure du jour (environ 6h)", route: "/prayers/hours/prime", disabled: false },
+  { debut: 9, titre: "Tierce", sous: "A la 3ème heure du jour (environ 9h)", route: "/prayers/hours/tierce", disabled: false },
+  { debut: 12, titre: "Sexte", sous: "A la 6ème heure du jour (environ midi)", route: "/prayers/hours/sext", disabled: false },
+  { debut: 15, titre: "None", sous: "A la 9ème heure du jour (environ 15h)", route: "/prayers/hours/none", disabled: false },
 ]
 
 function buildSlots(nbCycles = 3) {
