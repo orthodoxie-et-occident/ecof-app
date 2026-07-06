@@ -5,7 +5,7 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Actualités</ion-title>
+        <ion-title>Annonces</ion-title>
       </ion-toolbar>
     </ion-header>
 
