@@ -113,8 +113,17 @@ const daysDiff = (keyFrom, keyTo) => {
   return Math.round((b - a) / 86400000)
 }
 
+const todayKey = () => {
+  const now = new Date()
+  const yy = now.getFullYear()
+  const mm = String(now.getMonth() + 1).padStart(2, "0")
+  const dd = String(now.getDate()).padStart(2, "0")
+  return `${yy}-${mm}-${dd}`
+}
+
 const groupedEvents = computed(() => {
   const acc = {}
+  const today = todayKey()
 
   for (const event of events.value) {
     const startKey = dateKey(event.start)
@@ -122,6 +131,7 @@ const groupedEvents = computed(() => {
     const isMultiDay = startKey !== endKey
 
     if (!isMultiDay) {
+      if (startKey < today) continue // événement simple déjà passé -> on ignore
       if (!acc[startKey]) acc[startKey] = []
       acc[startKey].push({ ...event, isMultiDay: false })
       continue
@@ -130,6 +140,13 @@ const groupedEvents = computed(() => {
     const totalDays = daysDiff(startKey, endKey) + 1
     let key = startKey
     while (true) {
+      if (key < today) {
+        // ce jour précis du multi-jours est passé -> on saute cette journée,
+        // mais on garde le calcul de currentDay/totalDays correct pour la suite
+        if (key === endKey) break
+        key = nextDateKey(key)
+        continue
+      }
       if (!acc[key]) acc[key] = []
       acc[key].push({
         ...event,
