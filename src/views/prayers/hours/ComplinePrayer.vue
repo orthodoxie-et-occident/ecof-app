@@ -10,21 +10,47 @@
     </ion-header>
 
     <ion-content class="ion-padding">
-      <h1 class="office-titre">{{ titreOffice }}</h1>
+      <h1>{{ titreOffice }}</h1>
+      <ion-toggle v-model="withPriest" label-placement="start">Avec prêtre</ion-toggle><br /><br />
+
+      <h2>Préparation</h2>
+      <p v-html="withPriest ? preparationWithPriest : preparationWithoutPriest"></p>
+
+      <h2>Ouverture</h2>
+      <h2>Psalmodie</h2>
+      <h2>Hymne</h2>
+      <h2>Répons bref</h2>
+      <h2>Capitule</h2>
+      <h2>Répons long</h2>
+      <h2>Nunc Dimittis</h2>
+      <h2>Trisagion</h2>
+      <h2>Notre-Père</h2>
+      <h2>Clôture</h2>
+      <h2>Hymne a la Vierge</h2>
     </ion-content>
   </ion-page>
 </template>
 
 <script setup>
-import { computed } from "vue"
+import { ref, computed } from "vue"
 import { useRoute } from "vue-router"
-import { IonPage, IonHeader, IonButtons, IonBackButton, IonToolbar, IonTitle, IonContent } from "@ionic/vue"
+import { IonPage, IonHeader, IonButtons, IonBackButton, IonToolbar, IonTitle, IonContent, IonToggle } from "@ionic/vue"
+
+const withPriest = ref(false)
+
+const preparationWithPriest = `
+<p>Mon pere, veuille me benir</p>
+`
+
+const preparationWithoutPriest = `
+<p>Lecteur : Que le Dieu Tout-Puissant nous accorde une nuit tranquille et une fin heureuse.</p>
+<p>R : Amen.</p>
+`
 
 const JOURS = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"]
 
 const route = useRoute()
 
-// Parse "YYYY-MM-DD" en date locale (évite le décalage UTC de new Date("YYYY-MM-DD"))
 function parseISO(str) {
   const [y, m, d] = str.split("-").map(Number)
   return new Date(y, m - 1, d)
@@ -46,12 +72,3 @@ const titreOffice = computed(() => {
   return `Office de Complies du ${nomLiturgique} (célébré le ${nomSoir} soir)`
 })
 </script>
-
-<style scoped>
-.office-titre {
-  font-size: 17px;
-  font-weight: 600;
-  text-align: center;
-  margin: 16px 0 4px;
-}
-</style>
