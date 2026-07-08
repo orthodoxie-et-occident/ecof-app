@@ -183,11 +183,14 @@ const closingWithoutPriest = `
 `
 
 const paterWithPriest = `
-<p><em>Le prêtre dit le Notre-Père</em></p>
+<p><em>Le prêtre dit le Notre-Père :</em></p>
+<p>Notre Père qui es aux cieux, que Ton Nom soit sanctifié, que Ton Règne arrive, que Ta volonté soit faite sur la terre comme au ciel. Donne-nous aujourd'hui notre Pain substantiel, et remets-nous nos dettes comme nous remettons à nos débiteurs, et ne nous soumets pas à l'épreuve, mais délivre-nous du malin.</p>
 `
 
 const paterWithoutPriest = `
-<p>V : Notre Père... (à voix basse) ...et ne nous soumets pas à l'épreuve,</p>
+<p>V : Notre Père qui es aux cieux ...</p>
+<p><em>(à voix basse) ... que Ton Nom soit sanctifié, que Ton Règne arrive, que Ta volonté soit faite sur la terre comme au ciel. Donne-nous aujourd'hui notre Pain substantiel, et remets-nous nos dettes comme nous remettons à nos débiteurs ...</em>
+<p>V : ... et ne nous soumets pas à l'épreuve.</p>
 <p>R : Mais délivre nous du malin. Amen.</p>
 `
 
