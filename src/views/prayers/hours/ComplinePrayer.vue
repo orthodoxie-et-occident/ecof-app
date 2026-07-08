@@ -18,8 +18,8 @@
 
       <h2>Ouverture</h2>
       <p><em>Face au sanctuaire, le préchantre chante :</em></p>
-      <p>V : Ô Dieu, viens a mon aide.</p>
-      <p>R : Seigneur, hâte toi de me secourir.</p>
+      <p>V : Ô Dieu, viens à mon aide.</p>
+      <p>R : Seigneur, hâte-toi de me secourir.</p>
       <p>V : Gloire au Père et au Fils et au Saint-Esprit,</p>
       <p>R : Comme il était au commencement et maintenant et toujours, et aux siècles des siècles. Amen.</p>
 
@@ -27,7 +27,7 @@
       <h3>Antienne</h3>
       <p>Aie pitié de moi, Seigneur, exauce ma prière.</p>
       <h3>Psaume 4 <em>(récité sur la note la)</em></h3>
-      <p>- Quand je crie, réponds-moi, Dieu Qui me fais juste ! Qaund je suis dans la détresse Tu desserres mon angoisse ! / Aie pitié de moi, exauce ma prière !</p>
+      <p>- Quand je crie, réponds-moi, Dieu Qui me fais juste ! Quand je suis dans la détresse Tu desserres mon angoisse ! / Aie pitié de moi, exauce ma prière !</p>
       <p>- Fils des hommes, jusques à quand aurez-vous le coeur endurci ? / Jusques à quand aimerez-vous la vanité et chercherez-vous le mensonge ?</p>
       <p>- Sachez donc que le Seigneur S'est choisi un Juste : / Le Seigneur m'entend quand je crie vers Lui.</p>
       <p>- Tremblez et ne péchez plus ; / sur votre couche, méditez dans vos coeurs, puis silence !</p>
@@ -97,7 +97,7 @@
       <h2>Clôture</h2>
       <div v-html="withPriest ? closingWithPriest : closingWithoutPriest"></div>
 
-      <h2>Hymne a la Vierge</h2>
+      <h2>Hymne à la Vierge</h2>
       <p>Salut Marie, pleine de grâce, le Seigneur est avec Toi, Tu es bénie parmi toutes les femmes et Jésus, le fruit de Tes entrailles est béni.</p>
     </ion-content>
   </ion-page>
