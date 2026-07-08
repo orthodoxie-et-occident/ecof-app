@@ -64,8 +64,14 @@
       <h3>Antienne <em>(par tous)</em></h3>
       <p>Aie pitié de moi, Seigneur, exauce ma prière.</p>
       <h2>Hymne</h2>
+      <p>H : Avant que s'achève le jour, Dieu Créateur de l'univers, ensemble nous Te demandons, que Ton amour veille et nous garde.</p>
+      <p>F : Que loin de nous passent les songes et les phantasmes de la nuit. Garde nos coeurs de l'ennemi, afin qu'ils ne soient pas souillés.</p>
+      <p>HF : Exauce-nous, Père très bon, Toi Fils Unique égal au Père, et Toi Esprit consolateur, régnant dans les siècles des siècles. Amen.</p>
+
       <h2>Répons bref</h2>
+
       <h2>Capitule</h2>
+
       <h2>Répons long</h2>
 
       <h2>Nunc Dimittis</h2>
