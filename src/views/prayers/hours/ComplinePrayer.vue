@@ -119,6 +119,23 @@ const preparationWithPriest = `
 <p><em>Il s'incline :</em> Et Toi, Seigneur, aie pitié de moi.</p>
 <p>R : Rendons grâces à Dieu.</p>
 <h3>Confession</h3>
+<p>P : + Notre secours soit au nom du Seigneur,</p>
+<p>R : Qui a fait le ciel et la terre.</p>
+<p><em>Le prêtre, seul, profondément incliné :</em></p>
+<p>P : Je confesse devant la Face du Seigneur très clément, devant la bienheureuse Marie toujours Vierge, Mère de Dieu, saint Michel Archange, saint Jean-Baptiste, les saints Apôtres Pierre, Paul, Jean et Jacques, les saints NN..., tous les saints, et devant vous mes frères et soeurs, que j'ai beaucoup péché par pensées, par paroles, par actions, par omissions, consciemment et inconsciemment, volontairement et involontairement.</p>
+<p><em>Il se frappe trois fois la poitrine :</em></p>
+<p>Aie pitié de moi, Seigneur. Aie pitié de moi, Seigneur. Aie pitié de moi, Seigneur, selon Ta grande miséricorde ! C'est pourquoi je supplie la bienheureuse Marie toujours Vierge, Mère de Dieu, saint Michel Archange, saint Jean-Baptiste, les saints Apôtres Pierre, Paul, Jean et Jacques, les saints NN..., tous les saints et vous mes frères et soeurs, de prier pour moi le Seigneur notre Dieu.</p>
+<p>R : Que le Dieu Tout-Puissant aie pitié de toi, qu'Il te pardonne tes péchés et te conduise à la vie éternelle.</p>
+<p>P : Amen</p>
+<p>R : Je confesse devant la Face du Seigneur très clément, devant la bienheureuse Marie toujours Vierge, Mère de Dieu, saint Michel Archange, saint Jean-Baptiste, les saints Apôtres Pierre, Paul, Jean et Jacques, les saints NN..., tous les saints, et devant toi, mon père, que j'ai beaucoup péché par pensées, par paroles, par actions, par omissions, consciemment et inconsciemment, volontairement et involontairement.</p>
+<p><em>On se frappe trois fois la poitrine :</em></p>
+<p>Aie pitié de moi, Seigneur. Aie pitié de moi, Seigneur. Aie pitié de moi, Seigneur, selon Ta grande miséricorde ! C'est pourquoi je supplie la bienheureuse Marie toujours Vierge, Mère de Dieu, saint Michel Archange, saint Jean-Baptiste, les saints Apôtres Pierre, Paul, Jean et Jacques, les saints NN..., tous les saints, et toi, mon père, de prier pour moi le Seigneur notre Dieu.</p>
+<p>P : Que le Dieu Tout-Puissant aie pitié de vous, qu'Il vous pardonne vos péchés et vous conduise à la vie éternelle.</p>
+<p>R : Amen.</p>
+<p>P : Que le Seigneur Tout-Puissant et Miséricordieux vous accorde le pardon, l'absolution et la rémission de vos péchés ; qu'Il vous absolve de vos fautes et renouvelle vos coeurs par l'effusion du Saint-Esprit. + Au nom du Père, du Fils et du Saint-Esprit.</p>
+<p>R : Amen.</p>
+<p>P : Convertis-nous, ô Dieu Qui es notre salut !</p>
+<p>R : Et détourne de nous Ta colère.</p>
 `
 
 const preparationWithoutPriest = `
@@ -131,9 +148,9 @@ const preparationWithoutPriest = `
 <h3>Confession</h3>
 <p>V : + Notre secours soit au nom du Seigneur,</p>
 <p>R : Qui a fait le ciel et la terre.</p>
-<p>Tous : Je confesse devant la Face du Seigneur très clément, devant la bienheureuse Marie toujours Vierge, Mère de Dieu, saint Michel Archange, saint Jean-Baptiste, les saints NN..., tous les saints, et devant vous mes frères et soeurs, que j'ai beaucoup péché par pensées, par paroles, par actions, par omissions, consciemment et inconsciemment, volontairement et involontairement.</p>
+<p>Tous : Je confesse devant la Face du Seigneur très clément, devant la bienheureuse Marie toujours Vierge, Mère de Dieu, saint Michel Archange, saint Jean-Baptiste, les saints Apôtres Pierre, Paul, Jean et Jacques, les saints NN..., tous les saints, et devant vous mes frères et soeurs, que j'ai beaucoup péché par pensées, par paroles, par actions, par omissions, consciemment et inconsciemment, volontairement et involontairement.</p>
 <p><em>On se frappe trois fois la poitrine :</em></p>
-<p>Aie pitié de moi, Seigneur. Aie pitié de moi, Seigneur. Aie pitié de moi, Seigneur, selon Ta grande miséricorde ! C'est pourquoi je supplie la bienheureuse Marie toujours Vierge, Mère de Dieu, saint Michel Archange, saint Jean-Baptiste, les saints Apôtres Pierre, Paul, Jean, Jacques, les saints NN..., tous les saints et vous mes frères et soeurs, de prier pour moi le Seigneur notre Dieu. Que le Dieu Tout-Puissant aie pitié de nous, qu'Il nous pardonne nos péchés et nous conduise à la vie éternelle. Amen.</p>
+<p>Aie pitié de moi, Seigneur. Aie pitié de moi, Seigneur. Aie pitié de moi, Seigneur, selon Ta grande miséricorde ! C'est pourquoi je supplie la bienheureuse Marie toujours Vierge, Mère de Dieu, saint Michel Archange, saint Jean-Baptiste, les saints Apôtres Pierre, Paul, Jean et Jacques, les saints NN..., tous les saints et vous mes frères et soeurs, de prier pour moi le Seigneur notre Dieu. Que le Dieu Tout-Puissant aie pitié de nous, qu'Il nous pardonne nos péchés et nous conduise à la vie éternelle. Amen.</p>
 <p>V : Convertis-nous, ô Dieu Qui est notre salut !</p>
 <p>R : Et détourne de nous Ta colère.</p>
 `
