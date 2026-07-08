@@ -14,10 +14,24 @@
       <ion-toggle v-model="withPriest" label-placement="start">Avec prêtre</ion-toggle><br /><br />
 
       <h2>Préparation</h2>
-      <p v-html="withPriest ? preparationWithPriest : preparationWithoutPriest"></p>
+      <div v-html="withPriest ? preparationWithPriest : preparationWithoutPriest"></div>
 
       <h2>Ouverture</h2>
+      <p><em>Face au sanctuaire, le préchantre chante :</em></p>
+      <p>V : O Dieu, viens a mon aide.</p>
+      <p>R : Seigneur, hâte toi de me secourir.</p>
+      <p>V : Gloire au Père et au Fils et au Saint-Esprit,</p>
+      <p>R : Comme il était au commencement et maintenant et toujours, et aux siècles des siècles. Amen.</p>
+
       <h2>Psalmodie</h2>
+      <h3>Antienne</h3>
+      <p>Aie pitié de moi, Seigneur, exauce ma prière.</p>
+      <h3>Psaume 4</h3>
+      <h3>Psaume 91</h3>
+      <h3>Psaume 134</h3>
+      <h3>Antienne</h3>
+      <p>Aie pitié de moi, Seigneur, exauce ma prière.</p>
+
       <h2>Hymne</h2>
       <h2>Répons bref</h2>
       <h2>Capitule</h2>
@@ -39,7 +53,7 @@ import { IonPage, IonHeader, IonButtons, IonBackButton, IonToolbar, IonTitle, Io
 const withPriest = ref(false)
 
 const preparationWithPriest = `
-<p>Mon pere, veuille me benir</p>
+Mon pere, veuille me benir
 `
 
 const preparationWithoutPriest = `
@@ -69,6 +83,17 @@ const jourLiturgique = computed(() => {
 const titreOffice = computed(() => {
   const nomLiturgique = JOURS[jourLiturgique.value.getDay()]
   const nomSoir = JOURS[jourSoir.value.getDay()]
-  return `Office de Complies du ${nomLiturgique} (célébré le ${nomSoir} soir)`
+  return `Office de Complies (célébré le ${nomSoir} soir)`
 })
 </script>
+
+<style scoped>
+h2 {
+  text-align: center;
+  text-transform: uppercase;
+  border: 1px solid var(--ion-color-primary, #333);
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin: 24px 0 12px;
+}
+</style>
