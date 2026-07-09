@@ -63,16 +63,27 @@
       <p>- Gloire au Père et au Fils et au Saint-Esprit, / Comme il était au commencement et maintenant et toujours / Et aux siècles des siècles. Amen.</p>
       <h3>Antienne <em>(par tous)</em></h3>
       <p>Aie pitié de moi, Seigneur, exauce ma prière.</p>
+
       <h2>Hymne</h2>
       <p>H : Avant que s'achève le jour, Dieu Créateur de l'univers, ensemble nous Te demandons, que Ton amour veille et nous garde.</p>
       <p>F : Que loin de nous passent les songes et les phantasmes de la nuit. Garde nos coeurs de l'ennemi, afin qu'ils ne soient pas souillés.</p>
       <p>HF : Exauce-nous, Père très bon, Toi Fils Unique égal au Père, et Toi Esprit consolateur, régnant dans les siècles des siècles. Amen.</p>
 
       <h2>Répons bref</h2>
+      <p>V : Garde-nous, Seigneur, comme la prunelle de l'oeil.</p>
+      <p>R : Sous l'abri de Tes ailes, protège nous.</p>
 
       <h2>Capitule</h2>
+      <p>V : Tu es avec nous, Seigneur, et Ton Saint Nom a été invoqué sur nous. Ne nous abandonne pas, ô Seigneur, notre Dieu.</p>
+      <p>R : Rendons grâce à Dieu.</p>
 
       <h2>Répons long</h2>
+      <p>V : Entre Tes mains, Seigneur, je remets mon esprit.</p>
+      <p>R : Entre Tes mains, Seigneur, je remets mon esprit.</p>
+      <p>V : Tu nous a rachetés, Seigneur, Dieu de vérité.</p>
+      <p>R : Entre Tes mains, Seigneur, je remets mon esprit.</p>
+      <p>V : Gloire au Père et au Fils, et au Saint-Esprit.</p>
+      <p>R : Entre Tes mains, Seigneur, je remets mon esprit.</p>
 
       <h2>Nunc Dimittis</h2>
       <h3>Antienne</h3>
