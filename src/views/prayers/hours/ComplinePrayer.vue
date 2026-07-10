@@ -18,10 +18,7 @@
 
       <h2>Ouverture</h2>
       <p><em>Face au sanctuaire, le préchantre chante :</em></p>
-      <p>V : Ô Dieu, viens à mon aide.</p>
-      <p>R : Seigneur, hâte-toi de me secourir.</p>
-      <p>V : Gloire au Père et au Fils et au Saint-Esprit,</p>
-      <p>R : Comme il était au commencement et maintenant et toujours, et aux siècles des siècles. Amen.</p>
+      <Score :mei="ouvertureMei" />
 
       <h2>Psalmodie</h2>
       <h3>Antienne</h3>
@@ -124,6 +121,8 @@
 import { ref, computed } from "vue"
 import { useRoute } from "vue-router"
 import { IonPage, IonHeader, IonButtons, IonBackButton, IonToolbar, IonTitle, IonContent, IonToggle } from "@ionic/vue"
+import Score from "@/components/Score.vue"
+import ouvertureMei from "@/assets/mei/ouverture.mei?raw"
 
 const withPriest = ref(false)
 
