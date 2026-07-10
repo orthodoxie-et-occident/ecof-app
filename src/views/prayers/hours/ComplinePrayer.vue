@@ -9,7 +9,7 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content class="ion-padding">
+    <ion-content class="ion-padding hours">
       <h1>{{ titreOffice }}</h1>
       <ion-toggle v-model="withPriest" label-placement="start">Avec prêtre</ion-toggle><br /><br />
 
@@ -230,14 +230,3 @@ const titreOffice = computed(() => {
   return `Office de Complies du ${nomLiturgique} (célébré le ${nomSoir} soir)`
 })
 </script>
-
-<style scoped>
-h2 {
-  text-align: center;
-  text-transform: uppercase;
-  border: 1px solid var(--ion-color-primary, #333);
-  border-radius: 4px;
-  padding: 8px 16px;
-  margin: 24px 0 12px;
-}
-</style>
