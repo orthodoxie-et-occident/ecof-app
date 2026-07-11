@@ -20,19 +20,14 @@
                         <measure metcon="false" right="invis">
                             <staff n="1">
                                 <layer>
-                                    <note pname="c" oct="5" dur="4" stem.visible="false"
-                                        head.visible="false">
-                                        <verse n="1">
-                                            <syl>V :</syl>
-                                        </verse>
-                                    </note>
-                                    <note pname="c" oct="5" dur="8">
+                                    <note xml:id="v1note" pname="c" oct="5" dur="8">
                                         <verse n="1">
                                             <syl>O</syl>
                                         </verse>
                                     </note>
                                 </layer>
                             </staff>
+                            <dir place="above" startid="#v1note">V :</dir>
                         </measure>
                         <measure metcon="false" right="invis">
                             <staff n="1">
@@ -84,14 +79,10 @@
                                     <beam>
                                         <note pname="b" oct="4" dur="8" artic="acc">
                                             <verse n="1">
-                                                <syl>ai</syl>
+                                                <syl wordpos="i" con="d">ai</syl>
                                             </verse>
                                         </note>
-                                        <note pname="c" oct="5" dur="8">
-                                            <verse n="1">
-                                                <syl>-</syl>
-                                            </verse>
-                                        </note>
+                                        <note pname="c" oct="5" dur="8" />
                                     </beam>
                                 </layer>
                             </staff>
@@ -101,7 +92,7 @@
                                 <layer>
                                     <note pname="c" oct="5" dur="4">
                                         <verse n="1">
-                                            <syl>de. //</syl>
+                                            <syl wordpos="t">de. //</syl>
                                         </verse>
                                     </note>
                                 </layer>
@@ -110,26 +101,21 @@
                         <measure metcon="false" right="invis">
                             <staff n="1">
                                 <layer>
-                                    <note pname="c" oct="5" dur="4" stem.visible="false"
-                                        head.visible="false">
+                                    <note xml:id="r1note" pname="c" oct="5" dur="8">
                                         <verse n="1">
-                                            <syl>R :</syl>
-                                        </verse>
-                                    </note>
-                                    <note pname="c" oct="5" dur="8">
-                                        <verse n="1">
-                                            <syl>Sei -</syl>
+                                            <syl wordpos="i" con="d">Sei</syl>
                                         </verse>
                                     </note>
                                 </layer>
                             </staff>
+                            <dir place="above" startid="#r1note">R :</dir>
                         </measure>
                         <measure metcon="false" right="invis">
                             <staff n="1">
                                 <layer>
                                     <note pname="c" oct="5" dur="4">
                                         <verse n="1">
-                                            <syl>gneur,</syl>
+                                            <syl wordpos="t">gneur,</syl>
                                         </verse>
                                     </note>
                                 </layer>
@@ -163,7 +149,7 @@
                                 <layer>
                                     <note pname="c" oct="5" dur="8">
                                         <verse n="1">
-                                            <syl>secou -</syl>
+                                            <syl wordpos="i" con="d">secou</syl>
                                         </verse>
                                     </note>
                                 </layer>
@@ -174,7 +160,7 @@
                                 <layer>
                                     <note xml:id="n1" pname="b" oct="4" dur="4">
                                         <verse n="1">
-                                            <syl>rir</syl>
+                                            <syl wordpos="t">rir</syl>
                                         </verse>
                                     </note>
 
@@ -190,19 +176,14 @@
                         <measure metcon="false" right="invis">
                             <staff n="1">
                                 <layer>
-                                    <note pname="c" oct="5" dur="4" stem.visible="false"
-                                        head.visible="false">
-                                        <verse n="1">
-                                            <syl>V :</syl>
-                                        </verse>
-                                    </note>
-                                    <note pname="c" oct="5" dur="8">
+                                    <note xml:id="v2note" pname="c" oct="5" dur="8">
                                         <verse n="1">
                                             <syl>Gloire</syl>
                                         </verse>
                                     </note>
                                 </layer>
                             </staff>
+                            <dir place="above" startid="#v2note">V :</dir>
                         </measure>
                         <measure metcon="false" right="invis">
                             <staff n="1">
@@ -287,7 +268,7 @@
                                     <beam>
                                         <note pname="b" oct="4" dur="8" artic="acc">
                                             <verse n="1">
-                                                <syl>Saint -</syl>
+                                                <syl wordpos="i" con="d">Saint</syl>
                                             </verse>
                                         </note>
                                         <note pname="c" oct="5" dur="8" />
@@ -300,12 +281,12 @@
                                 <layer>
                                     <note pname="c" oct="5" dur="8">
                                         <verse n="1">
-                                            <syl>Es -</syl>
+                                            <syl wordpos="m" con="d">Es</syl>
                                         </verse>
                                     </note>
                                     <note pname="c" oct="5" dur="4">
                                         <verse n="1">
-                                            <syl>prit. //</syl>
+                                            <syl wordpos="t">prit. //</syl>
                                         </verse>
                                     </note>
                                 </layer>
@@ -314,19 +295,14 @@
                         <measure metcon="false" right="invis">
                             <staff n="1">
                                 <layer>
-                                    <note pname="c" oct="5" dur="4" stem.visible="false"
-                                        head.visible="false">
-                                        <verse n="1">
-                                            <syl>R :</syl>
-                                        </verse>
-                                    </note>
-                                    <note pname="c" oct="5" dur="8">
+                                    <note xml:id="r2note" pname="c" oct="5" dur="8">
                                         <verse n="1">
                                             <syl>Comme</syl>
                                         </verse>
                                     </note>
                                 </layer>
                             </staff>
+                            <dir place="above" startid="#r2note">R :</dir>
                         </measure>
                         <measure metcon="false" right="invis">
                             <staff n="1">
@@ -369,12 +345,12 @@
                                 <layer>
                                     <note pname="c" oct="5" dur="8">
                                         <verse n="1">
-                                            <syl>tou -</syl>
+                                            <syl wordpos="i" con="d">tou</syl>
                                         </verse>
                                     </note>
                                     <note pname="c" oct="5" dur="4">
                                         <verse n="1">
-                                            <syl>jours,</syl>
+                                            <syl wordpos="t">jours,</syl>
                                         </verse>
                                     </note>
                                 </layer>
@@ -407,18 +383,7 @@
                                 <layer>
                                     <note pname="d" oct="5" dur="8" artic="acc">
                                         <verse n="1">
-                                            <syl>siè -</syl>
-                                        </verse>
-                                    </note>
-                                </layer>
-                            </staff>
-                        </measure>
-                        <measure metcon="false" right="invis">
-                            <staff n="1">
-                                <layer>
-                                    <note pname="c" oct="5" dur="8">
-                                        <verse n="1">
-                                            <syl>cles</syl>
+                                            <syl wordpos="i" con="d">siè</syl>
                                         </verse>
                                     </note>
                                 </layer>
@@ -429,7 +394,7 @@
                                 <layer>
                                     <note pname="b" oct="4" dur="8">
                                         <verse n="1">
-                                            <syl>des</syl>
+                                            <syl wordpos="t">cles</syl>
                                         </verse>
                                     </note>
                                 </layer>
@@ -440,12 +405,12 @@
                                 <layer>
                                     <note pname="c" oct="5" dur="4">
                                         <verse n="1">
-                                            <syl>siè -</syl>
+                                            <syl wordpos="i" con="d">siè</syl>
                                         </verse>
                                     </note>
                                     <note pname="c" oct="5" dur="8">
                                         <verse n="1">
-                                            <syl>cles.</syl>
+                                            <syl wordpos="t">cles.</syl>
                                         </verse>
                                     </note>
                                 </layer>
@@ -456,12 +421,12 @@
                                 <layer>
                                     <note pname="b" oct="4" dur="4">
                                         <verse n="1">
-                                            <syl>A -</syl>
+                                            <syl wordpos="i" con="d">A</syl>
                                         </verse>
                                     </note>
                                     <note pname="c" oct="5" dur="4">
                                         <verse n="1">
-                                            <syl>men.</syl>
+                                            <syl wordpos="t">men.</syl>
                                         </verse>
                                     </note>
                                 </layer>

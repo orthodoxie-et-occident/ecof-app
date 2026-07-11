@@ -9,70 +9,76 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content class="ion-padding hours">
-      <h1>{{ titreOffice }}</h1>
-      <ion-toggle v-model="withPriest" label-placement="start">Avec prêtre</ion-toggle><br /><br />
+    <ion-content class="ion-padding hours" :class="{ 'is-short': shortVersion }">
+      <h1>Complies du {{ jourLiturgiqueNom }}</h1>
+      <p class="subtitle">Célébrées le {{ jourSoirNom }} soir</p>
+      <ion-toggle v-model="withPriest" label-placement="end">Avec prêtre</ion-toggle><br />
+      <ion-toggle v-model="shortVersion" label-placement="end">Office abrégé</ion-toggle><br />
 
-      <h2>Préparation</h2>
-      <div v-html="withPriest ? preparationWithPriest : preparationWithoutPriest"></div>
+      <div class="hide-on-short">
+        <h2>Préparation</h2>
+        <div v-html="withPriest ? preparationWithPriest : preparationWithoutPriest"></div>
+      </div>
 
       <h2>Ouverture</h2>
       <p><em>Face au sanctuaire, le préchantre chante :</em></p>
       <Score :mei="ouvertureMei" />
 
-      <h2>Psalmodie</h2>
-      <h3>Antienne</h3>
-      <p>Aie pitié de moi, Seigneur, exauce ma prière.</p>
-      <h3>Psaume 4 <em>(récité sur la note la)</em></h3>
-      <p>- Quand je crie, réponds-moi, Dieu Qui me fais juste ! Quand je suis dans la détresse Tu desserres mon angoisse ! / Aie pitié de moi, exauce ma prière !</p>
-      <p>- Fils des hommes, jusques à quand aurez-vous le coeur endurci ? / Jusques à quand aimerez-vous la vanité et chercherez-vous le mensonge ?</p>
-      <p>- Sachez donc que le Seigneur S'est choisi un Juste : / Le Seigneur m'entend quand je crie vers Lui.</p>
-      <p>- Tremblez et ne péchez plus ; / sur votre couche, méditez dans vos coeurs, puis silence !</p>
-      <p>- Offrez de justes sacrifices / et espérez dans le Seigneur.</p>
-      <p>- Beaucoup disent : « Qui nous fera voir le bonheur ? » / Fais briller sur nous, Seigneur, la lumière de Ta face.</p>
-      <p>- Tu as mis dans mon coeur plus de joie qu'ils n'en ont / quand abondent leur blé et leur vin nouveau.</p>
-      <p>- Je me couche et je m'endors en paix / car Toi seul, Seigneur, Tu me donnes la sécurité dans ma demeure.</p>
-      <p><strong>Tous : </strong><em>(se levant et s'inclinant)</em></p>
-      <p>- Gloire au Père et au Fils et au Saint-Esprit, / Comme il était au commencement et maintenant et toujours / Et aux siècles des siècles. Amen.</p>
-      <h3>Psaume 91 <em>(on hausse la voix d'un ton)</em></h3>
-      <p>- Celui qui demeure à l'abri du Très-Haut / et repose à l'ombre du puissant,</p>
-      <p>- Dit au Seigneur : « Mon secours, mon refuge, / mon Dieu en Qui je me confie. »</p>
-      <p>- C'est Lui qui te délivrera du filet de l'oiseleur / et de la maladie mortelle.</p>
-      <p>- Il te couvrira de ses ailes, et sous son plumage tu trouveras un refuge ; / Sa vérité est un bouclier et une cuirasse.</p>
-      <p>- Tu ne craindras ni la terreur de la nuit / ni la flèche qui vole le jour,</p>
-      <p>- Ni la peste qui s'avance dans les ténèbres, / ni la ruine qui frappe à midi.</p>
-      <p>- Que mille tombent à ton côté et dix mille à ta droite : / rien ne pourra t'atteindre,</p>
-      <p>- Mais de tes propres yeux / tu verras le châtiment des pécheurs,</p>
-      <p>- Car Toi, Seigneur, Tu es mon refuge, / Ô Très-Haut Tu as établi en moi Ta demeure.</p>
-      <p>- Le malheur ne rôdera pas autour de Toi / et le fléau n'approchera pas de ta tente,</p>
-      <p>- Car Il ordonnera à Ses anges / de te garder dans toutes tes voies.</p>
-      <p>- Dans leurs mains ils te porteront / de peur que ton pied ne heurte une pierre.</p>
-      <p>- Tu marcheras sur le lion et sur l'aspic, / tu fouleras le fauve et le dragon.</p>
-      <p>- Parce qu'il M'aime, Je le délivrerai. Je serai avec lui dans la détresse / et Je le sauverai et Je le glorifierai.</p>
-      <p>- Je le rassasierai de longs jours / et Je lui ferai voir Mon salut.</p>
-      <p><strong>Tous : </strong><em>(se levant et s'inclinant)</em></p>
-      <p>- Gloire au Père et au Fils et au Saint-Esprit, / Comme il était au commencement et maintenant et toujours / Et aux siècles des siècles. Amen.</p>
-      <h3>Psaume 134 <em>(on hausse la voix d'un ton)</em></h3>
-      <p>- Et maintenant, pendant la nuit, serviteurs du Seigneur, bénissez le Seigneur / vous tous qui veillez dans la Maison du Seigneur.</p>
-      <p>- Elevez vos mains vers le Sanctuaire / et bénissez le Seigneur.</p>
-      <p>- Le Seigneur te bénira de Sion, / Lui qui a fait le ciel et la terre.</p>
-      <p><strong>Tous : </strong><em>(se levant et s'inclinant)</em></p>
-      <p>- Gloire au Père et au Fils et au Saint-Esprit, / Comme il était au commencement et maintenant et toujours / Et aux siècles des siècles. Amen.</p>
-      <h3>Antienne <em>(par tous)</em></h3>
-      <p>Aie pitié de moi, Seigneur, exauce ma prière.</p>
+      <div class="hide-on-short">
+        <h2>Psalmodie</h2>
+        <h3>Antienne</h3>
+        <p>Aie pitié de moi, Seigneur, exauce ma prière.</p>
+        <h3>Psaume 4 <em>(récité sur la note la)</em></h3>
+        <p>- Quand je crie, réponds-moi, Dieu Qui me fais juste ! Quand je suis dans la détresse Tu desserres mon angoisse ! / Aie pitié de moi, exauce ma prière !</p>
+        <p>- Fils des hommes, jusques à quand aurez-vous le coeur endurci ? / Jusques à quand aimerez-vous la vanité et chercherez-vous le mensonge ?</p>
+        <p>- Sachez donc que le Seigneur S'est choisi un Juste : / Le Seigneur m'entend quand je crie vers Lui.</p>
+        <p>- Tremblez et ne péchez plus ; / sur votre couche, méditez dans vos coeurs, puis silence !</p>
+        <p>- Offrez de justes sacrifices / et espérez dans le Seigneur.</p>
+        <p>- Beaucoup disent : « Qui nous fera voir le bonheur ? » / Fais briller sur nous, Seigneur, la lumière de Ta face.</p>
+        <p>- Tu as mis dans mon coeur plus de joie qu'ils n'en ont / quand abondent leur blé et leur vin nouveau.</p>
+        <p>- Je me couche et je m'endors en paix / car Toi seul, Seigneur, Tu me donnes la sécurité dans ma demeure.</p>
+        <p><strong>Tous : </strong><em>(se levant et s'inclinant)</em></p>
+        <p>- Gloire au Père et au Fils et au Saint-Esprit, / Comme il était au commencement et maintenant et toujours / Et aux siècles des siècles. Amen.</p>
+        <h3>Psaume 91 <em>(on hausse la voix d'un ton)</em></h3>
+        <p>- Celui qui demeure à l'abri du Très-Haut / et repose à l'ombre du puissant,</p>
+        <p>- Dit au Seigneur : « Mon secours, mon refuge, / mon Dieu en Qui je me confie. »</p>
+        <p>- C'est Lui qui te délivrera du filet de l'oiseleur / et de la maladie mortelle.</p>
+        <p>- Il te couvrira de ses ailes, et sous son plumage tu trouveras un refuge ; / Sa vérité est un bouclier et une cuirasse.</p>
+        <p>- Tu ne craindras ni la terreur de la nuit / ni la flèche qui vole le jour,</p>
+        <p>- Ni la peste qui s'avance dans les ténèbres, / ni la ruine qui frappe à midi.</p>
+        <p>- Que mille tombent à ton côté et dix mille à ta droite : / rien ne pourra t'atteindre,</p>
+        <p>- Mais de tes propres yeux / tu verras le châtiment des pécheurs,</p>
+        <p>- Car Toi, Seigneur, Tu es mon refuge, / Ô Très-Haut Tu as établi en moi Ta demeure.</p>
+        <p>- Le malheur ne rôdera pas autour de Toi / et le fléau n'approchera pas de ta tente,</p>
+        <p>- Car Il ordonnera à Ses anges / de te garder dans toutes tes voies.</p>
+        <p>- Dans leurs mains ils te porteront / de peur que ton pied ne heurte une pierre.</p>
+        <p>- Tu marcheras sur le lion et sur l'aspic, / tu fouleras le fauve et le dragon.</p>
+        <p>- Parce qu'il M'aime, Je le délivrerai. Je serai avec lui dans la détresse / et Je le sauverai et Je le glorifierai.</p>
+        <p>- Je le rassasierai de longs jours / et Je lui ferai voir Mon salut.</p>
+        <p><strong>Tous : </strong><em>(se levant et s'inclinant)</em></p>
+        <p>- Gloire au Père et au Fils et au Saint-Esprit, / Comme il était au commencement et maintenant et toujours / Et aux siècles des siècles. Amen.</p>
+        <h3>Psaume 134 <em>(on hausse la voix d'un ton)</em></h3>
+        <p>- Et maintenant, pendant la nuit, serviteurs du Seigneur, bénissez le Seigneur / vous tous qui veillez dans la Maison du Seigneur.</p>
+        <p>- Elevez vos mains vers le Sanctuaire / et bénissez le Seigneur.</p>
+        <p>- Le Seigneur te bénira de Sion, / Lui qui a fait le ciel et la terre.</p>
+        <p><strong>Tous : </strong><em>(se levant et s'inclinant)</em></p>
+        <p>- Gloire au Père et au Fils et au Saint-Esprit, / Comme il était au commencement et maintenant et toujours / Et aux siècles des siècles. Amen.</p>
+        <h3>Antienne (par tous)</h3>
+        <p>Aie pitié de moi, Seigneur, exauce ma prière.</p>
 
-      <h2>Hymne</h2>
-      <p>H : Avant que s'achève le jour, Dieu Créateur de l'univers, ensemble nous Te demandons, que Ton amour veille et nous garde.</p>
-      <p>F : Que loin de nous passent les songes et les phantasmes de la nuit. Garde nos coeurs de l'ennemi, afin qu'ils ne soient pas souillés.</p>
-      <p>HF : Exauce-nous, Père très bon, Toi Fils Unique égal au Père, et Toi Esprit consolateur, régnant dans les siècles des siècles. Amen.</p>
+        <h2>Hymne</h2>
+        <p>H : Avant que s'achève le jour, Dieu Créateur de l'univers, ensemble nous Te demandons, que Ton amour veille et nous garde.</p>
+        <p>F : Que loin de nous passent les songes et les phantasmes de la nuit. Garde nos coeurs de l'ennemi, afin qu'ils ne soient pas souillés.</p>
+        <p>HF : Exauce-nous, Père très bon, Toi Fils Unique égal au Père, et Toi Esprit consolateur, régnant dans les siècles des siècles. Amen.</p>
 
-      <h2>Répons bref</h2>
-      <p>V : Garde-nous, Seigneur, comme la prunelle de l'oeil.</p>
-      <p>R : Sous l'abri de Tes ailes, protège nous.</p>
+        <h2>Répons bref</h2>
+        <p>V : Garde-nous, Seigneur, comme la prunelle de l'oeil.</p>
+        <p>R : Sous l'abri de Tes ailes, protège nous.</p>
 
-      <h2>Capitule</h2>
-      <p>V : Tu es avec nous, Seigneur, et Ton Saint Nom a été invoqué sur nous. Ne nous abandonne pas, ô Seigneur, notre Dieu.</p>
-      <p>R : Rendons grâce à Dieu.</p>
+        <h2>Capitule</h2>
+        <p>V : Tu es avec nous, Seigneur, et Ton Saint Nom a été invoqué sur nous. Ne nous abandonne pas, ô Seigneur, notre Dieu.</p>
+        <p>R : Rendons grâce à Dieu.</p>
+      </div>
 
       <h2>Répons long</h2>
       <p>V : Entre Tes mains, Seigneur, je remets mon esprit.</p>
@@ -83,18 +89,23 @@
       <p>R : Entre Tes mains, Seigneur, je remets mon esprit.</p>
 
       <h2>Nunc Dimittis</h2>
-      <h3>Antienne</h3>
-      <p>Sauve nous, Seigneur, durant la veille, garde nous durant le sommeil, afin que nous puissions veiller avec le Christ, et nous reposer en paix.</p>
-      <h3>Cantique de Siméon</h3>
 
+      <div class="hide-on-short">
+        <h3>Antienne</h3>
+        <p>Sauve nous, Seigneur, durant la veille, garde nous durant le sommeil, afin que nous puissions veiller avec le Christ, et nous reposer en paix.</p>
+      </div>
+
+      <h3>Cantique de Siméon</h3>
       <p>V : Et maintenant, Seigneur, laisse Ton serviteur,</p>
       <p>
         R : Selon Ta parole s'en aller en paix. Parce que mes yeux ont vu le salut qui vient de Toi, que Tu as préparé pour être mis devant tous les peuples, Lumière qui doit se révéler aux nations et
         la gloire de ton peuple, Israël. Gloire au Père et au Fils et au Saint-Esprit, comme il était au commencement et maintenant et toujours et aux siècles des siècles. Amen.
       </p>
 
-      <h3>Antienne</h3>
-      <p>Sauve nous, Seigneur, durant la veille, garde nous durant le sommeil, afin que nous puissions veiller avec le Christ, et nous reposer en paix.</p>
+      <div class="hide-on-short">
+        <h3>Antienne</h3>
+        <p>Sauve nous, Seigneur, durant la veille, garde nous durant le sommeil, afin que nous puissions veiller avec le Christ, et nous reposer en paix.</p>
+      </div>
 
       <h2>Trisagion</h2>
       <p>V : Agios o Theos TOUS : Agios Ischiros</p>
@@ -125,6 +136,7 @@ import Score from "@/components/Score.vue"
 import ouvertureMei from "@/assets/mei/ouverture.mei?raw"
 
 const withPriest = ref(false)
+const shortVersion = ref(false)
 
 const preparationWithPriest = `
 <p>Lecteur : Mon père, veuille me bénir.</p>
@@ -223,9 +235,6 @@ const jourLiturgique = computed(() => {
   return d
 })
 
-const titreOffice = computed(() => {
-  const nomLiturgique = JOURS[jourLiturgique.value.getDay()]
-  const nomSoir = JOURS[jourSoir.value.getDay()]
-  return `Office de Complies du ${nomLiturgique} (célébré le ${nomSoir} soir)`
-})
+const jourLiturgiqueNom = computed(() => JOURS[jourLiturgique.value.getDay()])
+const jourSoirNom = computed(() => JOURS[jourSoir.value.getDay()])
 </script>
