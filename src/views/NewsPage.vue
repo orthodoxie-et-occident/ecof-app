@@ -5,68 +5,56 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Actualités</ion-title>
+        <ion-title>Annonces</ion-title>
       </ion-toolbar>
     </ion-header>
 
-    <ion-content>
+    <ion-content class="ion-padding">
       <div v-if="loading" class="state-container">
         <ion-spinner color="primary"></ion-spinner>
         <p>Chargement...</p>
       </div>
 
       <div v-else-if="error" class="state-container">
-        <div class="error-card">
-          <ion-icon :icon="cloudOfflineOutline" class="error-icon"></ion-icon>
-          <p class="error-title">Connexion impossible</p>
-          <ion-button fill="outline" color="primary" @click="fetchArticles">
-            <ion-icon :icon="refreshOutline" slot="start"></ion-icon>
-            Réessayer
-          </ion-button>
-        </div>
+        <ion-icon :icon="cloudOfflineOutline" class="error-icon"></ion-icon>
+        <p class="error-title">Connexion impossible</p>
+        <ion-button fill="outline" color="primary" @click="fetchArticles">
+          <ion-icon :icon="refreshOutline" slot="start"></ion-icon>
+          Réessayer
+        </ion-button>
       </div>
 
-      <ion-list v-else>
-        <ion-item v-for="article in articles" :key="article.id" button detail :router-link="`/news/${article.id}`" router-direction="forward">
-          <ion-label>
-            <h2 class="article-title">{{ article.title }}</h2>
-            <p>{{ article.author }} • {{ formatDate(article.published_at) }}</p>
-
-            <ion-badge class="slug-badge">
-              {{ article.slug }}
-            </ion-badge>
-
-            <ion-badge color="light" v-if="isNew(article.published_at)"> Nouveau </ion-badge>
-          </ion-label>
-        </ion-item>
-      </ion-list>
+      <div v-else class="news-feed">
+        <router-link v-for="article in articles" :key="article.id" :to="`/news/${article.id}`" class="news-card">
+          <div class="news-card-header">
+            <ion-badge class="badge-slug">{{ article.slug }}</ion-badge>
+            <ion-badge class="badge-new" v-if="isNew(article.published_at)">Nouveau</ion-badge>
+          </div>
+          <h2 class="news-title">{{ article.title }}</h2>
+          <p class="news-meta">
+            <span class="news-author">{{ article.author }}</span>
+            <span class="news-date">{{ formatDate(article.published_at) }}</span>
+          </p>
+        </router-link>
+      </div>
     </ion-content>
   </ion-page>
 </template>
 
 <script setup>
 import { ref } from "vue"
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonList, IonItem, IonLabel, IonBadge, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonBadge, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
 import { cloudOfflineOutline, refreshOutline } from "ionicons/icons"
 
 const articles = ref([])
 const loading = ref(true)
 const error = ref(null)
-const hasFetched = ref(false)
+let hasFetched = false
 
-function formatDate(isoString) {
-  return new Intl.DateTimeFormat("fr-FR", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-  }).format(new Date(isoString))
-}
+const dateFormatter = new Intl.DateTimeFormat("fr-FR", { day: "2-digit", month: "long", year: "numeric" })
+const formatDate = (iso) => dateFormatter.format(new Date(iso))
 
-function isNew(isoString) {
-  const sevenDaysAgo = new Date()
-  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7)
-  return new Date(isoString) > sevenDaysAgo
-}
+const isNew = (iso) => new Date(iso).getTime() > Date.now() - 7 * 24 * 60 * 60 * 1000
 
 async function fetchArticles() {
   loading.value = true
@@ -75,7 +63,7 @@ async function fetchArticles() {
     const res = await fetch("https://api.ecof.app/news")
     if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
     articles.value = await res.json()
-    hasFetched.value = true
+    hasFetched = true
   } catch (err) {
     console.error(err.message)
     error.value = true
@@ -85,42 +73,77 @@ async function fetchArticles() {
 }
 
 onIonViewWillEnter(() => {
-  if (!hasFetched.value) fetchArticles()
+  if (!hasFetched) fetchArticles()
 })
 </script>
 
 <style scoped>
-ion-item {
-  --padding-start: 16px;
+.news-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-ion-label {
-  min-width: 0;
+.news-card {
+  display: block;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--ion-color-light);
+  text-decoration: none;
+  color: inherit;
 }
 
-h2.article-title {
-  font-weight: 400;
-  margin-bottom: 4px;
-  max-width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+.news-card:active {
+  background: var(--ion-color-light-shade);
 }
 
-p {
+.news-card-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.badge-slug {
+  --background: rgba(var(--ion-color-primary-rgb), 0.22);
+  --color: var(--ion-color-primary-shade);
+  font-weight: 600;
+}
+
+.badge-new {
+  --background: rgba(var(--ion-color-danger-rgb), 0.15);
+  --color: var(--ion-color-danger);
+  font-weight: 600;
+}
+
+.news-title {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.news-meta {
   margin: 0;
-  opacity: 0.7;
-  font-size: 0.9em;
+  font-size: 0.85rem;
+  color: var(--ion-color-medium);
 }
 
-ion-badge {
-  margin-top: 6px;
-  margin-right: 4px;
+.news-author {
+  font-weight: 600;
+  color: var(--ion-color-dark);
 }
 
-.slug-badge {
-  --background: var(--ion-color-primary-tint);
-  --color: var(--ion-color-primary-contrast);
+.news-date::before {
+  content: "";
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--ion-color-medium);
+  opacity: 0.6;
+  margin: 0 6px;
+  vertical-align: middle;
 }
 
 .state-container {
@@ -129,18 +152,11 @@ ion-badge {
   align-items: center;
   justify-content: center;
   min-height: 50vh;
-  gap: 10px;
-  color: #aaa;
-  font-size: 0.9rem;
-}
-
-.error-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   gap: 12px;
   padding: 2rem;
   text-align: center;
+  color: var(--ion-color-medium);
+  font-size: 0.9rem;
 }
 
 .error-icon {

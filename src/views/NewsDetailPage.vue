@@ -6,9 +6,7 @@
           <ion-back-button text="" default-href="/news"></ion-back-button>
         </ion-buttons>
 
-        <ion-title>
-          {{ article?.title ?? "Article" }}
-        </ion-title>
+        <ion-title>{{ article?.slug ?? "Article" }}</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -30,7 +28,13 @@
       </div>
 
       <div v-else-if="article" class="ion-padding">
-        <MarkdownSection :html="article.text" />
+        <div class="article-container">
+          <div class="article-header">
+            <h1 class="article-title">{{ article.title }}</h1>
+          </div>
+
+          <MarkdownSection :html="article.text" class="no-first-h1" />
+        </div>
       </div>
     </ion-content>
   </ion-page>
@@ -39,7 +43,7 @@
 <script setup>
 import { ref } from "vue"
 import { useRoute } from "vue-router"
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonBadge, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
 import { cloudOfflineOutline, refreshOutline } from "ionicons/icons"
 import MarkdownSection from "@/components/MarkdownSection.vue"
 
@@ -71,6 +75,38 @@ onIonViewWillEnter(fetchArticle)
 </script>
 
 <style scoped>
+.article-container {
+  max-width: 680px;
+  margin: 0 auto;
+  background: var(--ion-color-light);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.article-header {
+  margin-bottom: 1.2rem;
+}
+
+.badge-slug {
+  --background: rgba(var(--ion-color-primary-rgb), 0.22);
+  --color: var(--ion-color-primary-shade);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+
+.article-title {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--ion-color-dark);
+}
+
+/* Masque le h1 dupliqué généré par le markdown (déjà affiché ci-dessus via article.title) */
+.no-first-h1 :deep(h1:first-of-type) {
+  display: none;
+}
+
 .state-container {
   display: flex;
   flex-direction: column;
@@ -78,7 +114,7 @@ onIonViewWillEnter(fetchArticle)
   justify-content: center;
   min-height: 50vh;
   gap: 10px;
-  color: #aaa;
+  color: var(--ion-color-medium);
   font-size: 0.9rem;
 }
 
@@ -102,5 +138,23 @@ onIonViewWillEnter(fetchArticle)
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--ion-color-dark);
+}
+
+:deep(h2),
+:deep(em) {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--ion-color-dark);
+}
+
+:deep(h2)::before,
+:deep(em)::before {
+  content: "";
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--ion-color-primary);
 }
 </style>
