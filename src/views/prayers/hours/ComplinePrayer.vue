@@ -118,6 +118,11 @@
 
       <h2>Notre-Père</h2>
       <div v-html="withPriest ? paterWithPriest : paterWithoutPriest"></div>
+      <p>
+        V : Nous T'en prions, Seigneur, visite cette demeure et éloigne toutes les embûches de l'ennemi ; que Tes saints anges y habitent et nous gardent en paix, et que Ta bénédiction soit toujours
+        sur nous, par notre Seigneur Jésus-Christ, Qui vit et règne avec Toi et le Saint-Esprit, aux siècles des siècles.
+      </p>
+      <p>R : Amen.</p>
 
       <h2>Clôture</h2>
       <div v-html="withPriest ? closingWithPriest : closingWithoutPriest"></div>
