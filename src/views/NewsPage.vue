@@ -81,46 +81,90 @@ onIonViewWillEnter(() => {
 .news-feed {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
+/* Card façon papier : coins carrés + coin haut droit corné, teinte chaleureuse */
 .news-card {
   display: block;
-  padding: 14px 16px;
-  border-radius: 12px;
-  background: var(--ion-color-light);
+  position: relative;
+  padding: 16px 20px 14px;
+  border-radius: 3px;
+  background: #f8f1e4;
   text-decoration: none;
   color: inherit;
+  box-shadow:
+    0 1px 2px rgba(120, 90, 50, 0.08),
+    0 3px 8px rgba(120, 90, 50, 0.08);
+  /* on "coupe" le coin haut droit pour laisser place au pli */
+  clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%);
+  transition: box-shadow 0.15s ease;
+  overflow: hidden;
 }
 
 .news-card:active {
-  background: var(--ion-color-light-shade);
+  background: #f1e7d4;
+  box-shadow: 0 1px 2px rgba(120, 90, 50, 0.1);
+}
+
+/* Ombre projetée par le pli sur la card, pour donner du volume */
+.news-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 34px;
+  height: 34px;
+  background: radial-gradient(circle at top right, rgba(101, 78, 46, 0.28), transparent 72%);
+  z-index: 0;
+}
+
+/* Le rabat replié : dégradé clair -> foncé pour simuler l'épaisseur du papier + ombre portée */
+.news-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 26px;
+  height: 26px;
+  background: linear-gradient(225deg, #fffaf0 0%, #ecdfc4 45%, #d7c39d 100%);
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+  box-shadow: -2px 2px 3px rgba(101, 78, 46, 0.3);
+  z-index: 1;
 }
 
 .news-card-header {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   gap: 6px;
   margin-bottom: 8px;
+  padding-right: 18px; /* évite que les badges touchent le pli */
 }
 
 .badge-slug {
   --background: rgba(var(--ion-color-primary-rgb), 0.22);
   --color: var(--ion-color-primary-shade);
   font-weight: 600;
+  border-radius: 3px;
 }
 
 .badge-new {
   --background: rgba(var(--ion-color-danger-rgb), 0.15);
   --color: var(--ion-color-danger);
   font-weight: 600;
+  border-radius: 3px;
 }
 
+/* Titre moins gras et moins imposant */
 .news-title {
-  margin: 0 0 4px;
-  font-size: 1.05rem;
+  margin: 0 0 6px;
+  font-size: 1.08rem;
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.32;
+  letter-spacing: 0;
+  color: var(--ion-color-dark);
 }
 
 .news-meta {

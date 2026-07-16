@@ -28,7 +28,7 @@
         <h2>Psalmodie</h2>
         <h3>Antienne</h3>
         <p>Aie pitié de moi, Seigneur, exauce ma prière.</p>
-        <h3>Psaume 4 <em>(récité sur la note la)</em></h3>
+        <h3>Psaume 4 (récité sur la note la)</h3>
         <p>- Quand je crie, réponds-moi, Dieu Qui me fais juste ! Quand je suis dans la détresse Tu desserres mon angoisse ! / Aie pitié de moi, exauce ma prière !</p>
         <p>- Fils des hommes, jusques à quand aurez-vous le coeur endurci ? / Jusques à quand aimerez-vous la vanité et chercherez-vous le mensonge ?</p>
         <p>- Sachez donc que le Seigneur S'est choisi un Juste : / Le Seigneur m'entend quand je crie vers Lui.</p>
@@ -37,9 +37,9 @@
         <p>- Beaucoup disent : « Qui nous fera voir le bonheur ? » / Fais briller sur nous, Seigneur, la lumière de Ta face.</p>
         <p>- Tu as mis dans mon coeur plus de joie qu'ils n'en ont / quand abondent leur blé et leur vin nouveau.</p>
         <p>- Je me couche et je m'endors en paix / car Toi seul, Seigneur, Tu me donnes la sécurité dans ma demeure.</p>
-        <p><strong>Tous : </strong><em>(se levant et s'inclinant)</em></p>
+        <p><strong>Tous : </strong>(se levant et s'inclinant)</p>
         <p>- Gloire au Père et au Fils et au Saint-Esprit, / Comme il était au commencement et maintenant et toujours / Et aux siècles des siècles. Amen.</p>
-        <h3>Psaume 91 <em>(on hausse la voix d'un ton)</em></h3>
+        <h3>Psaume 91 (on hausse la voix d'un ton)</h3>
         <p>- Celui qui demeure à l'abri du Très-Haut / et repose à l'ombre du puissant,</p>
         <p>- Dit au Seigneur : « Mon secours, mon refuge, / mon Dieu en Qui je me confie. »</p>
         <p>- C'est Lui qui te délivrera du filet de l'oiseleur / et de la maladie mortelle.</p>
@@ -55,13 +55,13 @@
         <p>- Tu marcheras sur le lion et sur l'aspic, / tu fouleras le fauve et le dragon.</p>
         <p>- Parce qu'il M'aime, Je le délivrerai. Je serai avec lui dans la détresse / et Je le sauverai et Je le glorifierai.</p>
         <p>- Je le rassasierai de longs jours / et Je lui ferai voir Mon salut.</p>
-        <p><strong>Tous : </strong><em>(se levant et s'inclinant)</em></p>
+        <p><strong>Tous : </strong>(se levant et s'inclinant)</p>
         <p>- Gloire au Père et au Fils et au Saint-Esprit, / Comme il était au commencement et maintenant et toujours / Et aux siècles des siècles. Amen.</p>
-        <h3>Psaume 134 <em>(on hausse la voix d'un ton)</em></h3>
+        <h3>Psaume 134 (on hausse la voix d'un ton)</h3>
         <p>- Et maintenant, pendant la nuit, serviteurs du Seigneur, bénissez le Seigneur / vous tous qui veillez dans la Maison du Seigneur.</p>
         <p>- Elevez vos mains vers le Sanctuaire / et bénissez le Seigneur.</p>
         <p>- Le Seigneur te bénira de Sion, / Lui qui a fait le ciel et la terre.</p>
-        <p><strong>Tous : </strong><em>(se levant et s'inclinant)</em></p>
+        <p><strong>Tous : </strong>(se levant et s'inclinant)</p>
         <p>- Gloire au Père et au Fils et au Saint-Esprit, / Comme il était au commencement et maintenant et toujours / Et aux siècles des siècles. Amen.</p>
         <h3>Antienne (par tous)</h3>
         <p>Aie pitié de moi, Seigneur, exauce ma prière.</p>

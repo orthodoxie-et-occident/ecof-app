@@ -75,16 +75,52 @@ onIonViewWillEnter(fetchArticle)
 </script>
 
 <style scoped>
+/* Card article façon papier : coins carrés, teinte chaleureuse, coin haut droit corné (cf. NewsPage) */
 .article-container {
   max-width: 680px;
   margin: 0 auto;
-  background: var(--ion-color-light);
-  border-radius: 12px;
-  padding: 16px;
+  position: relative;
+  background: #f8f1e4;
+  border-radius: 3px;
+  padding: 20px 22px 18px;
+  box-shadow:
+    0 1px 2px rgba(120, 90, 50, 0.08),
+    0 3px 8px rgba(120, 90, 50, 0.08);
+  clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 0 100%);
+  overflow: hidden;
+}
+
+/* Ombre projetée par le pli */
+.article-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 38px;
+  height: 38px;
+  background: radial-gradient(circle at top right, rgba(101, 78, 46, 0.28), transparent 72%);
+  z-index: 0;
+}
+
+/* Le rabat replié */
+.article-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(225deg, #fffaf0 0%, #ecdfc4 45%, #d7c39d 100%);
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+  box-shadow: -2px 2px 3px rgba(101, 78, 46, 0.3);
+  z-index: 1;
 }
 
 .article-header {
+  position: relative;
+  z-index: 2;
   margin-bottom: 1.2rem;
+  padding-right: 20px; /* évite que le titre touche le pli */
 }
 
 .badge-slug {
@@ -94,10 +130,11 @@ onIonViewWillEnter(fetchArticle)
   margin-bottom: 0.6rem;
 }
 
+/* Titre un peu plus affirmé qu'un titre de card (h1 de page), mais moins massif que l'original */
 .article-title {
   margin: 0;
   font-size: 1.4rem;
-  font-weight: 700;
+  font-weight: 650;
   line-height: 1.4;
   color: var(--ion-color-dark);
 }
