@@ -21,7 +21,7 @@
       </div>
 
       <h2>Ouverture</h2>
-      <p><em>Face au sanctuaire, le préchantre chante :</em></p>
+      <p><span class="rubric">Face au sanctuaire, le préchantre chante :</span></p>
       <Score :mei="ouvertureMei" />
 
       <div class="hide-on-short">
@@ -37,7 +37,7 @@
         <p>- Beaucoup disent : « Qui nous fera voir le bonheur ? » / Fais briller sur nous, Seigneur, la lumière de Ta face.</p>
         <p>- Tu as mis dans mon coeur plus de joie qu'ils n'en ont / quand abondent leur blé et leur vin nouveau.</p>
         <p>- Je me couche et je m'endors en paix / car Toi seul, Seigneur, Tu me donnes la sécurité dans ma demeure.</p>
-        <p><strong>Tous : </strong>(se levant et s'inclinant)</p>
+        <p><span class="rubric">Tous (se levant et s'inclinant) :</span></p>
         <p>- Gloire au Père et au Fils et au Saint-Esprit, / Comme il était au commencement et maintenant et toujours / Et aux siècles des siècles. Amen.</p>
         <h3>Psaume 91 (on hausse la voix d'un ton)</h3>
         <p>- Celui qui demeure à l'abri du Très-Haut / et repose à l'ombre du puissant,</p>
@@ -55,38 +55,38 @@
         <p>- Tu marcheras sur le lion et sur l'aspic, / tu fouleras le fauve et le dragon.</p>
         <p>- Parce qu'il M'aime, Je le délivrerai. Je serai avec lui dans la détresse / et Je le sauverai et Je le glorifierai.</p>
         <p>- Je le rassasierai de longs jours / et Je lui ferai voir Mon salut.</p>
-        <p><strong>Tous : </strong>(se levant et s'inclinant)</p>
+        <p><span class="rubric">Tous (se levant et s'inclinant) :</span></p>
         <p>- Gloire au Père et au Fils et au Saint-Esprit, / Comme il était au commencement et maintenant et toujours / Et aux siècles des siècles. Amen.</p>
         <h3>Psaume 134 (on hausse la voix d'un ton)</h3>
         <p>- Et maintenant, pendant la nuit, serviteurs du Seigneur, bénissez le Seigneur / vous tous qui veillez dans la Maison du Seigneur.</p>
         <p>- Elevez vos mains vers le Sanctuaire / et bénissez le Seigneur.</p>
         <p>- Le Seigneur te bénira de Sion, / Lui qui a fait le ciel et la terre.</p>
-        <p><strong>Tous : </strong>(se levant et s'inclinant)</p>
+        <p><span class="rubric">Tous (se levant et s'inclinant) :</span></p>
         <p>- Gloire au Père et au Fils et au Saint-Esprit, / Comme il était au commencement et maintenant et toujours / Et aux siècles des siècles. Amen.</p>
-        <h3>Antienne (par tous)</h3>
-        <p>Aie pitié de moi, Seigneur, exauce ma prière.</p>
+        <h3>Antienne</h3>
+        <p><span class="rubric">Tous :</span>Aie pitié de moi, Seigneur, exauce ma prière.</p>
 
         <h2>Hymne</h2>
-        <p>H : Avant que s'achève le jour, Dieu Créateur de l'univers, ensemble nous Te demandons, que Ton amour veille et nous garde.</p>
-        <p>F : Que loin de nous passent les songes et les phantasmes de la nuit. Garde nos coeurs de l'ennemi, afin qu'ils ne soient pas souillés.</p>
-        <p>HF : Exauce-nous, Père très bon, Toi Fils Unique égal au Père, et Toi Esprit consolateur, régnant dans les siècles des siècles. Amen.</p>
+        <p><span class="rubric">H :</span> Avant que s'achève le jour, Dieu Créateur de l'univers, ensemble nous Te demandons, que Ton amour veille et nous garde.</p>
+        <p><span class="rubric">F :</span> Que loin de nous passent les songes et les phantasmes de la nuit. Garde nos coeurs de l'ennemi, afin qu'ils ne soient pas souillés.</p>
+        <p><span class="rubric">HF :</span> Exauce-nous, Père très bon, Toi Fils Unique égal au Père, et Toi Esprit consolateur, régnant dans les siècles des siècles. Amen.</p>
 
         <h2>Répons bref</h2>
-        <p>V : Garde-nous, Seigneur, comme la prunelle de l'oeil.</p>
-        <p>R : Sous l'abri de Tes ailes, protège nous.</p>
+        <p><span class="rubric">V :</span> Garde-nous, Seigneur, comme la prunelle de l'oeil.</p>
+        <p><span class="rubric">R :</span> Sous l'abri de Tes ailes, protège nous.</p>
 
         <h2>Capitule</h2>
-        <p>V : Tu es avec nous, Seigneur, et Ton Saint Nom a été invoqué sur nous. Ne nous abandonne pas, ô Seigneur, notre Dieu.</p>
-        <p>R : Rendons grâce à Dieu.</p>
+        <p><span class="rubric">V :</span> Tu es avec nous, Seigneur, et Ton Saint Nom a été invoqué sur nous. Ne nous abandonne pas, ô Seigneur, notre Dieu.</p>
+        <p><span class="rubric">R :</span> Rendons grâce à Dieu.</p>
       </div>
 
       <h2>Répons long</h2>
-      <p>V : Entre Tes mains, Seigneur, je remets mon esprit.</p>
-      <p>R : Entre Tes mains, Seigneur, je remets mon esprit.</p>
-      <p>V : Tu nous a rachetés, Seigneur, Dieu de vérité.</p>
-      <p>R : Entre Tes mains, Seigneur, je remets mon esprit.</p>
-      <p>V : Gloire au Père et au Fils, et au Saint-Esprit.</p>
-      <p>R : Entre Tes mains, Seigneur, je remets mon esprit.</p>
+      <p><span class="rubric">V :</span> Entre Tes mains, Seigneur, je remets mon esprit.</p>
+      <p><span class="rubric">R :</span> Entre Tes mains, Seigneur, je remets mon esprit.</p>
+      <p><span class="rubric">V :</span> Tu nous a rachetés, Seigneur, Dieu de vérité.</p>
+      <p><span class="rubric">R :</span> Entre Tes mains, Seigneur, je remets mon esprit.</p>
+      <p><span class="rubric">V :</span> Gloire au Père et au Fils, et au Saint-Esprit.</p>
+      <p><span class="rubric">R :</span> Entre Tes mains, Seigneur, je remets mon esprit.</p>
 
       <h2>Nunc Dimittis</h2>
 
@@ -96,10 +96,11 @@
       </div>
 
       <h3>Cantique de Siméon</h3>
-      <p>V : Et maintenant, Seigneur, laisse Ton serviteur,</p>
+      <p><span class="rubric">V :</span> Et maintenant, Seigneur, laisse Ton serviteur,</p>
       <p>
-        R : Selon Ta parole s'en aller en paix. Parce que mes yeux ont vu le salut qui vient de Toi, que Tu as préparé pour être mis devant tous les peuples, Lumière qui doit se révéler aux nations et
-        la gloire de ton peuple, Israël. Gloire au Père et au Fils et au Saint-Esprit, comme il était au commencement et maintenant et toujours et aux siècles des siècles. Amen.
+        <span class="rubric">R :</span> Selon Ta parole s'en aller en paix. Parce que mes yeux ont vu le salut qui vient de Toi, que Tu as préparé pour être mis devant tous les peuples, Lumière qui
+        doit se révéler aux nations et la gloire de ton peuple, Israël. Gloire au Père et au Fils et au Saint-Esprit, comme il était au commencement et maintenant et toujours et aux siècles des
+        siècles. Amen.
       </p>
 
       <div class="hide-on-short">
@@ -108,21 +109,27 @@
       </div>
 
       <h2>Trisagion</h2>
-      <p>V : Agios o Theos TOUS : Agios Ischiros</p>
-      <p>V : Agios Athanatos TOUS : Eleison Imas</p>
-      <p>V : Sanctus Deus TOUS : Sanctus Fortis</p>
-      <p>V : Sanctus Immortalis TOUS : Miserere nobis</p>
-      <p>V : Saint Dieu TOUS : Saint Fort</p>
-      <p>V : Saint Immortel TOUS : Aie pitié de nous</p>
-      <p>V : Kyrie eleison</p>
+      <p><span class="rubric">V :</span> Agios o Theos</p>
+      <p><span class="rubric">Tous :</span> Agios Ischiros</p>
+      <p><span class="rubric">V :</span> Agios Athanatos</p>
+      <p><span class="rubric">Tous :</span> Eleison Imas</p>
+      <p><span class="rubric">V :</span> Sanctus Deus</p>
+      <p><span class="rubric">Tous :</span> Sanctus Fortis</p>
+      <p><span class="rubric">V :</span> Sanctus Immortalis</p>
+      <p><span class="rubric">Tous :</span> Miserere nobis</p>
+      <p><span class="rubric">V :</span> Saint Dieu</p>
+      <p><span class="rubric">Tous :</span> Saint Fort</p>
+      <p><span class="rubric">V :</span> Saint Immortel</p>
+      <p><span class="rubric">Tous :</span> Aie pitié de nous</p>
+      <p><span class="rubric">V :</span> Kyrie eleison</p>
 
       <h2>Notre-Père</h2>
       <div v-html="withPriest ? paterWithPriest : paterWithoutPriest"></div>
       <p>
-        V : Nous T'en prions, Seigneur, visite cette demeure et éloigne toutes les embûches de l'ennemi ; que Tes saints anges y habitent et nous gardent en paix, et que Ta bénédiction soit toujours
-        sur nous, par notre Seigneur Jésus-Christ, Qui vit et règne avec Toi et le Saint-Esprit, aux siècles des siècles.
+        <span class="rubric">V :</span> Nous T'en prions, Seigneur, visite cette demeure et éloigne toutes les embûches de l'ennemi ; que Tes saints anges y habitent et nous gardent en paix, et que Ta
+        bénédiction soit toujours sur nous, par notre Seigneur Jésus-Christ, Qui vit et règne avec Toi et le Saint-Esprit, aux siècles des siècles.
       </p>
-      <p>R : Amen.</p>
+      <p><span class="rubric">R :</span> Amen.</p>
 
       <h2>Clôture</h2>
       <div v-html="withPriest ? closingWithPriest : closingWithoutPriest"></div>
@@ -202,84 +209,84 @@ const saintsNamesHtml = computed(() => {
 
 const preparationWithPriest = computed(
   () => `
-<p>Lecteur : Mon père, veuille me bénir.</p>
-<p>Prêtre : + Que le Dieu Tout-Puissant nous accorde une nuit tranquille et une fin heureuse.</p>
-<p>R : Amen.</p>
+<p><span class="rubric">Lecteur :</span> Mon père, veuille me bénir.</p>
+<p><span class="rubric">Prêtre :</span> + Que le Dieu Tout-Puissant nous accorde une nuit tranquille et une fin heureuse.</p>
+<p><span class="rubric">R :</span>Amen.</p>
 <h3>Leçon brève</h3>
-<p>V : Mes frères, soyez sobres et vigilants, car votre adversaire le diable rôde autour de vous comme un lion rugissant, cherchant qui il pourra dévorer. Résistez-lui en étant forts dans la foi.</p>
+<p><span class="rubric">V :</span> Mes frères, soyez sobres et vigilants, car votre adversaire le diable rôde autour de vous comme un lion rugissant, cherchant qui il pourra dévorer. Résistez-lui en étant forts dans la foi.</p>
 <p><em>Il s'incline :</em> Et Toi, Seigneur, aie pitié de moi.</p>
-<p>R : Rendons grâces à Dieu.</p>
+<p><span class="rubric">R :</span>Rendons grâces à Dieu.</p>
 <h3>Confession</h3>
-<p>P : + Notre secours soit au nom du Seigneur,</p>
-<p>R : Qui a fait le ciel et la terre.</p>
+<p><span class="rubric">P :</span> + Notre secours soit au nom du Seigneur,</p>
+<p><span class="rubric">R :</span> Qui a fait le ciel et la terre.</p>
 <p><em>Le prêtre, seul, profondément incliné :</em></p>
-<p>P : Je confesse devant la Face du Seigneur très clément, devant la bienheureuse Marie toujours Vierge, Mère de Dieu, saint Michel Archange, saint Jean-Baptiste, les saints Apôtres Pierre, Paul, Jean et Jacques, les saints ${saintsNamesHtml.value}, tous les saints, et devant vous mes frères et soeurs, que j'ai beaucoup péché par pensées, par paroles, par actions, par omissions, consciemment et inconsciemment, volontairement et involontairement.</p>
+<p><span class="rubric">P :</span> Je confesse devant la Face du Seigneur très clément, devant la bienheureuse Marie toujours Vierge, Mère de Dieu, saint Michel Archange, saint Jean-Baptiste, les saints Apôtres Pierre, Paul, Jean et Jacques, les saints ${saintsNamesHtml.value}, tous les saints, et devant vous mes frères et soeurs, que j'ai beaucoup péché par pensées, par paroles, par actions, par omissions, consciemment et inconsciemment, volontairement et involontairement.</p>
 <p><em>Il se frappe trois fois la poitrine :</em></p>
 <p>Aie pitié de moi, Seigneur. Aie pitié de moi, Seigneur. Aie pitié de moi, Seigneur, selon Ta grande miséricorde ! C'est pourquoi je supplie la bienheureuse Marie toujours Vierge, Mère de Dieu, saint Michel Archange, saint Jean-Baptiste, les saints Apôtres Pierre, Paul, Jean et Jacques, les saints ${saintsNamesHtml.value}, tous les saints et vous mes frères et soeurs, de prier pour moi le Seigneur notre Dieu.</p>
-<p>R : Que le Dieu Tout-Puissant aie pitié de toi, qu'Il te pardonne tes péchés et te conduise à la vie éternelle.</p>
-<p>P : Amen</p>
-<p>R : Je confesse devant la Face du Seigneur très clément, devant la bienheureuse Marie toujours Vierge, Mère de Dieu, saint Michel Archange, saint Jean-Baptiste, les saints Apôtres Pierre, Paul, Jean et Jacques, les saints ${saintsNamesHtml.value}, tous les saints, et devant toi, mon père, que j'ai beaucoup péché par pensées, par paroles, par actions, par omissions, consciemment et inconsciemment, volontairement et involontairement.</p>
+<p><span class="rubric">R :</span> Que le Dieu Tout-Puissant aie pitié de toi, qu'Il te pardonne tes péchés et te conduise à la vie éternelle.</p>
+<p><span class="rubric">P :</span> Amen</p>
+<p><span class="rubric">R :</span> Je confesse devant la Face du Seigneur très clément, devant la bienheureuse Marie toujours Vierge, Mère de Dieu, saint Michel Archange, saint Jean-Baptiste, les saints Apôtres Pierre, Paul, Jean et Jacques, les saints ${saintsNamesHtml.value}, tous les saints, et devant toi, mon père, que j'ai beaucoup péché par pensées, par paroles, par actions, par omissions, consciemment et inconsciemment, volontairement et involontairement.</p>
 <p><em>On se frappe trois fois la poitrine :</em></p>
 <p>Aie pitié de moi, Seigneur. Aie pitié de moi, Seigneur. Aie pitié de moi, Seigneur, selon Ta grande miséricorde ! C'est pourquoi je supplie la bienheureuse Marie toujours Vierge, Mère de Dieu, saint Michel Archange, saint Jean-Baptiste, les saints Apôtres Pierre, Paul, Jean et Jacques, les saints ${saintsNamesHtml.value}, tous les saints, et toi, mon père, de prier pour moi le Seigneur notre Dieu.</p>
-<p>P : Que le Dieu Tout-Puissant aie pitié de vous, qu'Il vous pardonne vos péchés et vous conduise à la vie éternelle.</p>
-<p>R : Amen.</p>
-<p>P : Que le Seigneur Tout-Puissant et Miséricordieux vous accorde le pardon, l'absolution et la rémission de vos péchés ; qu'Il vous absolve de vos fautes et renouvelle vos coeurs par l'effusion du Saint-Esprit. + Au nom du Père, du Fils et du Saint-Esprit.</p>
-<p>R : Amen.</p>
-<p>P : Convertis-nous, ô Dieu Qui es notre salut !</p>
-<p>R : Et détourne de nous Ta colère.</p>
+<p><span class="rubric">P :</span> Que le Dieu Tout-Puissant aie pitié de vous, qu'Il vous pardonne vos péchés et vous conduise à la vie éternelle.</p>
+<p><span class="rubric">R :</span> Amen.</p>
+<p><span class="rubric">P :</span> Que le Seigneur Tout-Puissant et Miséricordieux vous accorde le pardon, l'absolution et la rémission de vos péchés ; qu'Il vous absolve de vos fautes et renouvelle vos coeurs par l'effusion du Saint-Esprit. + Au nom du Père, du Fils et du Saint-Esprit.</p>
+<p><span class="rubric">R :</span> Amen.</p>
+<p><span class="rubric">P :</span> Convertis-nous, ô Dieu Qui es notre salut !</p>
+<p><span class="rubric">R :</span> Et détourne de nous Ta colère.</p>
 `,
 )
 
 const preparationWithoutPriest = computed(
   () => `
-<p>Lecteur : Que le Dieu Tout-Puissant nous accorde une nuit tranquille et une fin heureuse.</p>
-<p>R : Amen.</p>
+<p><span class="rubric">Lecteur :</span> Que le Dieu Tout-Puissant nous accorde une nuit tranquille et une fin heureuse.</p>
+<p><span class="rubric">R :</span> Amen.</p>
 <h3>Leçon brève</h3>
-<p>V : Mes frères, soyez sobres et vigilants, car votre adversaire le diable rôde autour de vous comme un lion rugissant, cherchant qui il pourra dévorer. Résistez-lui en étant forts dans la foi.</p>
+<p><span class="rubric">V :</span> Mes frères, soyez sobres et vigilants, car votre adversaire le diable rôde autour de vous comme un lion rugissant, cherchant qui il pourra dévorer. Résistez-lui en étant forts dans la foi.</p>
 <p><em>Il s'incline :</em> Et Toi, Seigneur, aie pitié de moi.</p>
-<p>R : Rendons grâces à Dieu.</p>
+<p><span class="rubric">R :</span> Rendons grâces à Dieu.</p>
 <h3>Confession</h3>
-<p>V : + Notre secours soit au nom du Seigneur,</p>
-<p>R : Qui a fait le ciel et la terre.</p>
-<p>Tous : Je confesse devant la Face du Seigneur très clément, devant la bienheureuse Marie toujours Vierge, Mère de Dieu, saint Michel Archange, saint Jean-Baptiste, les saints Apôtres Pierre, Paul, Jean et Jacques, les saints ${saintsNamesHtml.value}, tous les saints, et devant vous mes frères et soeurs, que j'ai beaucoup péché par pensées, par paroles, par actions, par omissions, consciemment et inconsciemment, volontairement et involontairement.</p>
+<p><span class="rubric">V :</span> + Notre secours soit au nom du Seigneur,</p>
+<p><span class="rubric">R :</span> Qui a fait le ciel et la terre.</p>
+<p><span class="rubric">Tous :</span> Je confesse devant la Face du Seigneur très clément, devant la bienheureuse Marie toujours Vierge, Mère de Dieu, saint Michel Archange, saint Jean-Baptiste, les saints Apôtres Pierre, Paul, Jean et Jacques, les saints ${saintsNamesHtml.value}, tous les saints, et devant vous mes frères et soeurs, que j'ai beaucoup péché par pensées, par paroles, par actions, par omissions, consciemment et inconsciemment, volontairement et involontairement.</p>
 <p><em>On se frappe trois fois la poitrine :</em></p>
 <p>Aie pitié de moi, Seigneur. Aie pitié de moi, Seigneur. Aie pitié de moi, Seigneur, selon Ta grande miséricorde ! C'est pourquoi je supplie la bienheureuse Marie toujours Vierge, Mère de Dieu, saint Michel Archange, saint Jean-Baptiste, les saints Apôtres Pierre, Paul, Jean et Jacques, les saints ${saintsNamesHtml.value}, tous les saints et vous mes frères et soeurs, de prier pour moi le Seigneur notre Dieu. Que le Dieu Tout-Puissant aie pitié de nous, qu'Il nous pardonne nos péchés et nous conduise à la vie éternelle. Amen.</p>
-<p>V : Convertis-nous, ô Dieu Qui est notre salut !</p>
-<p>R : Et détourne de nous Ta colère.</p>
+<p><span class="rubric">V :</span> Convertis-nous, ô Dieu Qui est notre salut !</p>
+<p><span class="rubric">R :</span> Et détourne de nous Ta colère.</p>
 `,
 )
 
 const closingWithPriest = `
-<p>P : Le Seigneur soit toujours avec vous.</p>
-<p>R : Et avec ton esprit.</p>
-<p>P : Bénissons le Seigneur.</p>
-<p>R : Rendons grâces à Dieu.</p>
-<p>P : Que les âmes des fidèles défunts, par la miséricorde de Dieu, reposent en paix.</p>
-<p>R : Amen.</p>
-<p>P : Que le Seigneur Tout-Puissant et miséricordieux, + Père, Fils et Saint-Esprit, vous bénisse et vous garde.</p>
-<p>R : Amen.</p>
+<p><span class="rubric">P :</span> Le Seigneur soit toujours avec vous.</p>
+<p><span class="rubric">R :</span> Et avec ton esprit.</p>
+<p><span class="rubric">P :</span> Bénissons le Seigneur.</p>
+<p><span class="rubric">R :</span> Rendons grâces à Dieu.</p>
+<p><span class="rubric">P :</span> Que les âmes des fidèles défunts, par la miséricorde de Dieu, reposent en paix.</p>
+<p><span class="rubric">R :</span> Amen.</p>
+<p><span class="rubric">P :</span> Que le Seigneur Tout-Puissant et miséricordieux, + Père, Fils et Saint-Esprit, vous bénisse et vous garde.</p>
+<p><span class="rubric">R :</span> Amen.</p>
 `
 
 const closingWithoutPriest = `
-<p>V : Seigneur, écoute ma prière,</p>
-<p>R : Et que mon cri parvienne jusqu'à Toi.</p>
-<p>V : Bénissons le Seigneur.</p>
-<p>R : Rendons grâces à Dieu.</p>
-<p>V : Que les âmes des fidèles défunts, par la miséricorde de Dieu, reposent en paix.</p>
-<p>R : Amen.</p>
-<p>V : Que le Seigneur Tout-Puissant et miséricordieux (+), Père, Fils et Saint-Esprit, nous bénisse et nous garde.</p>
-<p>R : Amen.</p>
+<p><span class="rubric">V :</span> Seigneur, écoute ma prière,</p>
+<p><span class="rubric">R :</span> Et que mon cri parvienne jusqu'à Toi.</p>
+<p><span class="rubric">V :</span> Bénissons le Seigneur.</p>
+<p><span class="rubric">R :</span> Rendons grâces à Dieu.</p>
+<p><span class="rubric">V :</span> Que les âmes des fidèles défunts, par la miséricorde de Dieu, reposent en paix.</p>
+<p><span class="rubric">R :</span> Amen.</p>
+<p><span class="rubric">V :</span> Que le Seigneur Tout-Puissant et miséricordieux (+), Père, Fils et Saint-Esprit, nous bénisse et nous garde.</p>
+<p><span class="rubric">R :</span> Amen.</p>
 `
 
 const paterWithPriest = `
-<p><em>Le prêtre dit le Notre-Père :</em></p>
+<p><span class="rubric">Le prêtre dit le Notre-Père :</span></p>
 <p>Notre Père qui es aux cieux, que Ton Nom soit sanctifié, que Ton Règne arrive, que Ta volonté soit faite sur la terre comme au ciel. Donne-nous aujourd'hui notre Pain substantiel, et remets-nous nos dettes comme nous remettons à nos débiteurs, et ne nous soumets pas à l'épreuve, mais délivre-nous du malin.</p>
 `
 
 const paterWithoutPriest = `
-<p>V : Notre Père qui es aux cieux ...</p>
+<p><span class="rubric">V :</span> Notre Père qui es aux cieux ...</p>
 <p><em>(à voix basse) ... que Ton Nom soit sanctifié, que Ton Règne arrive, que Ta volonté soit faite sur la terre comme au ciel. Donne-nous aujourd'hui notre Pain substantiel, et remets-nous nos dettes comme nous remettons à nos débiteurs ...</em>
-<p>V : ... et ne nous soumets pas à l'épreuve.</p>
-<p>R : Mais délivre nous du malin. Amen.</p>
+<p><span class="rubric">V :</span> ... et ne nous soumets pas à l'épreuve.</p>
+<p><span class="rubric">R :</span> Mais délivre nous du malin. Amen.</p>
 `
 </script>

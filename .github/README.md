@@ -7,7 +7,6 @@
 </p>
 
 <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-3.4.8-blue" />
   <img alt="License" src="https://img.shields.io/badge/license-MIT-green" />
   <img alt="Built with Vue" src="https://img.shields.io/badge/Vue-3-4FC08D?logo=vuedotjs&logoColor=white" />
   <img alt="Built with Ionic" src="https://img.shields.io/badge/Ionic-Vue%208-3880FF?logo=ionic" />

@@ -168,8 +168,8 @@ onIonViewWillEnter(fetchSaintData)
 }
 
 .saint-image {
-  max-width: 300px;
   width: 100%;
+  max-width: min(300px, 100%);
   height: auto;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -195,11 +195,5 @@ onIonViewWillEnter(fetchSaintData)
   margin: 0;
   font-size: 0.95rem;
   color: var(--ion-color-medium);
-}
-
-@media (max-width: 768px) {
-  .saint-image {
-    max-width: 100%;
-  }
 }
 </style>
