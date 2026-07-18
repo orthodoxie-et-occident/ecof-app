@@ -170,7 +170,7 @@
                                     </note>
                                 </layer>
                             </staff>
-                            <slur startid="#n1" endid="#n2" />
+                            <slur startid="#n1" endid="#n2" curvedir="below" />
                         </measure>
                         <measure metcon="false" right="invis">
                             <staff n="1">
