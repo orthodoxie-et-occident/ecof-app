@@ -5,7 +5,7 @@
         <ion-buttons slot="start">
           <ion-back-button text="" default-href="/prayers/hours"></ion-back-button>
         </ion-buttons>
-        <ion-title>Vigiles</ion-title>
+        <ion-title>Nocturnes</ion-title>
       </ion-toolbar>
     </ion-header>
 
