@@ -243,7 +243,7 @@ const preparationWithoutPriest = computed(
 <p><span class="rubric">R :</span> Amen.</p>
 <h3>Leçon brève</h3>
 <p><span class="rubric">V :</span> Mes frères, soyez sobres et vigilants, car votre adversaire le diable rôde autour de vous comme un lion rugissant, cherchant qui il pourra dévorer. Résistez-lui en étant forts dans la foi.</p>
-<p><em>Il s'incline :</em> Et Toi, Seigneur, aie pitié de moi.</p>
+<p><span class="rubric">Il s'incline :</span> Et Toi, Seigneur, aie pitié de moi.</p>
 <p><span class="rubric">R :</span> Rendons grâces à Dieu.</p>
 <h3>Confession</h3>
 <p><span class="rubric">V :</span> + Notre secours soit au nom du Seigneur,</p>
@@ -285,7 +285,7 @@ const paterWithPriest = `
 
 const paterWithoutPriest = `
 <p><span class="rubric">V :</span> Notre Père qui es aux cieux ...</p>
-<p><em>(à voix basse) ... que Ton Nom soit sanctifié, que Ton Règne arrive, que Ta volonté soit faite sur la terre comme au ciel. Donne-nous aujourd'hui notre Pain substantiel, et remets-nous nos dettes comme nous remettons à nos débiteurs ...</em>
+<p><span class="rubric">(à voix basse)</span> ... que Ton Nom soit sanctifié, que Ton Règne arrive, que Ta volonté soit faite sur la terre comme au ciel. Donne-nous aujourd'hui notre Pain substantiel, et remets-nous nos dettes comme nous remettons à nos débiteurs ...
 <p><span class="rubric">V :</span> ... et ne nous soumets pas à l'épreuve.</p>
 <p><span class="rubric">R :</span> Mais délivre nous du malin. Amen.</p>
 `
