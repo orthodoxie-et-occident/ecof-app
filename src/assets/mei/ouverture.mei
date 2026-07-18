@@ -151,18 +151,11 @@
                                             <syl wordpos="i" con="d">secou</syl>
                                         </verse>
                                     </note>
-                                </layer>
-                            </staff>
-                        </measure>
-                        <measure metcon="false">
-                            <staff n="1">
-                                <layer>
                                     <note xml:id="n1" pname="b" oct="4" dur="4" artic="acc">
                                         <verse n="1">
                                             <syl wordpos="t">rir</syl>
                                         </verse>
                                     </note>
-
                                     <note xml:id="n2" pname="c" oct="5" dur="4">
                                         <verse n="1">
                                             <syl>...</syl>
@@ -332,7 +325,31 @@
                                     <note pname="c" oct="5" dur="4" stem.visible="false"
                                         head.visible="false">
                                         <verse n="1">
-                                            <syl>et maintenant et</syl>
+                                            <syl>et</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="4" stem.visible="false"
+                                        head.visible="false">
+                                        <verse n="1">
+                                            <syl>maintenant</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="4" stem.visible="false"
+                                        head.visible="false">
+                                        <verse n="1">
+                                            <syl>et</syl>
                                         </verse>
                                     </note>
                                 </layer>
