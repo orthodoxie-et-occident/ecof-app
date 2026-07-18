@@ -27,7 +27,7 @@
       </div>
 
       <div v-else class="news-list">
-        <ion-card v-for="article in articles" :key="article.id" button :router-link="`/news/${article.id}`" router-direction="forward" class="news-card">
+        <ion-card v-for="article in articles" :key="article.id" button @click="openArticle(article)" class="news-card">
           <ion-card-content>
             <div class="card-body">
               <div class="category-icon-wrap">
@@ -55,32 +55,34 @@
 
 <script setup>
 import { ref } from "vue"
+import { useIonRouter } from "@ionic/vue"
 import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonCard, IonCardContent, IonBadge, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
 import { cloudOfflineOutline, refreshOutline, helpCircleOutline, documentTextOutline, calendarOutline, phonePortraitOutline } from "ionicons/icons"
 
+const ionRouter = useIonRouter()
 const articles = ref([])
 const loading = ref(true)
 const error = ref(null)
 const hasFetched = ref(false)
 
-// Mapping des catégories connues (slug renvoyé par l'API)
+// Mapping des catégories connues (slug_id renvoyé par l'API)
 const categoryMap = {
   0: { label: "Général", icon: helpCircleOutline },
-  1: { label: "Homélie", icon: documentTextOutline },
+  1: { label: "Enseignement", icon: documentTextOutline },
   2: { label: "Agenda", icon: calendarOutline },
-  3: { label: "Actus de l'appli", icon: phonePortraitOutline },
+  3: { label: "Application", icon: phonePortraitOutline },
 }
 
-function getCategory(slug) {
-  return categoryMap[slug] ?? categoryMap[0]
+function getCategory(slug_id) {
+  return categoryMap[slug_id] ?? categoryMap[0]
 }
 
-function getCategoryIcon(slug) {
-  return getCategory(slug).icon
+function getCategoryIcon(slug_id) {
+  return getCategory(slug_id).icon
 }
 
-function getCategoryLabel(slug) {
-  return getCategory(slug).label
+function getCategoryLabel(slug_id) {
+  return getCategory(slug_id).label
 }
 
 function formatDate(isoString) {
@@ -95,6 +97,13 @@ function isNew(isoString) {
   const sevenDaysAgo = new Date()
   sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7)
   return new Date(isoString) > sevenDaysAgo
+}
+
+function openArticle(article) {
+  ionRouter.push({
+    path: `/news/${article.id}`,
+    query: { label: getCategoryLabel(article.slug_id) },
+  })
 }
 
 async function fetchArticles() {

@@ -7,7 +7,7 @@
         </ion-buttons>
 
         <ion-title>
-          {{ article?.title ?? "Article" }}
+          {{ route.query.label ?? "Article" }}
         </ion-title>
       </ion-toolbar>
     </ion-header>
