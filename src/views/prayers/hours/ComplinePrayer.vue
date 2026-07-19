@@ -145,7 +145,7 @@ import { ref, computed, watch } from "vue"
 import { useRoute } from "vue-router"
 import { IonPage, IonHeader, IonButtons, IonBackButton, IonToolbar, IonTitle, IonContent, IonToggle } from "@ionic/vue"
 import Score from "@/components/Score.vue"
-import ouvertureMei from "@/assets/mei/ouverture.mei?raw"
+import ouvertureMei from "@/assets/scores/compline/ouverture.mei?raw"
 
 const withPriest = ref(false)
 const shortVersion = ref(false)

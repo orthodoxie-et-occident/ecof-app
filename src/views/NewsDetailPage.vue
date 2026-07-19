@@ -29,7 +29,7 @@
         </div>
       </div>
 
-      <div v-else-if="article" class="ion-padding">
+      <div v-else-if="article" class="ion-padding article-detail">
         <MarkdownSection :html="article.text" />
       </div>
     </ion-content>
@@ -71,6 +71,15 @@ onIonViewWillEnter(fetchArticle)
 </script>
 
 <style scoped>
+.article-detail :deep(h1) {
+  font-size: 22px;
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--ion-color-dark, #1a1a1a);
+  margin: 0 0 12px;
+  overflow-wrap: break-word;
+}
+
 .state-container {
   display: flex;
   flex-direction: column;
