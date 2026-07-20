@@ -18,7 +18,7 @@ let vrvToolkit = null
 let currentMei = null
 
 function pxToVerovioUnits(px) {
-  return Math.round(px * (100 / props.scale) * 1.2)
+  return Math.round(px * (100 / props.scale))
 }
 
 async function render() {
