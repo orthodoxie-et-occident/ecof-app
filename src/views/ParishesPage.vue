@@ -48,7 +48,7 @@ import vannesImg from "@/assets/img/parishes/vannes.png"
 import lyonImg from "@/assets/img/parishes/lyon.png"
 import parisImg from "@/assets/img/parishes/paris.png"
 import stebaumeImg from "@/assets/img/parishes/stebaume.png"
-import poitiersImg from "@/assets/img/parishes/poitiers.png"
+import poitiersImg from "@/assets/img/parishes/poitiers2.png"
 import lisieuxImg from "@/assets/img/parishes/lisieux.png"
 
 const ionRouter = useIonRouter()

@@ -7,26 +7,23 @@
         </ion-buttons>
         <ion-title>Office des Heures</ion-title>
       </ion-toolbar>
-
-      <ion-toolbar class="experimental-banner">
-        <ion-title>En développement...</ion-title>
-      </ion-toolbar>
     </ion-header>
 
     <ion-content class="ion-padding">
       <ion-list>
         <ion-item
           button
-          v-for="priere in prieres"
-          :key="priere.id"
-          :router-link="priere.disabled ? undefined : priere.route"
+          v-for="office in OFFICES"
+          :key="office.heure"
+          :router-link="{ path: office.route, query: { date: fmtISO(aujourdhui) } }"
           router-direction="forward"
-          :detail="!priere.disabled"
-          :disabled="priere.disabled"
+          :color="officeEnCours && officeEnCours.heure === office.heure ? 'light' : undefined"
+          detail
         >
           <ion-label>
-            <h2>{{ priere.titre }}</h2>
-            <p>{{ priere.info }}</p>
+            <h2>{{ office.titre }}</h2>
+            <p>{{ office.sous }}</p>
+            <p class="note-heure">{{ office.note }}</p>
           </ion-label>
         </ion-item>
       </ion-list>
@@ -35,84 +32,45 @@
 </template>
 
 <script setup>
+import { computed } from "vue"
 import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonList, IonItem, IonLabel } from "@ionic/vue"
 
-const prieres = [
-  {
-    id: 1,
-    titre: "Vêpres",
-    info: "Au coucher du soleil (environ 18h)",
-    route: "/prayers/hours/vespers",
-    disabled: true,
-  },
-  {
-    id: 2,
-    titre: "Complies",
-    info: "A la 3ème heure de la nuit (environ 21h)",
-    route: "/prayers/hours/compline",
-    disabled: true,
-  },
-  {
-    id: 3,
-    titre: "Nocturnes",
-    info: "A la 6ème heure de la nuit (environ minuit)",
-    route: "/prayers/hours/vigils",
-    disabled: true,
-  },
-  {
-    id: 4,
-    titre: "Laudes",
-    info: "Au lever du soleil, à la 9ème heure de la nuit (environ 3h)",
-    route: "/prayers/hours/lauds",
-    disabled: true,
-  },
-  {
-    id: 5,
-    titre: "Prime",
-    info: "A la 1ère heure du jour (environ 6h du matin)",
-    route: "/prayers/hours/prime",
-    disabled: true,
-  },
-  {
-    id: 6,
-    titre: "Tierce",
-    info: "A la 3ème heure du jour (environ 9h)",
-    route: "/prayers/hours/tierce",
-    disabled: true,
-  },
-  {
-    id: 7,
-    titre: "Sexte",
-    info: "A la 6ème heure du jour (environ midi)",
-    route: "/prayers/hours/sext",
-    disabled: true,
-  },
-  {
-    id: 8,
-    titre: "None",
-    info: "A la 9ème heure du jour (environ 15h)",
-    route: "/prayers/hours/none",
-    disabled: true,
-  },
+const OFFICES = [
+  { heure: 0, titre: "Nocturnes", sous: "A la 6ème heure de la nuit", note: "Environ minuit", route: "/prayers/hours/vigils" },
+  { heure: 3, titre: "Laudes", sous: "Au lever du soleil", note: "Environ 3h", route: "/prayers/hours/lauds" },
+  { heure: 6, titre: "Prime", sous: "A la 1ère heure du jour", note: "Environ 6h", route: "/prayers/hours/prime" },
+  { heure: 9, titre: "Tierce", sous: "A la 3ème heure du jour", note: "Environ 9h", route: "/prayers/hours/tierce" },
+  { heure: 12, titre: "Sexte", sous: "A la 6ème heure du jour", note: "Environ midi", route: "/prayers/hours/sext" },
+  { heure: 15, titre: "None", sous: "A la 9ème heure du jour", note: "Environ 15h", route: "/prayers/hours/none" },
+  { heure: 18, titre: "Vêpres", sous: "Au coucher du soleil", note: "Environ 18h", route: "/prayers/hours/vespers" },
+  { heure: 21, titre: "Complies", sous: "A la 3ème heure de la nuit", note: "Environ 21h", route: "/prayers/hours/compline" },
 ]
+
+function fmtISO(d) {
+  const y = d.getFullYear()
+  const m = String(d.getMonth() + 1).padStart(2, "0")
+  const day = String(d.getDate()).padStart(2, "0")
+  return `${y}-${m}-${day}`
+}
+
+// ── Jour actuel, figé au chargement du composant ──
+const aujourdhui = new Date()
+
+// ── Office en cours ──
+const officeEnCours = computed(() => {
+  const h = new Date().getHours()
+  let courant = OFFICES[0]
+  for (const o of OFFICES) {
+    if (h >= o.heure) courant = o
+  }
+  return courant
+})
 </script>
 
 <style scoped>
-ion-item {
-  --padding-start: 16px;
-}
-
-.experimental-banner {
-  --background: #fff8e1;
-  --color: #795548;
-  --min-height: 28px;
-  border-top: 1px solid #ffe082;
-}
-
-.experimental-banner ion-title {
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  text-align: center;
+.note-heure {
+  font-size: 0.8em;
+  font-style: italic;
+  opacity: 0.6;
 }
 </style>

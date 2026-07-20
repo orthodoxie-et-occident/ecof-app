@@ -1,0 +1,466 @@
+<mei xmlns="http://www.music-encoding.org/ns/mei">
+    <meiHead>
+        <fileDesc>
+            <titleStmt>
+                <title />
+            </titleStmt>
+            <pubStmt />
+        </fileDesc>
+    </meiHead>
+    <music>
+        <body>
+            <mdiv>
+                <score>
+                    <scoreDef>
+                        <staffGrp>
+                            <staffDef clef.shape="G" clef.line="2" n="1" lines="5" />
+                        </staffGrp>
+                    </scoreDef>
+                    <section>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note xml:id="v1note" pname="c" oct="5" dur="8">
+                                        <verse n="1">
+                                            <syl>Ô</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                            <dir place="above" startid="#v1note">V :</dir>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="4">
+                                        <verse n="1">
+                                            <syl>Dieu,</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="d" oct="5" dur="8">
+                                        <verse n="1">
+                                            <syl>viens</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="8">
+                                        <verse n="1">
+                                            <syl>à</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="8">
+                                        <verse n="1">
+                                            <syl>mon</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <beam>
+                                        <note pname="b" oct="4" dur="8" artic="acc">
+                                            <verse n="1">
+                                                <syl wordpos="i" con="d">ai</syl>
+                                            </verse>
+                                        </note>
+                                        <note pname="c" oct="5" dur="8" />
+                                    </beam>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="4">
+                                        <verse n="1">
+                                            <syl wordpos="t">de. //</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note xml:id="r1note" pname="c" oct="5" dur="8">
+                                        <verse n="1">
+                                            <syl wordpos="i" con="d">Sei</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                            <dir place="above" startid="#r1note">R :</dir>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="4">
+                                        <verse n="1">
+                                            <syl wordpos="t">gneur,</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="8">
+                                        <verse n="1">
+                                            <syl>hâte Toi</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="breve" dur.ges="4">
+                                        <verse n="1">
+                                            <syl>de me</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="8">
+                                        <verse n="1">
+                                            <syl wordpos="i" con="d">secou</syl>
+                                        </verse>
+                                    </note>
+                                    <note xml:id="n1" pname="b" oct="4" dur="4" artic="acc">
+                                        <verse n="1">
+                                            <syl wordpos="t">rir</syl>
+                                        </verse>
+                                    </note>
+                                    <note xml:id="n2" pname="c" oct="5" dur="4">
+                                        <verse n="1">
+                                            <syl>...</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                            <slur startid="#n1" endid="#n2" curvedir="below" />
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note xml:id="v2note" pname="c" oct="5" dur="8">
+                                        <verse n="1">
+                                            <syl>Gloire</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                            <dir place="above" startid="#v2note">V :</dir>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="8">
+                                        <verse n="1">
+                                            <syl>au</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="d" oct="5" dur="4" artic="acc">
+                                        <verse n="1">
+                                            <syl>Père</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="8">
+                                        <verse n="1">
+                                            <syl>et</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="8">
+                                        <verse n="1">
+                                            <syl>au</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="4" artic="acc">
+                                        <verse n="1">
+                                            <syl>Fils</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="8">
+                                        <verse n="1">
+                                            <syl>et</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="8">
+                                        <verse n="1">
+                                            <syl>au</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <beam>
+                                        <note pname="b" oct="4" dur="8" artic="acc">
+                                            <verse n="1">
+                                                <syl wordpos="i" con="d">Saint</syl>
+                                            </verse>
+                                        </note>
+                                        <note pname="c" oct="5" dur="8" />
+                                    </beam>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="8">
+                                        <verse n="1">
+                                            <syl wordpos="m" con="d">Es</syl>
+                                        </verse>
+                                    </note>
+                                    <note pname="c" oct="5" dur="4">
+                                        <verse n="1">
+                                            <syl wordpos="t">prit. //</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note xml:id="r2note" pname="c" oct="5" dur="8">
+                                        <verse n="1">
+                                            <syl>Comme</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                            <dir place="above" startid="#r2note">R :</dir>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="4" stem.visible="false"
+                                        head.visible="false">
+                                        <verse n="1">
+                                            <syl>il etait au</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="breve" dur.ges="4">
+                                        <verse n="1">
+                                            <syl>commencement</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="4" stem.visible="false"
+                                        head.visible="false">
+                                        <verse n="1">
+                                            <syl>et</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="4" stem.visible="false"
+                                        head.visible="false">
+                                        <verse n="1">
+                                            <syl>maintenant</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="4" stem.visible="false"
+                                        head.visible="false">
+                                        <verse n="1">
+                                            <syl>et</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="8">
+                                        <verse n="1">
+                                            <syl wordpos="i" con="d">tou</syl>
+                                        </verse>
+                                    </note>
+                                    <note pname="c" oct="5" dur="4">
+                                        <verse n="1">
+                                            <syl wordpos="t">jours,</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="8">
+                                        <verse n="1">
+                                            <syl>et</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="8">
+                                        <verse n="1">
+                                            <syl>aux</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="d" oct="5" dur="8" artic="acc">
+                                        <verse n="1">
+                                            <syl wordpos="i" con="d">siè</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="8">
+                                        <verse n="1">
+                                            <syl wordpos="t">cles</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false" right="invis">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="b" oct="4" dur="8">
+                                        <verse n="1">
+                                            <syl wordpos="t">des</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="c" oct="5" dur="4">
+                                        <verse n="1">
+                                            <syl wordpos="i" con="d">siè</syl>
+                                        </verse>
+                                    </note>
+                                    <note pname="c" oct="5" dur="8">
+                                        <verse n="1">
+                                            <syl wordpos="t">cles.</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                        <measure metcon="false">
+                            <staff n="1">
+                                <layer>
+                                    <note pname="b" oct="4" dur="4">
+                                        <verse n="1">
+                                            <syl wordpos="i" con="d">A</syl>
+                                        </verse>
+                                    </note>
+                                    <note pname="c" oct="5" dur="4">
+                                        <verse n="1">
+                                            <syl wordpos="t">men.</syl>
+                                        </verse>
+                                    </note>
+                                </layer>
+                            </staff>
+                        </measure>
+                    </section>
+                </score>
+            </mdiv>
+        </body>
+    </music>
+</mei>

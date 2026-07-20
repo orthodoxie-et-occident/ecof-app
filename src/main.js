@@ -23,6 +23,7 @@ import "@ionic/vue/css/display.css"
 /* Theme variables */
 import "./theme/variables.css"
 import "./theme/fonts.css"
+import "./theme/hours.css"
 
 const app = createApp(App).use(IonicVue).use(router)
 

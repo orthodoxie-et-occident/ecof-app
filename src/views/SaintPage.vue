@@ -51,11 +51,10 @@
           <!-- Vie brève -->
           <div v-if="selectedTab === 'vie_b'">
             <div v-if="saintData?.vie_b">
-              <MarkdownSection :html="saintData.vie_b" />
-
               <div v-if="saintData?.img" class="saint-image-container">
                 <img :src="saintData.img" :alt="`Icône de ${saintData.saint}`" class="saint-image" />
               </div>
+              <MarkdownSection :html="saintData.vie_b" />
             </div>
 
             <div v-else class="no-content">
@@ -168,8 +167,8 @@ onIonViewWillEnter(fetchSaintData)
 }
 
 .saint-image {
-  max-width: 300px;
   width: 100%;
+  max-width: min(300px, 100%);
   height: auto;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -195,11 +194,5 @@ onIonViewWillEnter(fetchSaintData)
   margin: 0;
   font-size: 0.95rem;
   color: var(--ion-color-medium);
-}
-
-@media (max-width: 768px) {
-  .saint-image {
-    max-width: 100%;
-  }
 }
 </style>
