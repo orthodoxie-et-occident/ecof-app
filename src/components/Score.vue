@@ -36,6 +36,7 @@ async function render() {
     pageWidth: pxToVerovioUnits(width),
     pageMarginLeft: 0,
     pageMarginRight: 0,
+    fontTextLiberation: "true",
   })
 
   vrvToolkit.loadData(currentMei)
@@ -44,6 +45,12 @@ async function render() {
   for (let i = 1; i <= pageCount; i++) {
     out += vrvToolkit.renderToSVG(i)
   }
+
+  // 👇 debug temporaire — à retirer une fois le diagnostic fait
+  console.log("[verovio] version:", vrvToolkit.getVersion())
+  console.log("[verovio] contient Liberation:", out.includes("Liberation"))
+  console.log("[verovio] contient Times:", out.includes("Times"))
+
   svg.value = out
 }
 
