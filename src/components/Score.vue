@@ -46,11 +46,6 @@ async function render() {
     out += vrvToolkit.renderToSVG(i)
   }
 
-  // 👇 debug temporaire — à retirer une fois le diagnostic fait
-  console.log("[verovio] version:", vrvToolkit.getVersion())
-  console.log("[verovio] contient Liberation:", out.includes("Liberation"))
-  console.log("[verovio] contient Times:", out.includes("Times"))
-
   svg.value = out
 }
 
