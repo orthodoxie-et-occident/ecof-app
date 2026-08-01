@@ -36,7 +36,13 @@
 <script setup>
 import { ref } from "vue"
 import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, onIonViewDidEnter, onIonViewWillLeave } from "@ionic/vue"
-import maplibregl from "maplibre-gl"
+
+import * as maplibregl from "maplibre-gl"
+import "maplibre-gl/dist/maplibre-gl.css"
+import workerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url"
+
+maplibregl.setWorkerUrl(workerUrl)
+
 import { Protocol } from "pmtiles"
 import { layers, namedFlavor } from "@protomaps/basemaps"
 import markerDiocese1 from "@/assets/img/layout/pin1.png"
