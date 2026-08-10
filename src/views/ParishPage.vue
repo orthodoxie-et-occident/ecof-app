@@ -49,7 +49,7 @@
             </div>
             <div class="event-content">
               <p class="event-title">{{ event.title }}</p>
-              <p v-if="event.isMultiDay" class="event-range">{{ formatRange(event.start, event.end) }}</p>
+              <p v-if="event.isMultiDay" class="event-range">{{ formatRange(event.start, event.end, event.allDay) }}</p>
               <p v-if="event.location" class="event-meta">{{ event.location }}</p>
               <p v-if="event.description" class="event-desc">{{ event.description }}</p>
             </div>
@@ -177,12 +177,20 @@ const getFullDate = (dateStr) => new Date(`${dateStr}T00:00:00`).toLocaleDateStr
 
 const formatTime = (dateString) => new Date(dateString).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })
 
-const formatRange = (start, end) => {
+// Pour les événements multi-jours "journée entière" (allDay: true, venant de
+// l'API), on n'affiche que les dates, sans heures. Pour les multi-jours avec
+// horaires précis, on garde l'affichage complet date + heure.
+const formatRange = (start, end, allDay) => {
   const s = new Date(start)
   const e = new Date(end)
   const dateOpts = { day: "numeric", month: "short" }
   const startDate = s.toLocaleDateString("fr-FR", dateOpts)
   const endDate = e.toLocaleDateString("fr-FR", dateOpts)
+
+  if (allDay) {
+    return `${startDate} → ${endDate}`
+  }
+
   return `${startDate} ${formatTime(start)} → ${endDate} ${formatTime(end)}`
 }
 </script>
