@@ -7,7 +7,8 @@
         </ion-buttons>
 
         <ion-title>
-          {{ saintData?.saint || saintData?.prefixe }}
+          <div class="title-main">{{ saintData?.saint || saintData?.prefixe }}</div>
+          <div v-if="commemorationDate" class="title-date">{{ commemorationDate }}</div>
         </ion-title>
       </ion-toolbar>
     </ion-header>
@@ -79,7 +80,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { ref, computed } from "vue"
 import { useRoute } from "vue-router"
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonBackButton, IonIcon, IonSpinner, IonButton, IonSegment, IonSegmentButton, IonLabel, onIonViewWillEnter } from "@ionic/vue"
 import { cloudOfflineOutline, refreshOutline } from "ionicons/icons"
@@ -96,6 +97,15 @@ const saintData = ref(null)
 const loading = ref(true)
 const error = ref(null)
 const selectedTab = ref("vie_b")
+
+const MOIS_FR = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
+
+const commemorationDate = computed(() => {
+  const jour = saintData.value?.jour
+  const mois = saintData.value?.mois
+  if (!jour || !mois || mois < 1 || mois > 12) return null
+  return `${jour} ${MOIS_FR[mois - 1]}`
+})
 
 const fetchSaintData = async () => {
   loading.value = true
@@ -127,6 +137,21 @@ onIonViewWillEnter(fetchSaintData)
 </script>
 
 <style scoped>
+.title-main {
+  font-size: 1rem;
+  line-height: 1.2;
+  white-space: normal;
+}
+
+.title-date {
+  font-size: 0.75rem;
+  font-weight: 400;
+  opacity: 0.75;
+  text-transform: capitalize;
+  line-height: 1.2;
+  margin-top: 2px;
+}
+
 .state-container {
   display: flex;
   flex-direction: column;
