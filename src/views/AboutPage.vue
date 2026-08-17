@@ -65,7 +65,7 @@
         </ion-card-content>
       </ion-card>
 
-      <p class="version">Version 3.5.4</p>
+      <p class="version">Version 3.5.5</p>
     </ion-content>
   </ion-page>
 </template>

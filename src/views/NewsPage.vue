@@ -39,7 +39,7 @@
                   <h2 class="category-title">{{ category.label }}</h2>
                   <ion-badge class="new-badge" v-if="category.hasNew">Nouveau</ion-badge>
                 </div>
-                <p class="category-meta">{{ category.count }} publication{{ category.count > 1 ? "s" : "" }}</p>
+                <p class="category-meta">{{ category.count }} annonce{{ category.count > 1 ? "s" : "" }}</p>
               </div>
 
               <ion-icon :icon="chevronForwardOutline" class="chevron"></ion-icon>
@@ -62,18 +62,28 @@ import { categoryMap } from "../composables/categories"
 const ionRouter = useIonRouter()
 const { articles, loading, error, hasFetched, fetchArticles } = useArticles()
 
-// Calcule, pour chaque catégorie connue, son nombre d'articles et si elle contient une nouveauté
+// Calcule, pour chaque catégorie connue, son nombre d'articles, sa nouveauté et sa dernière mise à jour
+// Masque les catégories vides et trie par publication la plus récente en premier
 const categoriesWithStats = computed(() => {
-  return Object.entries(categoryMap).map(([slug_id, meta]) => {
-    const catArticles = articles.value.filter((a) => (a.slug_id ?? 0) === Number(slug_id))
-    return {
-      slug_id: Number(slug_id),
-      label: meta.label,
-      icon: meta.icon,
-      count: catArticles.length,
-      hasNew: catArticles.some((a) => isNew(a.published_at)),
-    }
-  })
+  return Object.entries(categoryMap)
+    .map(([slug_id, meta]) => {
+      const catArticles = articles.value.filter((a) => (a.slug_id ?? 0) === Number(slug_id))
+      const lastPublishedAt = catArticles.reduce((latest, a) => {
+        const d = new Date(a.published_at)
+        return !latest || d > latest ? d : latest
+      }, null)
+
+      return {
+        slug_id: Number(slug_id),
+        label: meta.label,
+        icon: meta.icon,
+        count: catArticles.length,
+        hasNew: catArticles.some((a) => isNew(a.published_at)),
+        lastPublishedAt,
+      }
+    })
+    .filter((category) => category.count > 0)
+    .sort((a, b) => b.lastPublishedAt - a.lastPublishedAt)
 })
 
 function openCategory(category) {
