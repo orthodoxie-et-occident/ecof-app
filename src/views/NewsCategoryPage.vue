@@ -3,9 +3,9 @@
     <ion-header>
       <ion-toolbar color="primary">
         <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
+          <ion-back-button default-href="/news"></ion-back-button>
         </ion-buttons>
-        <ion-title>Annonces</ion-title>
+        <ion-title>{{ categoryLabel }}</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -26,23 +26,22 @@
         </div>
       </div>
 
-      <div v-else class="category-list">
-        <ion-card v-for="category in categoriesWithStats" :key="category.slug_id" button @click="openCategory(category)" class="category-card">
+      <div v-else-if="categoryArticles.length === 0" class="state-container">
+        <p>Aucune annonce dans cette catégorie</p>
+      </div>
+
+      <div v-else class="news-list">
+        <ion-card v-for="article in categoryArticles" :key="article.id" button @click="openArticle(article)" class="news-card">
           <ion-card-content>
             <div class="card-body">
-              <div class="category-icon-wrap">
-                <ion-icon :icon="category.icon"></ion-icon>
-              </div>
-
               <div class="card-main">
                 <div class="badges-row">
-                  <h2 class="category-title">{{ category.label }}</h2>
-                  <ion-badge class="new-badge" v-if="category.hasNew">Nouveau</ion-badge>
+                  <ion-badge class="new-badge" v-if="isNew(article.published_at)">Nouveau</ion-badge>
                 </div>
-                <p class="category-meta">{{ category.count }} publication{{ category.count > 1 ? "s" : "" }}</p>
-              </div>
 
-              <ion-icon :icon="chevronForwardOutline" class="chevron"></ion-icon>
+                <h2 class="article-title">{{ article.title }}</h2>
+                <p class="article-meta">{{ article.author }} • {{ formatDate(article.published_at) }}</p>
+              </div>
             </div>
           </ion-card-content>
         </ion-card>
@@ -53,33 +52,35 @@
 
 <script setup>
 import { computed } from "vue"
+import { useRoute } from "vue-router"
 import { useIonRouter } from "@ionic/vue"
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonCard, IonCardContent, IonBadge, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
-import { cloudOfflineOutline, refreshOutline, chevronForwardOutline } from "ionicons/icons"
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonCard, IonCardContent, IonBadge, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
+import { cloudOfflineOutline, refreshOutline } from "ionicons/icons"
 import { useArticles, isNew } from "../composables/useArticles"
-import { categoryMap } from "../composables/categories"
+import { getCategoryLabel } from "../composables/categories"
 
+const route = useRoute()
 const ionRouter = useIonRouter()
 const { articles, loading, error, hasFetched, fetchArticles } = useArticles()
 
-// Calcule, pour chaque catégorie connue, son nombre d'articles et si elle contient une nouveauté
-const categoriesWithStats = computed(() => {
-  return Object.entries(categoryMap).map(([slug_id, meta]) => {
-    const catArticles = articles.value.filter((a) => (a.slug_id ?? 0) === Number(slug_id))
-    return {
-      slug_id: Number(slug_id),
-      label: meta.label,
-      icon: meta.icon,
-      count: catArticles.length,
-      hasNew: catArticles.some((a) => isNew(a.published_at)),
-    }
-  })
-})
+const slugId = computed(() => Number(route.params.slugId))
+const categoryLabel = computed(() => getCategoryLabel(slugId.value))
 
-function openCategory(category) {
+const categoryArticles = computed(() => articles.value.filter((a) => (a.slug_id ?? 0) === slugId.value))
+
+function formatDate(isoString) {
+  return new Intl.DateTimeFormat("fr-FR", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(isoString))
+}
+
+function openArticle(article) {
   ionRouter.push({
-    name: "NewsCategory",
-    params: { slugId: category.slug_id },
+    name: "NewsDetail",
+    params: { id: article.id },
+    query: { label: categoryLabel.value },
   })
 }
 
@@ -89,43 +90,27 @@ onIonViewWillEnter(() => {
 </script>
 
 <style scoped>
-.category-list {
+.news-list {
   padding: 12px 12px 24px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.category-card {
+.news-card {
   margin: 0;
   border-radius: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-.category-card ion-card-content {
+.news-card ion-card-content {
   padding: 14px 16px;
 }
 
 .card-body {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
-}
-
-.category-icon-wrap {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  background: rgba(var(--ion-color-primary-rgb), 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.category-icon-wrap ion-icon {
-  font-size: 20px;
-  color: var(--ion-color-primary-shade);
 }
 
 .card-main {
@@ -136,18 +121,9 @@ onIonViewWillEnter(() => {
 .badges-row {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 2px;
-}
-
-.category-title {
-  font-size: 15px;
-  line-height: 1.3;
-  font-weight: 600;
-  color: var(--ion-color-dark, #1a1a1a);
-  margin: 0;
-  white-space: normal;
-  overflow-wrap: break-word;
+  gap: 6px;
+  margin-bottom: 8px;
+  min-height: 20px;
 }
 
 .new-badge {
@@ -157,19 +133,22 @@ onIonViewWillEnter(() => {
   font-weight: 600;
   border-radius: 6px;
   padding: 4px 8px;
-  flex-shrink: 0;
 }
 
-.category-meta {
+.article-title {
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--ion-color-dark, #1a1a1a);
+  margin: 0 0 4px;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+.article-meta {
   margin: 0;
   font-size: 0.85em;
   opacity: 0.7;
-}
-
-.chevron {
-  flex-shrink: 0;
-  font-size: 18px;
-  opacity: 0.35;
 }
 
 .state-container {

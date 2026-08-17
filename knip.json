@@ -1,7 +1,0 @@
-{
-  "paths": {
-    "@/*": ["./src/*"]
-  },
-  "project": ["src/**/*.{js,ts,vue}"],
-  "ignoreDependencies": ["@capacitor/assets", "@capacitor/cli"]
-}

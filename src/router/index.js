@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "@ionic/vue-router"
 import AboutPage from "../views/AboutPage.vue"
 import NewsPage from "../views/NewsPage.vue"
+import NewsCategoryPage from "../views/NewsCategoryPage.vue"
 import NewsDetailPage from "../views/NewsDetailPage.vue"
 import CalendarPage from "../views/CalendarPage.vue"
 import MapPage from "../views/MapPage.vue"
@@ -28,6 +29,7 @@ import NotrePere from "../views/prayers/miscellaneous/NotrePere.vue"
 const routes = [
   { path: "/", name: "Parishes", component: ParishesPage },
   { path: "/news", name: "News", component: NewsPage },
+  { path: "/news/category/:slugId", name: "NewsCategory", component: NewsCategoryPage },
   { path: "/news/:id", name: "NewsDetail", component: NewsDetailPage },
   { path: "/parish/:id", name: "Parish", component: ParishPage },
   { path: "/calendar", name: "Calendar", component: CalendarPage },
