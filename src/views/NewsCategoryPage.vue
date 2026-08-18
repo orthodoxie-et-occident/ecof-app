@@ -3,7 +3,7 @@
     <ion-header>
       <ion-toolbar color="primary">
         <ion-buttons slot="start">
-          <ion-back-button default-href="/news"></ion-back-button>
+          <ion-back-button text="" default-href="/news"></ion-back-button>
         </ion-buttons>
         <ion-title>{{ categoryLabel }}</ion-title>
       </ion-toolbar>
