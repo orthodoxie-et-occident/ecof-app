@@ -35,8 +35,8 @@
           <ion-card-content>
             <div class="card-body">
               <div class="card-main">
-                <div class="badges-row">
-                  <ion-badge class="new-badge" v-if="isNew(article.published_at)">Nouveau</ion-badge>
+                <div class="badges-row" v-if="isNew(article.published_at)">
+                  <ion-badge class="new-badge">Nouveau</ion-badge>
                 </div>
 
                 <h2 class="article-title">{{ article.title }}</h2>
@@ -123,7 +123,6 @@ onIonViewWillEnter(() => {
   align-items: center;
   gap: 6px;
   margin-bottom: 8px;
-  min-height: 20px;
 }
 
 .new-badge {
