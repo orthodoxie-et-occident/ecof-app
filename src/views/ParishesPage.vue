@@ -12,9 +12,9 @@
     <ion-content>
       <template v-for="(paroisses, departement) in paroissesByDept" :key="departement">
         <ion-list-header>
-          <ion-label
-            ><h2>{{ departement }}</h2></ion-label
-          >
+          <ion-label>
+            <h2>{{ departement }}</h2>
+          </ion-label>
         </ion-list-header>
         <ion-list>
           <ion-item button detail v-for="p in paroisses" :key="p.id" @click="showEvents(p.id, p.nom)">
@@ -35,7 +35,6 @@
 <script setup>
 import { useIonRouter } from "@ionic/vue"
 import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonList, IonListHeader, IonItem, IonThumbnail, IonLabel } from "@ionic/vue"
-
 import bordeauxImg from "@/assets/img/parishes/bordeaux.png"
 import montpellierImg from "@/assets/img/parishes/montpellier.png"
 import amboiseImg from "@/assets/img/parishes/amboise.png"
@@ -106,8 +105,8 @@ ion-label h2 {
   font-size: 15px;
   line-height: 1.3;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  line-clamp: 2;
   overflow: hidden;
 }
 

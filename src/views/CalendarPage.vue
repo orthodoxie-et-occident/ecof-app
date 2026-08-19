@@ -10,7 +10,7 @@
     </ion-header>
 
     <ion-content>
-      <div class="ion-padding">
+      <div class="ion-padding-top">
         <ion-item lines="none" class="date-item">
           <ion-icon :icon="calendarOutline" slot="start" color="medium"></ion-icon>
 
