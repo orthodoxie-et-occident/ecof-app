@@ -1,6 +1,6 @@
 {
   "name": "ecof-app",
-  "version": "3.5.4",
+  "version": "3.5.5",
   "private": true,
   "description": "ECOF Application",
   "type": "module",
@@ -10,22 +10,20 @@
     "preview": "vite preview",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
-    "fmt": "oxfmt",
-    "fmt:check": "oxfmt --check",
-    "knip": "knip"
+    "fmt": "oxfmt"
   },
   "dependencies": {
     "@capacitor/android": "8.5.0",
     "@capacitor/app": "8.1.1",
     "@capacitor/core": "8.5.0",
     "@capacitor/ios": "^8.5.0",
-    "@ionic/vue": "^8.8.18",
-    "@ionic/vue-router": "^8.8.18",
+    "@ionic/vue": "^9.0.0",
+    "@ionic/vue-router": "^9.0.0",
     "@protomaps/basemaps": "^5.7.2",
     "ionicons": "^8.1.0",
     "maplibre-gl": "^6.4.1",
     "pmtiles": "^4.5.0",
-    "verovio": "^6.2.0",
+    "verovio": "^6.3.0",
     "vue": "^3.5.41",
     "vue-router": "^5.2.0"
   },

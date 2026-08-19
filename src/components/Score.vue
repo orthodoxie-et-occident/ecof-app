@@ -36,7 +36,7 @@ async function render() {
     pageWidth: pxToVerovioUnits(width),
     pageMarginLeft: 0,
     pageMarginRight: 0,
-    fontTextLiberation: "true",
+    fontTextLiberation: true,
   })
 
   vrvToolkit.loadData(currentMei)
