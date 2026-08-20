@@ -28,13 +28,13 @@
         </div>
       </div>
 
-      <ion-list v-else>
-        <ion-item v-for="item in visibleSaints" :key="item.id" button detail @click="showSaintDetail(item)">
-          <ion-label class="ion-text-wrap">
-            <h2>{{ item.saint }}</h2>
-          </ion-label>
-        </ion-item>
-      </ion-list>
+      <div v-else class="saint-list">
+        <ion-card v-for="item in visibleSaints" :key="item.id" button @click="showSaintDetail(item)" class="saint-card">
+          <ion-card-content>
+            <h2 class="saint-title">{{ item.saint }}</h2>
+          </ion-card-content>
+        </ion-card>
+      </div>
 
       <ion-infinite-scroll v-if="!loading && !error" :disabled="allLoaded" @ionInfinite="loadMore">
         <ion-infinite-scroll-content loading-spinner="crescent" loading-text="Chargement..."> </ion-infinite-scroll-content>
@@ -55,9 +55,8 @@ import {
   IonTitle,
   IonContent,
   IonSearchbar,
-  IonList,
-  IonItem,
-  IonLabel,
+  IonCard,
+  IonCardContent,
   IonSpinner,
   IonButton,
   IonIcon,
@@ -143,6 +142,34 @@ onIonViewWillEnter(() => {
 </script>
 
 <style scoped>
+.saint-list {
+  padding: 12px 12px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.saint-card {
+  margin: 0;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.saint-card ion-card-content {
+  padding: 14px 16px;
+}
+
+.saint-title {
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--ion-color-dark, #1a1a1a);
+  margin: 0;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
 .state-container {
   display: flex;
   flex-direction: column;

@@ -8,12 +8,8 @@ export const categoryMap = {
   3: { label: "Application", icon: phonePortraitOutline },
 }
 
-export function getCategory(slug_id) {
+function getCategory(slug_id) {
   return categoryMap[slug_id] ?? categoryMap[0]
-}
-
-export function getCategoryIcon(slug_id) {
-  return getCategory(slug_id).icon
 }
 
 export function getCategoryLabel(slug_id) {

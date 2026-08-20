@@ -9,7 +9,7 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content class="ion-padding">
+    <ion-content>
       <ion-list>
         <ion-item button v-for="priere in prieres" :key="priere.id" :router-link="priere.route" router-direction="forward" detail>
           <ion-label>

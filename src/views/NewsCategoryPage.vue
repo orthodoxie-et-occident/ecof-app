@@ -31,14 +31,10 @@
       </div>
 
       <div v-else class="news-list">
-        <ion-card v-for="article in categoryArticles" :key="article.id" button @click="openArticle(article)" class="news-card">
+        <ion-card v-for="article in categoryArticles" :key="article.id" button @click="openArticle(article)" class="news-card" :class="{ 'news-card--new': isNew(article.published_at) }">
           <ion-card-content>
             <div class="card-body">
               <div class="card-main">
-                <div class="badges-row" v-if="isNew(article.published_at)">
-                  <ion-badge class="new-badge">Nouveau</ion-badge>
-                </div>
-
                 <h2 class="article-title">{{ article.title }}</h2>
                 <p class="article-meta">{{ article.author }} • {{ formatDate(article.published_at) }}</p>
               </div>
@@ -54,7 +50,7 @@
 import { computed } from "vue"
 import { useRoute } from "vue-router"
 import { useIonRouter } from "@ionic/vue"
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonCard, IonCardContent, IonBadge, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonCard, IonCardContent, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
 import { cloudOfflineOutline, refreshOutline } from "ionicons/icons"
 import { useArticles, isNew } from "../composables/useArticles"
 import { getCategoryLabel } from "../composables/categories"
@@ -100,7 +96,13 @@ onIonViewWillEnter(() => {
 .news-card {
   margin: 0;
   border-radius: 10px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.news-card--new {
+  --background: #fffbeb;
+  border: 1px solid #f5dd8f;
 }
 
 .news-card ion-card-content {
@@ -116,22 +118,6 @@ onIonViewWillEnter(() => {
 .card-main {
   flex: 1;
   min-width: 0;
-}
-
-.badges-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 8px;
-}
-
-.new-badge {
-  --background: #fff2cc;
-  --color: #8a6d00;
-  font-size: 0.7rem;
-  font-weight: 600;
-  border-radius: 6px;
-  padding: 4px 8px;
 }
 
 .article-title {

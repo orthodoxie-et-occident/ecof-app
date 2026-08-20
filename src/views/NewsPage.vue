@@ -26,27 +26,16 @@
         </div>
       </div>
 
-      <div v-else class="category-list">
-        <ion-card v-for="category in categoriesWithStats" :key="category.slug_id" button @click="openCategory(category)" class="category-card">
-          <ion-card-content>
-            <div class="card-body">
-              <div class="category-icon-wrap">
-                <ion-icon :icon="category.icon"></ion-icon>
-              </div>
-
-              <div class="card-main">
-                <div class="badges-row">
-                  <h2 class="category-title">{{ category.label }}</h2>
-                  <ion-badge class="new-badge" v-if="category.hasNew">Nouveau</ion-badge>
-                </div>
-                <p class="category-meta">{{ category.count }} annonce{{ category.count > 1 ? "s" : "" }}</p>
-              </div>
-
-              <ion-icon :icon="chevronForwardOutline" class="chevron"></ion-icon>
-            </div>
-          </ion-card-content>
-        </ion-card>
-      </div>
+      <ion-list v-else>
+        <ion-item button v-for="category in categoriesWithStats" :key="category.slug_id" @click="openCategory(category)" detail>
+          <ion-icon :icon="category.icon" slot="start" color="primary"></ion-icon>
+          <ion-label>
+            <h2>{{ category.label }}</h2>
+            <p>{{ category.count }} annonce{{ category.count > 1 ? "s" : "" }}</p>
+          </ion-label>
+          <ion-badge slot="end" class="new-badge" v-if="category.newCount > 0">+{{ category.newCount }}</ion-badge>
+        </ion-item>
+      </ion-list>
     </ion-content>
   </ion-page>
 </template>
@@ -54,15 +43,15 @@
 <script setup>
 import { computed } from "vue"
 import { useIonRouter } from "@ionic/vue"
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonCard, IonCardContent, IonBadge, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
-import { cloudOfflineOutline, refreshOutline, chevronForwardOutline } from "ionicons/icons"
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonList, IonItem, IonLabel, IonBadge, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
+import { cloudOfflineOutline, refreshOutline } from "ionicons/icons"
 import { useArticles, isNew } from "../composables/useArticles"
 import { categoryMap } from "../composables/categories"
 
 const ionRouter = useIonRouter()
 const { articles, loading, error, hasFetched, fetchArticles } = useArticles()
 
-// Calcule, pour chaque catégorie connue, son nombre d'articles, sa nouveauté et sa dernière mise à jour
+// Calcule, pour chaque catégorie connue, son nombre d'articles, son nombre de nouveautés et sa dernière mise à jour
 // Masque les catégories vides et trie par publication la plus récente en premier
 const categoriesWithStats = computed(() => {
   return Object.entries(categoryMap)
@@ -78,7 +67,7 @@ const categoriesWithStats = computed(() => {
         label: meta.label,
         icon: meta.icon,
         count: catArticles.length,
-        hasNew: catArticles.some((a) => isNew(a.published_at)),
+        newCount: catArticles.filter((a) => isNew(a.published_at)).length,
         lastPublishedAt,
       }
     })
@@ -99,87 +88,22 @@ onIonViewWillEnter(() => {
 </script>
 
 <style scoped>
-.category-list {
-  padding: 12px 12px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.category-card {
-  margin: 0;
-  border-radius: 10px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-}
-
-.category-card ion-card-content {
-  padding: 14px 16px;
-}
-
-.card-body {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.category-icon-wrap {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  background: rgba(var(--ion-color-primary-rgb), 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.category-icon-wrap ion-icon {
-  font-size: 20px;
-  color: var(--ion-color-primary-shade);
-}
-
-.card-main {
-  flex: 1;
-  min-width: 0;
-}
-
-.badges-row {
+.category-title {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 2px;
-}
-
-.category-title {
-  font-size: 15px;
-  line-height: 1.3;
-  font-weight: 600;
-  color: var(--ion-color-dark, #1a1a1a);
-  margin: 0;
-  white-space: normal;
-  overflow-wrap: break-word;
+  flex-wrap: wrap;
 }
 
 .new-badge {
   --background: #fff2cc;
-  --color: #8a6d00;
-  font-size: 0.7rem;
-  font-weight: 600;
-  border-radius: 6px;
-  padding: 4px 8px;
-  flex-shrink: 0;
-}
-
-.category-meta {
-  margin: 0;
-  font-size: 0.85em;
-  opacity: 0.7;
-}
-
-.chevron {
-  flex-shrink: 0;
-  font-size: 18px;
-  opacity: 0.35;
+  --color: #6b5400;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border: 1px solid #e8c766;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin-inline-end: 6px;
 }
 
 .state-container {

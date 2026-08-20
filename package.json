@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
-    "fmt": "oxfmt"
+    "fmt": "oxfmt",
+    "knip": "knip"
   },
   "dependencies": {
     "@capacitor/android": "8.5.0",
@@ -34,11 +35,12 @@
     "@vitejs/plugin-legacy": "^8.2.3",
     "@vitejs/plugin-vue": "^6.0.8",
     "jsdom": "^30.0.1",
+    "knip": "^6.32.2",
     "oxfmt": "^0.64.0",
     "oxlint": "^1.79.0",
     "terser": "^5.50.0",
     "typescript": "^7.0.2",
-    "vite": "^8.2.1",
+    "vite": "^8.2.2",
     "vitest": "^4.1.11"
   }
 }

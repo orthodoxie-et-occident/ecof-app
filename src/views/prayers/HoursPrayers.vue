@@ -10,32 +10,32 @@
     </ion-header>
 
     <ion-content>
-      <div class="ion-padding">
-        <ion-list>
-          <ion-item
-            button
-            v-for="office in OFFICES"
-            :key="office.heure"
-            :router-link="{ path: office.route, query: { date: fmtISO(aujourdhui) } }"
-            router-direction="forward"
-            :color="officeEnCours && officeEnCours.heure === office.heure ? 'light' : undefined"
-            detail
-          >
-            <ion-label>
-              <h2>{{ office.titre }}</h2>
-              <p>{{ office.sous }}</p>
-              <p class="note-heure">{{ office.note }}</p>
-            </ion-label>
-          </ion-item>
-        </ion-list>
-      </div>
+      <ion-list>
+        <ion-item
+          button
+          v-for="office in OFFICES"
+          :key="office.heure"
+          :router-link="{ path: office.route, query: { date: fmtISO(aujourdhui) } }"
+          router-direction="forward"
+          class="office-item"
+          :class="{ 'office-item--current': officeEnCours && officeEnCours.heure === office.heure }"
+          detail
+        >
+          <ion-label>
+            <h2>{{ office.titre }}</h2>
+            <p>{{ office.sous }}</p>
+            <p class="note-heure">{{ office.note }}</p>
+          </ion-label>
+          <ion-badge slot="end" class="current-badge" v-if="officeEnCours && officeEnCours.heure === office.heure"> En cours </ion-badge>
+        </ion-item>
+      </ion-list>
     </ion-content>
   </ion-page>
 </template>
 
 <script setup>
 import { computed } from "vue"
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonList, IonItem, IonLabel } from "@ionic/vue"
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonList, IonItem, IonLabel, IonBadge } from "@ionic/vue"
 
 const OFFICES = [
   { heure: 0, titre: "Nocturnes", sous: "A la 6ème heure de la nuit", note: "Environ minuit", route: "/prayers/hours/vigils" },
@@ -74,5 +74,20 @@ const officeEnCours = computed(() => {
   font-size: 0.8em;
   font-style: italic;
   opacity: 0.6;
+}
+
+.office-item--current {
+  --background: #fdf8ee;
+}
+
+.current-badge {
+  --background: #fff2cc;
+  --color: #6b5400;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid #e8c766;
+  border-radius: 10px;
+  padding: 5px 9px;
+  white-space: nowrap;
 }
 </style>
