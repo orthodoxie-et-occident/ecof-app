@@ -23,7 +23,7 @@ async function fetchArticles() {
 
 export function isNew(isoString) {
   const sevenDaysAgo = new Date()
-  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7)
+  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 5)
   return new Date(isoString) > sevenDaysAgo
 }
 
