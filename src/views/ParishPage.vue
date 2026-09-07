@@ -9,7 +9,7 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content>
+    <ion-content :fullscreen="true" class="ion-padding-bottom" style="--background: #f4f4f6">
       <div v-if="loading" class="state-container">
         <ion-spinner color="primary"></ion-spinner>
         <p>Chargement...</p>
@@ -37,19 +37,18 @@
             <span class="day-date">{{ getFullDate(date) }}</span>
           </div>
 
-          <div v-for="event in group" :key="event.uid" class="event-row" :class="{ 'event-row--multiday': event.isMultiDay }">
+          <div v-for="event in group" :key="event.uid" class="event-row">
             <div class="event-time">
-              <template v-if="event.isMultiDay">
-                <span class="day-badge">{{ event.currentDay }}/{{ event.totalDays }}</span>
-              </template>
-              <template v-else>
+              <template v-if="!event.allDay">
                 <span>{{ formatTime(event.start) }}</span>
                 <span class="time-end">{{ formatTime(event.end) }}</span>
+              </template>
+              <template v-else>
+                <span class="allday-label">Toute la<br />journée</span>
               </template>
             </div>
             <div class="event-content">
               <p class="event-title">{{ event.title }}</p>
-              <p v-if="event.isMultiDay" class="event-range">{{ formatRange(event.start, event.end, event.allDay) }}</p>
               <p v-if="event.location" class="event-meta">{{ event.location }}</p>
               <p v-if="event.description" class="event-desc">{{ event.description }}</p>
             </div>
@@ -105,14 +104,6 @@ const nextDateKey = (key) => {
   return `${yy}-${mm}-${dd}`
 }
 
-const daysDiff = (keyFrom, keyTo) => {
-  const [y1, m1, d1] = keyFrom.split("-").map(Number)
-  const [y2, m2, d2] = keyTo.split("-").map(Number)
-  const a = new Date(y1, m1 - 1, d1)
-  const b = new Date(y2, m2 - 1, d2)
-  return Math.round((b - a) / 86400000)
-}
-
 const todayKey = () => {
   const now = new Date()
   const yy = now.getFullYear()
@@ -121,6 +112,9 @@ const todayKey = () => {
   return `${yy}-${mm}-${dd}`
 }
 
+// Les événements multi-jours sont toujours des allDay (jamais d'horaires
+// précis sur plusieurs jours) : on les répartit simplement sur chaque
+// journée qu'ils couvrent.
 const groupedEvents = computed(() => {
   const acc = {}
   const today = todayKey()
@@ -128,32 +122,16 @@ const groupedEvents = computed(() => {
   for (const event of events.value) {
     const startKey = dateKey(event.start)
     const endKey = dateKey(event.end)
-    const isMultiDay = startKey !== endKey
 
-    if (!isMultiDay) {
-      if (startKey < today) continue // événement simple déjà passé -> on ignore
-      if (!acc[startKey]) acc[startKey] = []
-      acc[startKey].push({ ...event, isMultiDay: false })
-      continue
-    }
-
-    const totalDays = daysDiff(startKey, endKey) + 1
     let key = startKey
     while (true) {
       if (key < today) {
-        // ce jour précis du multi-jours est passé -> on saute cette journée,
-        // mais on garde le calcul de currentDay/totalDays correct pour la suite
         if (key === endKey) break
         key = nextDateKey(key)
         continue
       }
       if (!acc[key]) acc[key] = []
-      acc[key].push({
-        ...event,
-        isMultiDay: true,
-        currentDay: daysDiff(startKey, key) + 1,
-        totalDays,
-      })
+      acc[key].push(event)
       if (key === endKey) break
       key = nextDateKey(key)
     }
@@ -161,7 +139,7 @@ const groupedEvents = computed(() => {
 
   for (const key in acc) {
     acc[key].sort((a, b) => {
-      if (a.isMultiDay !== b.isMultiDay) return a.isMultiDay ? -1 : 1
+      if (a.allDay !== b.allDay) return a.allDay ? -1 : 1
       return a.start.localeCompare(b.start)
     })
   }
@@ -176,62 +154,53 @@ const getDayName = (dateStr) => new Date(`${dateStr}T00:00:00`).toLocaleDateStri
 const getFullDate = (dateStr) => new Date(`${dateStr}T00:00:00`).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })
 
 const formatTime = (dateString) => new Date(dateString).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })
-
-// Pour les événements multi-jours "journée entière" (allDay: true, venant de
-// l'API), on n'affiche que les dates, sans heures. Pour les multi-jours avec
-// horaires précis, on garde l'affichage complet date + heure.
-const formatRange = (start, end, allDay) => {
-  const s = new Date(start)
-  const e = new Date(end)
-  const dateOpts = { day: "numeric", month: "short" }
-  const startDate = s.toLocaleDateString("fr-FR", dateOpts)
-  const endDate = e.toLocaleDateString("fr-FR", dateOpts)
-
-  if (allDay) {
-    return `${startDate} → ${endDate}`
-  }
-
-  return `${startDate} ${formatTime(start)} → ${endDate} ${formatTime(end)}`
-}
 </script>
 
 <style scoped>
 .events-wrapper {
-  padding: 8px 0 40px;
+  padding: 12px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.day-group {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 .day-header {
   display: flex;
   align-items: baseline;
   gap: 8px;
-  padding: 20px 16px 8px;
-  border-bottom: 1px solid #eee;
+  padding: 12px 16px;
+  background: rgba(var(--ion-color-primary-rgb), 0.08);
 }
 
 .day-name {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--ion-color-primary);
   text-transform: capitalize;
 }
 
 .day-date {
-  font-size: 0.8rem;
-  color: #999;
+  font-size: 0.78rem;
+  color: var(--ion-color-primary);
+  opacity: 0.7;
   text-transform: capitalize;
 }
 
 .event-row {
   display: flex;
   gap: 16px;
-  padding: 12px 16px;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 14px 16px;
 }
 
-.event-row--multiday {
-  background: rgba(var(--ion-color-primary-rgb), 0.06);
-  border-left: 3px solid var(--ion-color-primary);
-  padding-left: 13px;
+.event-row + .event-row {
+  border-top: 1px solid #ececec;
 }
 
 .event-time {
@@ -255,14 +224,12 @@ const formatRange = (start, end, allDay) => {
   color: #bbb;
 }
 
-.day-badge {
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--ion-color-primary);
-  background: #fff;
-  padding: 2px 6px;
-  border-radius: 6px;
-  white-space: nowrap;
+.allday-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: #bbb;
+  text-align: right;
+  line-height: 1.3;
 }
 
 .event-content {
@@ -274,16 +241,6 @@ const formatRange = (start, end, allDay) => {
   font-size: 0.9rem;
   font-weight: 500;
   color: #1a1a1a;
-  margin: 0 0 4px;
-}
-
-.event-row--multiday .event-title {
-  color: var(--ion-color-primary);
-}
-
-.event-range {
-  font-size: 0.78rem;
-  color: #999;
   margin: 0 0 4px;
 }
 
