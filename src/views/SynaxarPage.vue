@@ -89,7 +89,7 @@ const fetchSaints = async () => {
   displayCount.value = PAGE_SIZE
 
   try {
-    const response = await fetch("https://api.ecof.app/synaxar")
+    const response = await fetch("https://api-v2.ecof.app/synaxar")
     if (!response.ok) throw new Error("Erreur lors du chargement des données")
 
     const data = await response.json()

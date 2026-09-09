@@ -56,7 +56,7 @@ async function fetchArticle() {
 
   try {
     const id = route.params.id
-    const res = await fetch(`https://api.ecof.app/news/${id}`)
+    const res = await fetch(`https://api-v2.ecof.app/news/${id}`)
     if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
     article.value = await res.json()
   } catch (err) {

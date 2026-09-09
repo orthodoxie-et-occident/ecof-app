@@ -80,7 +80,7 @@ async function fetchEvents() {
     loading.value = true
     error.value = null
     const parishId = route.params.id
-    const response = await fetch(`https://api.ecof.app/parish/${parishId}`)
+    const response = await fetch(`https://api-v2.ecof.app/parish/${parishId}`)
     if (!response.ok) throw new Error("Impossible de récupérer les événements")
     const data = await response.json()
     events.value = (data.events || []).sort((a, b) => a.start.localeCompare(b.start))
