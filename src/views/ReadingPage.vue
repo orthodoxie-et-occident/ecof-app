@@ -34,9 +34,7 @@
           {{ readingData.book_txt }}
         </h2>
 
-        <div class="reading-text">
-          {{ readingData.reading }}
-        </div>
+        <div class="reading-text" v-html="readingData.reading"></div>
       </div>
 
       <!-- EMPTY -->
@@ -65,10 +63,10 @@ const fetchReadingData = async () => {
 
   try {
     const readingId = route.params.id
-    const response = await fetch(`https://api.ecof.app/reading/${readingId}`)
+    const response = await fetch(`https://api-v2.ecof.app/reading/${readingId}`)
     if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`)
     const data = await response.json()
-    readingData.value = data[0] || null
+    readingData.value = data
   } catch (err) {
     console.error(err.message)
     error.value = true
@@ -93,7 +91,6 @@ onIonViewWillEnter(fetchReadingData)
   line-height: 1.8;
   text-align: left;
   padding-top: 0.5rem;
-  white-space: pre-line;
 }
 
 .reading-wrapper {
