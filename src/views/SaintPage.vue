@@ -32,17 +32,17 @@
 
       <template v-else>
         <ion-segment v-model="selectedTab">
-          <ion-segment-button v-if="saintData?.vie_b" value="vie_b">
+          <ion-segment-button v-if="saintData?.v_short" value="v_short">
             <ion-icon :src="fileTextIcon"></ion-icon>
             <ion-label>Vie brève</ion-label>
           </ion-segment-button>
 
-          <ion-segment-button v-if="saintData?.vita_long" value="vita_long">
+          <ion-segment-button v-if="saintData?.v_long" value="v_long">
             <ion-icon :src="bookAIcon"></ion-icon>
             <ion-label>Synaxaire</ion-label>
           </ion-segment-button>
 
-          <ion-segment-button v-if="saintData?.vita_liturgy" value="vita_liturgy">
+          <ion-segment-button v-if="saintData?.v_liturgy" value="v_liturgy">
             <ion-icon :src="scrollTextIcon"></ion-icon>
             <ion-label>Vie liturgique</ion-label>
           </ion-segment-button>
@@ -50,12 +50,12 @@
 
         <div class="ion-padding">
           <!-- Vie brève -->
-          <div v-if="selectedTab === 'vie_b'">
-            <div v-if="saintData?.vie_b">
+          <div v-if="selectedTab === 'v_short'">
+            <div v-if="saintData?.v_short">
               <div v-if="saintData?.img" class="saint-image-container">
                 <img :src="saintData.img" :alt="`Icône de ${saintData.saint}`" class="saint-image" />
               </div>
-              <MarkdownSection :html="saintData.vie_b" />
+              <MarkdownSection :html="saintData.v_short" />
             </div>
 
             <div v-else class="no-content">
@@ -65,13 +65,13 @@
           </div>
 
           <!-- Synaxaire -->
-          <div v-else-if="selectedTab === 'vita_long'">
-            <MarkdownSection :html="saintData.vita_long" />
+          <div v-else-if="selectedTab === 'v_long'">
+            <MarkdownSection :html="saintData.v_long" />
           </div>
 
           <!-- Vie liturgique -->
-          <div v-else-if="selectedTab === 'vita_liturgy'">
-            <MarkdownSection :html="saintData.vita_liturgy" />
+          <div v-else-if="selectedTab === 'v_liturgy'">
+            <MarkdownSection :html="saintData.v_liturgy" />
           </div>
         </div>
       </template>
@@ -96,7 +96,7 @@ const route = useRoute()
 const saintData = ref(null)
 const loading = ref(true)
 const error = ref(null)
-const selectedTab = ref("vie_b")
+const selectedTab = ref("v_short")
 
 const MOIS_FR = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
 
@@ -113,17 +113,17 @@ const fetchSaintData = async () => {
 
   try {
     const saintId = route.params.id
-    const response = await fetch(`https://api.ecof.app/vita/${saintId}`)
+    const response = await fetch(`https://api-v2.ecof.app/synaxar/${saintId}`)
     if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`)
     const data = await response.json()
     saintData.value = data
 
-    if (data.vie_b) {
-      selectedTab.value = "vie_b"
-    } else if (data.vita_long) {
-      selectedTab.value = "vita_long"
-    } else if (data.vita_liturgy) {
-      selectedTab.value = "vita_liturgy"
+    if (data.v_short) {
+      selectedTab.value = "v_short"
+    } else if (data.v_long) {
+      selectedTab.value = "v_long"
+    } else if (data.v_liturgy) {
+      selectedTab.value = "v_liturgy"
     }
   } catch (err) {
     console.error(err.message)
