@@ -25,3 +25,10 @@
   font-weight: normal;
   font-style: italic;
 }
+
+@font-face {
+  font-family: "bitter";
+  src: url("@/assets/fonts/bitter.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}

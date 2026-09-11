@@ -88,6 +88,7 @@ onIonViewWillEnter(fetchReadingData)
 }
 
 .reading-text {
+  font-family: bitter;
   line-height: 1.8;
   text-align: left;
   padding-top: 0.5rem;

@@ -222,4 +222,8 @@ onIonViewWillEnter(fetchSaintData)
   font-size: 0.95rem;
   color: var(--ion-color-medium);
 }
+
+.ion-padding {
+  font-family: bitter;
+}
 </style>

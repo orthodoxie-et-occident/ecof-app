@@ -71,7 +71,12 @@ onIonViewWillEnter(fetchArticle)
 </script>
 
 <style scoped>
+.article-detail {
+  font-family: bitter;
+}
+
 .article-detail :deep(h1) {
+  font-family: CarroisGothicSC;
   font-size: 22px;
   line-height: 1.3;
   font-weight: 600;
