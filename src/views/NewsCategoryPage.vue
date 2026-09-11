@@ -116,6 +116,7 @@ onIonViewWillEnter(() => {
 }
 
 .card-main {
+  font-family: sora;
   flex: 1;
   min-width: 0;
 }

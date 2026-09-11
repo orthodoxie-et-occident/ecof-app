@@ -80,8 +80,9 @@ onIonViewWillEnter(fetchReadingData)
 
 <style scoped>
 .book-title {
-  font-size: 1.3rem;
+  font-family: sora;
   font-weight: 600;
+  font-size: 1.3rem;
   margin-bottom: 1.5rem;
   color: var(--ion-color-primary);
   text-align: center;
@@ -91,7 +92,6 @@ onIonViewWillEnter(fetchReadingData)
   font-family: bitter;
   line-height: 1.8;
   text-align: left;
-  padding-top: 0.5rem;
 }
 
 .reading-wrapper {

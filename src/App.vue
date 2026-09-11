@@ -10,7 +10,7 @@
         <ion-list>
           <ion-menu-toggle auto-hide="false" v-for="item in menuItems" :key="item.route">
             <ion-item button :router-link="item.route" router-direction="root">
-              <ion-label>{{ item.label }}</ion-label>
+              <ion-label class="menu-label">{{ item.label }}</ion-label>
               <img slot="end" :src="item.image" :alt="item.label" class="menu-img" />
             </ion-item>
           </ion-menu-toggle>
@@ -77,5 +77,9 @@ ion-menu ion-item {
   width: 90px;
   object-fit: contain;
   object-position: center;
+}
+
+ion-menu :deep(.menu-label) {
+  font-size: 1rem;
 }
 </style>

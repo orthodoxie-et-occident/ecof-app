@@ -53,7 +53,7 @@
           <div v-if="selectedTab === 'v_short'">
             <div v-if="saintData?.v_short">
               <div v-if="saintData?.img" class="saint-image-container">
-                <img :src="saintData.img" :alt="`Icône de ${saintData.saint}`" class="saint-image" />
+                <img :src="saintData.img" class="saint-image" />
               </div>
               <MarkdownSection :html="saintData.v_short" />
             </div>
@@ -188,7 +188,7 @@ onIonViewWillEnter(fetchSaintData)
 }
 
 .saint-image-container {
-  margin-top: 1.5rem;
+  margin: 1rem 0;
   display: flex;
   justify-content: center;
 }

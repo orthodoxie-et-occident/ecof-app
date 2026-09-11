@@ -102,7 +102,7 @@ ion-thumbnail img {
 }
 
 ion-label h2 {
-  font-size: 15px;
+  font-size: 1rem;
   line-height: 1.3;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -111,6 +111,7 @@ ion-label h2 {
 }
 
 ion-list-header h2 {
+  font-size: 1rem;
   font-weight: 600;
   color: var(--ion-color-primary);
 }

@@ -76,10 +76,10 @@ onIonViewWillEnter(fetchArticle)
 }
 
 .article-detail :deep(h1) {
-  font-family: CarroisGothicSC;
+  font-family: sora;
+  font-weight: 600;
   font-size: 22px;
   line-height: 1.3;
-  font-weight: 600;
   color: var(--ion-color-dark, #1a1a1a);
   margin: 0 0 12px;
   overflow-wrap: break-word;

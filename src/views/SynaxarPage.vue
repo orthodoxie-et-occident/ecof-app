@@ -161,9 +161,8 @@ onIonViewWillEnter(() => {
 }
 
 .saint-title {
-  font-size: 15px;
+  font-size: 0.9rem;
   line-height: 1.3;
-  font-weight: 600;
   color: var(--ion-color-dark, #1a1a1a);
   margin: 0;
   white-space: normal;
