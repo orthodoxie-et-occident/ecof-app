@@ -24,7 +24,6 @@
 <script setup>
 import { IonApp, IonRouterOutlet, IonMenu, IonMenuToggle, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel, useBackButton, useIonRouter } from "@ionic/vue"
 import { App } from "@capacitor/app"
-
 import synaxarImage from "@/assets/img/layout/saints.png"
 import parishImage from "@/assets/img/layout/ange.png"
 import newsImage from "@/assets/img/layout/ange-b.png"

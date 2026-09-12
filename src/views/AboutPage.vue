@@ -44,7 +44,7 @@
           <p>Pour toute question, suggestion ou contribution vous pouvez nous contacter à l'adresse <a href="mailto:contact@ecof.app">contact@ecof.app</a></p>
         </section>
 
-        <p class="version">Version 3.5.6</p>
+        <p class="version">Version 3.6.0</p>
       </div>
     </ion-content>
   </ion-page>
