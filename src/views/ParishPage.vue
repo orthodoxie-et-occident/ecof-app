@@ -9,7 +9,7 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content :fullscreen="true" class="ion-padding-bottom" style="--background: #f4f4f6">
+    <ion-content :fullscreen="true" class="ion-padding-bottom">
       <div v-if="loading" class="state-container">
         <ion-spinner color="primary"></ion-spinner>
         <p>Chargement...</p>
@@ -112,9 +112,6 @@ const todayKey = () => {
   return `${yy}-${mm}-${dd}`
 }
 
-// Les événements multi-jours sont toujours des allDay (jamais d'horaires
-// précis sur plusieurs jours) : on les répartit simplement sur chaque
-// journée qu'ils couvrent.
 const groupedEvents = computed(() => {
   const acc = {}
   const today = todayKey()
@@ -165,7 +162,7 @@ const formatTime = (dateString) => new Date(dateString).toLocaleTimeString("fr-F
 }
 
 .day-group {
-  background: #fff;
+  background: #faf8f4;
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
@@ -182,15 +179,13 @@ const formatTime = (dateString) => new Date(dateString).toLocaleTimeString("fr-F
 .day-name {
   font-size: 0.9rem;
   font-weight: 700;
-  color: var(--ion-color-primary);
+  color: var(--ion-color-dark);
   text-transform: capitalize;
 }
 
 .day-date {
-  font-size: 0.78rem;
-  color: var(--ion-color-primary);
-  opacity: 0.7;
-  text-transform: capitalize;
+  font-size: 0.8rem;
+  color: var(--ion-color-medium);
 }
 
 .event-row {

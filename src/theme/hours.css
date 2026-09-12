@@ -8,6 +8,7 @@
 }
 
 .hours .subtitle {
+  font-family: sora;
   font-size: 1rem;
   color: var(--ion-color-medium);
   text-align: center;
@@ -39,6 +40,7 @@
 }
 
 .hours p {
+  font-family: bitter;
   margin: 0.35rem 0;
   line-height: 1.55;
 }
@@ -52,6 +54,7 @@
 }
 
 .hours .rubric {
+  font-family: sora;
   font-size: 0.9em;
   font-weight: 600;
   font-style: italic;

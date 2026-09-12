@@ -15,7 +15,7 @@
           <h2>Ressources</h2>
           <p>
             Les ressources utilisées pour cette application s'appuient sur la tradition liturgique de l'<a href="https://eglise-catholique-orthodoxe-de-france.fr/" target="_blank"
-              >Église catholique orthodoxe de France</a
+              >Église Catholique Orthodoxe de France</a
             >.
           </p>
           <p>Les lectures quotidiennes font usage de traductions libres de droits de la Bible&nbsp;:</p>
@@ -31,10 +31,6 @@
             Le rendu des partitions musicales de cette application s'appuie sur
             <a href="https://www.verovio.org/" target="_blank">Verovio</a>, une bibliothèque open-source de gravure musicale développée par le
             <a href="https://rism.digital/" target="_blank">RISM Digital Center</a>, distribuée sous <a href="https://www.gnu.org/licenses/lgpl-3.0.html" target="_blank">licence LGPL v3</a>.
-          </p>
-          <p>
-            Le code source de Verovio est disponible sur
-            <a href="https://github.com/rism-digital/verovio" target="_blank">GitHub</a>.
           </p>
         </section>
 
@@ -68,20 +64,25 @@ import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, Io
 .about-section {
   padding-bottom: 20px;
   margin-bottom: 20px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.about-section:last-of-type {
-  border-bottom: none;
 }
 
 .about-section h2 {
-  font-size: 15px;
+  position: relative;
+  font-size: 1.1rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  color: var(--ion-color-primary-shade, var(--ion-color-primary));
-  margin: 0 0 10px;
+  color: var(--ion-color-dark);
+  padding-bottom: 10px;
+  margin: 0 0 16px;
+}
+
+.about-section h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 16px;
+  height: 2px;
+  background: var(--ion-color-primary);
 }
 
 .about-section p,
@@ -105,12 +106,17 @@ import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, Io
 }
 
 a {
-  color: var(--ion-color-primary);
+  color: var(--ion-color-dark);
   text-decoration: none;
+  background: linear-gradient(rgba(var(--ion-color-primary-rgb), 0.25), rgba(var(--ion-color-primary-rgb), 0.25));
+  background-repeat: no-repeat;
+  background-size: 100% 40%;
+  background-position: 0 88%;
+  padding: 0 1px;
 }
 
 a:hover {
-  text-decoration: underline;
+  background-size: 100% 100%;
 }
 
 .version {

@@ -22,10 +22,8 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue"
 import { IonApp, IonRouterOutlet, IonMenu, IonMenuToggle, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel, useBackButton, useIonRouter } from "@ionic/vue"
 import { App } from "@capacitor/app"
-import { Capacitor } from "@capacitor/core"
 
 import synaxarImage from "@/assets/img/layout/saints.png"
 import parishImage from "@/assets/img/layout/ange.png"

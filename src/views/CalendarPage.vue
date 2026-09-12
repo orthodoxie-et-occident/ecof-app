@@ -61,7 +61,7 @@
         <div v-else-if="calendarData">
           <!-- SYNAXAIRE -->
           <div class="section">
-            <h3 class="section-title">Calendrier du jour</h3>
+            <h3 class="section-title">Synaxaire du jour</h3>
 
             <ion-list>
               <ion-item v-for="saint in calendarData.synaxar" :key="saint.id" :button="saint.id !== 0" :detail="saint.id !== 0" @click="saint.id !== 0 && navigateToSaint(saint.id)">
@@ -225,11 +225,23 @@ watch(dateParam, fetchCalendarData)
 }
 
 .section-title {
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: var(--ion-color-primary);
+  position: relative;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ion-color-dark);
   margin-bottom: 15px;
   padding-left: 16px;
+  padding-bottom: 10px;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 16px;
+  right: 16px;
+  height: 2px;
+  background: var(--ion-color-primary);
 }
 
 .subsection-title {

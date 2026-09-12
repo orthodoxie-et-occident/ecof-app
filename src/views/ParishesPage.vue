@@ -53,22 +53,22 @@ import lisieuxImg from "@/assets/img/parishes/lisieux.png"
 const ionRouter = useIonRouter()
 
 const paroissesByDept = {
-  "14 - Calvados": [{ id: "lisieux", nom: "Paroisse Notre-Dame en Normandie", ville: "Le Mesnil-Germain", img: lisieuxImg }],
-  "33 - Gironde": [{ id: "bordeaux", nom: "Paroisse de l'Exaltation de la Sainte Croix et Saint-Paulin de Nole", ville: "Bordeaux", img: bordeauxImg }],
-  "34 - Hérault": [{ id: "montpellier", nom: "Paroisse de la Théophanie", ville: "Montpellier", img: montpellierImg }],
-  "37 - Indre-et-Loire": [{ id: "amboise", nom: "Paroisse du Moutier Saint-Martin", ville: "Amboise", img: amboiseImg }],
-  "38 - Isère": [{ id: "grenoble", nom: "Paroisse de la Résurrection", ville: "Grenoble", img: grenobleImg }],
-  "44 - Loire-Atlantique": [{ id: "nantes", nom: "Paroisse de la Trinité et Saint-Clair", ville: "Nantes", img: nantesImg }],
-  "45 - Loiret": [
+  "14 - CALVADOS": [{ id: "lisieux", nom: "Paroisse Notre-Dame en Normandie", ville: "Le Mesnil-Germain", img: lisieuxImg }],
+  "33 - GIRONDE": [{ id: "bordeaux", nom: "Paroisse de l'Exaltation de la Sainte Croix et Saint-Paulin de Nole", ville: "Bordeaux", img: bordeauxImg }],
+  "34 - HÉRAULT": [{ id: "montpellier", nom: "Paroisse de la Théophanie", ville: "Montpellier", img: montpellierImg }],
+  "37 - INDRE-ET-LOIRE": [{ id: "amboise", nom: "Paroisse du Moutier Saint-Martin", ville: "Amboise", img: amboiseImg }],
+  "38 - ISÈRE": [{ id: "grenoble", nom: "Paroisse de la Résurrection", ville: "Grenoble", img: grenobleImg }],
+  "44 - LOIRE-ATLANTIQUE": [{ id: "nantes", nom: "Paroisse de la Trinité et Saint-Clair", ville: "Nantes", img: nantesImg }],
+  "45 - LOIRET": [
     { id: "orleans", nom: "Paroisse Saint-Avit", ville: "Orléans", img: orleansImg },
     { id: "stloup", nom: "Chapelle Saint-Loup de Sens et Sainte-Radegonde", ville: "Saint-Loup-des-Vignes", img: stloupImg },
   ],
-  "49 - Maine-et-Loire": [{ id: "angers", nom: "Paroisse Saint-Martin d'Anjou", ville: "Angers", img: angersImg }],
-  "56 - Morbihan": [{ id: "vannes", nom: "Chapelle Saint-Martin du Moustoir", ville: "Vannes", img: vannesImg }],
-  "69 - Rhône": [{ id: "lyon", nom: "Paroisse Sainte-Marie et Saint-Jean", ville: "Lyon", img: lyonImg }],
-  "75 - Paris": [{ id: "paris", nom: "Cathédrale Saint Irénée", ville: "Paris", img: parisImg }],
-  "83 - Var": [{ id: "stebaume", nom: "Paroisse Sainte Marie-Madeleine de la Sainte Baume", ville: "Plan d’Aups – Sainte-Baume", img: stebaumeImg }],
-  "86 - Vienne": [{ id: "poitiers", nom: "Paroisse Saint-Savin et Saint-Cyprien", ville: "Poitiers", img: poitiersImg }],
+  "49 - MAINE-ET-LOIRE": [{ id: "angers", nom: "Paroisse Saint-Martin d'Anjou", ville: "Angers", img: angersImg }],
+  "56 - MORBIHAN": [{ id: "vannes", nom: "Chapelle Saint-Martin du Moustoir", ville: "Vannes", img: vannesImg }],
+  "69 - RHÔNE": [{ id: "lyon", nom: "Paroisse Sainte-Marie et Saint-Jean", ville: "Lyon", img: lyonImg }],
+  "75 - PARIS": [{ id: "paris", nom: "Cathédrale Saint Irénée", ville: "Paris", img: parisImg }],
+  "83 - VAR": [{ id: "stebaume", nom: "Paroisse Sainte Marie-Madeleine de la Sainte Baume", ville: "Plan d’Aups – Sainte-Baume", img: stebaumeImg }],
+  "86 - VIENNE": [{ id: "poitiers", nom: "Paroisse Saint-Savin et Saint-Cyprien", ville: "Poitiers", img: poitiersImg }],
 }
 
 const showEvents = (id, nom) => {
@@ -82,6 +82,29 @@ const showEvents = (id, nom) => {
 <style scoped>
 ion-list-header {
   padding-top: 20px;
+  padding-bottom: 8px;
+  position: relative;
+  margin-bottom: 8px;
+}
+
+ion-list-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 16px;
+  right: 0px;
+  height: 2px;
+  background: var(--ion-color-primary);
+}
+
+ion-list-header h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ion-color-dark);
+}
+
+ion-list:last-of-type {
+  margin-bottom: 24px;
 }
 
 ion-item {
@@ -102,17 +125,11 @@ ion-thumbnail img {
 }
 
 ion-label h2 {
-  font-size: 1rem;
+  font-size: 0.9rem;
   line-height: 1.3;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   line-clamp: 2;
   overflow: hidden;
-}
-
-ion-list-header h2 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--ion-color-primary);
 }
 </style>
