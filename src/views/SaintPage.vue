@@ -55,7 +55,7 @@
               <div v-if="saintData?.img" class="saint-image-container">
                 <img :src="saintData.img" class="saint-image" />
               </div>
-              <MarkdownSection :html="saintData.v_short" />
+              <div class="rich-text" v-html="saintData.v_short"></div>
             </div>
 
             <div v-else class="no-content">
@@ -66,12 +66,12 @@
 
           <!-- Synaxaire -->
           <div v-else-if="selectedTab === 'v_long'">
-            <MarkdownSection :html="saintData.v_long" />
+            <div class="rich-text" v-html="saintData.v_long"></div>
           </div>
 
           <!-- Vie liturgique -->
           <div v-else-if="selectedTab === 'v_liturgy'">
-            <MarkdownSection :html="saintData.v_liturgy" />
+            <div class="rich-text" v-html="saintData.v_liturgy"></div>
           </div>
         </div>
       </template>
@@ -84,9 +84,6 @@ import { ref, computed } from "vue"
 import { useRoute } from "vue-router"
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonBackButton, IonIcon, IonSpinner, IonButton, IonSegment, IonSegmentButton, IonLabel, onIonViewWillEnter } from "@ionic/vue"
 import { cloudOfflineOutline, refreshOutline } from "ionicons/icons"
-
-import MarkdownSection from "@/components/MarkdownSection.vue"
-
 import fileTextIcon from "@/assets/icons/file-text.svg"
 import bookAIcon from "@/assets/icons/book-a.svg"
 import scrollTextIcon from "@/assets/icons/scroll-text.svg"
@@ -221,9 +218,5 @@ onIonViewWillEnter(fetchSaintData)
   margin: 0;
   font-size: 0.95rem;
   color: var(--ion-color-medium);
-}
-
-.ion-padding {
-  font-family: bitter;
 }
 </style>

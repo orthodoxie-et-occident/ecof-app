@@ -82,9 +82,8 @@ const showEvents = (id, nom) => {
 <style scoped>
 ion-list-header {
   padding-top: 20px;
-  padding-bottom: 8px;
+  padding-bottom: 4px;
   position: relative;
-  margin-bottom: 8px;
 }
 
 ion-list-header::after {
@@ -92,7 +91,7 @@ ion-list-header::after {
   position: absolute;
   bottom: 0;
   left: 16px;
-  right: 0px;
+  right: 16px;
   height: 2px;
   background: var(--ion-color-primary);
 }
@@ -105,6 +104,11 @@ ion-list-header h2 {
 
 ion-list:last-of-type {
   margin-bottom: 24px;
+}
+
+ion-list ion-item:last-child {
+  --border-width: 0;
+  --inner-border-width: 0;
 }
 
 ion-item {

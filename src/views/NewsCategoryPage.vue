@@ -30,18 +30,14 @@
         <p>Aucune annonce dans cette catégorie</p>
       </div>
 
-      <div v-else class="news-list">
-        <ion-card v-for="article in categoryArticles" :key="article.id" button @click="openArticle(article)" class="news-card" :class="{ 'news-card--new': isNew(article.published_at) }">
-          <ion-card-content>
-            <div class="card-body">
-              <div class="card-main">
-                <h2 class="article-title">{{ article.title }}</h2>
-                <p class="article-meta">{{ article.author }} • {{ formatDate(article.published_at) }}</p>
-              </div>
-            </div>
-          </ion-card-content>
-        </ion-card>
-      </div>
+      <ion-list v-else>
+        <ion-item button detail v-for="article in categoryArticles" :key="article.id" @click="openArticle(article)" :class="{ 'item--new': isNew(article.published_at) }">
+          <ion-label>
+            <h2 class="article-title">{{ article.title }}</h2>
+            <p class="article-meta">{{ article.author }} • {{ formatDate(article.published_at) }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
     </ion-content>
   </ion-page>
 </template>
@@ -50,7 +46,7 @@
 import { computed } from "vue"
 import { useRoute } from "vue-router"
 import { useIonRouter } from "@ionic/vue"
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonCard, IonCardContent, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonList, IonItem, IonLabel, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
 import { cloudOfflineOutline, refreshOutline } from "ionicons/icons"
 import { useArticles, isNew } from "../composables/useArticles"
 import { getCategoryLabel } from "../composables/categories"
@@ -86,45 +82,18 @@ onIonViewWillEnter(() => {
 </script>
 
 <style scoped>
-.news-list {
-  padding: 12px 12px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.news-card {
-  margin: 0;
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.news-card--new {
-  --background: #fffbeb;
-  border: 1px solid #f5dd8f;
-}
-
-.news-card ion-card-content {
-  padding: 14px 16px;
-}
-
-.card-body {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.card-main {
+ion-item {
+  --min-height: 64px;
   font-family: sora;
-  flex: 1;
-  min-width: 0;
+}
+
+.item--new {
+  --background: #fffbeb;
 }
 
 .article-title {
   font-size: 15px;
   line-height: 1.3;
-  font-weight: 600;
   color: var(--ion-color-dark, #1a1a1a);
   margin: 0 0 4px;
   white-space: normal;

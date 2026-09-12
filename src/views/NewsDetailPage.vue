@@ -29,8 +29,8 @@
         </div>
       </div>
 
-      <div v-else-if="article" class="ion-padding article-detail">
-        <MarkdownSection :html="article.text" />
+      <div v-else-if="article" class="ion-padding">
+        <div class="rich-text" v-html="article.text"></div>
       </div>
     </ion-content>
   </ion-page>
@@ -41,7 +41,6 @@ import { ref } from "vue"
 import { useRoute } from "vue-router"
 import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
 import { cloudOfflineOutline, refreshOutline } from "ionicons/icons"
-import MarkdownSection from "@/components/MarkdownSection.vue"
 
 const route = useRoute()
 
@@ -71,20 +70,6 @@ onIonViewWillEnter(fetchArticle)
 </script>
 
 <style scoped>
-.article-detail {
-  font-family: bitter;
-}
-
-.article-detail :deep(h1) {
-  font-family: sora;
-  font-weight: 600;
-  font-size: 22px;
-  line-height: 1.3;
-  color: var(--ion-color-dark, #1a1a1a);
-  margin: 0 0 12px;
-  overflow-wrap: break-word;
-}
-
 .state-container {
   display: flex;
   flex-direction: column;

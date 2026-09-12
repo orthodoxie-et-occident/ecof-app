@@ -28,13 +28,22 @@
         </div>
       </div>
 
-      <div v-else class="saint-list">
-        <ion-card v-for="item in visibleSaints" :key="item.id" button @click="showSaintDetail(item)" class="saint-card">
-          <ion-card-content>
-            <h2 class="saint-title">{{ item.saint }}</h2>
-          </ion-card-content>
-        </ion-card>
-      </div>
+      <template v-else>
+        <template v-for="(items, letter) in groupedSaints" :key="letter">
+          <ion-list-header>
+            <ion-label>
+              <h2>{{ letter }}</h2>
+            </ion-label>
+          </ion-list-header>
+          <ion-list>
+            <ion-item button detail v-for="item in items" :key="item.id" @click="showSaintDetail(item)">
+              <ion-label>
+                <h2 class="saint-title">{{ item.saint }}</h2>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </template>
+      </template>
 
       <ion-infinite-scroll v-if="!loading && !error" :disabled="allLoaded" @ionInfinite="loadMore">
         <ion-infinite-scroll-content loading-spinner="crescent" loading-text="Chargement..."> </ion-infinite-scroll-content>
@@ -55,8 +64,10 @@ import {
   IonTitle,
   IonContent,
   IonSearchbar,
-  IonCard,
-  IonCardContent,
+  IonListHeader,
+  IonList,
+  IonItem,
+  IonLabel,
   IonSpinner,
   IonButton,
   IonIcon,
@@ -118,12 +129,33 @@ const visibleSaints = computed(() => filteredSaints.value.slice(0, displayCount.
 
 const allLoaded = computed(() => displayCount.value >= filteredSaints.value.length)
 
+const groupedSaints = computed(() => {
+  const groups = {}
+  for (const item of visibleSaints.value) {
+    const letter = item._normalized.charAt(0).toUpperCase() || "#"
+    if (!groups[letter]) groups[letter] = []
+    groups[letter].push(item)
+  }
+  return groups
+})
+
 watch(searchTerm, () => {
   displayCount.value = PAGE_SIZE
 })
 
 const loadMore = async (event) => {
-  displayCount.value += PAGE_SIZE
+  const targetCount = Math.min(displayCount.value + PAGE_SIZE, filteredSaints.value.length)
+
+  // Étend jusqu'à la fin de la lettre en cours pour éviter de la couper en deux
+  let newCount = targetCount
+  if (newCount < filteredSaints.value.length) {
+    const currentLetter = filteredSaints.value[newCount - 1]._normalized.charAt(0).toUpperCase() || "#"
+    while (newCount < filteredSaints.value.length && (filteredSaints.value[newCount]._normalized.charAt(0).toUpperCase() || "#") === currentLetter) {
+      newCount++
+    }
+  }
+
+  displayCount.value = newCount
   await event.target.complete()
 }
 
@@ -142,22 +174,35 @@ onIonViewWillEnter(() => {
 </script>
 
 <style scoped>
-.saint-list {
-  padding: 12px 12px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+ion-list-header {
+  padding-top: 20px;
+  padding-bottom: 8px;
+  position: relative;
+  margin-bottom: 8px;
 }
 
-.saint-card {
-  margin: 0;
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+ion-list-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 16px;
+  right: 16px;
+  height: 2px;
+  background: var(--ion-color-primary);
 }
 
-.saint-card ion-card-content {
-  padding: 14px 16px;
+ion-list-header h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ion-color-dark);
+}
+
+ion-list:last-of-type {
+  margin-bottom: 24px;
+}
+
+ion-item {
+  --min-height: 56px;
 }
 
 .saint-title {
