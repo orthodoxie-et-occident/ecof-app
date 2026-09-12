@@ -11,6 +11,7 @@
   overflow-wrap: break-word;
   max-width: 680px;
   margin: 0 auto;
+  margin-top: 10px;
 }
 
 .rich-text p {

@@ -29,12 +29,11 @@
       </div>
 
       <!-- CONTENT -->
-      <div v-else-if="readingData" class="reading-wrapper ion-padding">
-        <h2 class="book-title">
-          {{ readingData.book_txt }}
-        </h2>
-
-        <div class="reading-text" v-html="readingData.reading"></div>
+      <div v-else-if="readingData" class="ion-padding">
+        <div class="rich-text">
+          <h1>{{ readingData.book_txt }}</h1>
+          <div v-html="readingData.reading"></div>
+        </div>
       </div>
 
       <!-- EMPTY -->
@@ -79,26 +78,6 @@ onIonViewWillEnter(fetchReadingData)
 </script>
 
 <style scoped>
-.book-title {
-  font-family: sora;
-  font-weight: 600;
-  font-size: 1.3rem;
-  margin-bottom: 1.5rem;
-  color: var(--ion-color-primary);
-  text-align: center;
-}
-
-.reading-text {
-  font-family: bitter;
-  line-height: 1.8;
-  text-align: left;
-}
-
-.reading-wrapper {
-  max-width: 680px;
-  margin: 0 auto;
-}
-
 .state-container {
   display: flex;
   flex-direction: column;
