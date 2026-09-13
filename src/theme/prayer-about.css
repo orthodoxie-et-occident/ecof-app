@@ -1,0 +1,40 @@
+/* ==========================================================================
+   About Accordion — bloc "À propos" utilisé dans les pages de prière
+   ========================================================================== */
+
+.about-accordion {
+  max-width: 680px;
+  margin: 0 auto 2rem;
+}
+
+.about-accordion ion-item::part(native) {
+  background: rgba(var(--ion-color-primary-rgb), 0.12) !important;
+  color: var(--ion-color-dark) !important;
+  border-radius: 10px;
+}
+
+.about-accordion ion-item {
+  --min-height: 40px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.about-content {
+  margin-top: 8px;
+  padding: 0.65rem 0.9rem;
+  background: rgba(var(--ion-color-primary-rgb), 0.05);
+  border-radius: 10px;
+  border-left: 2px solid var(--ion-color-primary);
+}
+
+.about-content p {
+  font-family: sora;
+  font-size: 0.82rem;
+  color: var(--ion-color-medium);
+  line-height: 1.5;
+  margin: 0 0 0.4rem;
+}
+
+.about-content p:last-child {
+  margin-bottom: 0;
+}

@@ -28,6 +28,7 @@ import "./theme/variables.css"
 import "./theme/fonts.css"
 import "./theme/hours.css"
 import "./theme/rich-text.css"
+import "./theme/prayer-about.css"
 
 const app = createApp(App).use(IonicVue).use(router)
 
