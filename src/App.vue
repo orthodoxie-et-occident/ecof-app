@@ -11,6 +11,9 @@
           <ion-menu-toggle auto-hide="false" v-for="item in menuItems" :key="item.route">
             <ion-item button :router-link="item.route" router-direction="root">
               <ion-label class="menu-label">{{ item.label }}</ion-label>
+              <ion-badge v-if="item.route === '/news' && newsUnreadCount > 0" color="danger" class="menu-badge" slot="end">
+                {{ newsUnreadCount }}
+              </ion-badge>
               <img slot="end" :src="item.image" :alt="item.label" class="menu-img" />
             </ion-item>
           </ion-menu-toggle>
@@ -22,8 +25,11 @@
 </template>
 
 <script setup>
-import { IonApp, IonRouterOutlet, IonMenu, IonMenuToggle, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel, useBackButton, useIonRouter } from "@ionic/vue"
+import { computed, onMounted } from "vue"
+import { IonApp, IonRouterOutlet, IonMenu, IonMenuToggle, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel, IonBadge, useBackButton, useIonRouter } from "@ionic/vue"
 import { App } from "@capacitor/app"
+import { useArticles } from "./composables/useArticles"
+import { useReadNews } from "./composables/useReadNews"
 import synaxarImage from "@/assets/img/layout/saints.png"
 import parishImage from "@/assets/img/layout/ange.png"
 import newsImage from "@/assets/img/layout/ange-b.png"
@@ -43,6 +49,16 @@ const menuItems = [
 ]
 
 const ionRouter = useIonRouter()
+
+const { articles, hasFetched, fetchArticles } = useArticles()
+const { load: loadReadNews, unreadCount } = useReadNews()
+
+const newsUnreadCount = computed(() => unreadCount(articles.value))
+
+onMounted(async () => {
+  await loadReadNews()
+  if (!hasFetched.value) fetchArticles()
+})
 
 useBackButton(10, () => {
   const path = ionRouter.route?.value?.path || window.location.pathname
@@ -67,6 +83,11 @@ useBackButton(10, () => {
 <style scoped>
 ion-menu ion-item {
   --min-height: 80px;
+}
+
+.menu-badge {
+  margin-inline-end: 6px;
+  font-size: 0.75rem;
 }
 
 .menu-img {

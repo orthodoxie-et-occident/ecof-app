@@ -21,12 +21,6 @@ async function fetchArticles() {
   }
 }
 
-export function isNew(isoString) {
-  const sevenDaysAgo = new Date()
-  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 5)
-  return new Date(isoString) > sevenDaysAgo
-}
-
 export function useArticles() {
   return {
     articles,

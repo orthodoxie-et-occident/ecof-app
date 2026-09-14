@@ -33,7 +33,7 @@
             <h2>{{ category.label }}</h2>
             <p>{{ category.count }} annonce{{ category.count > 1 ? "s" : "" }}</p>
           </ion-label>
-          <ion-badge slot="end" class="new-badge" v-if="category.newCount > 0">+{{ category.newCount }}</ion-badge>
+          <ion-badge slot="end" color="danger" class="unread-badge" v-if="category.unreadCount > 0">{{ category.unreadCount }}</ion-badge>
         </ion-item>
       </ion-list>
     </ion-content>
@@ -45,11 +45,13 @@ import { computed } from "vue"
 import { useIonRouter } from "@ionic/vue"
 import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonList, IonItem, IonLabel, IonBadge, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
 import { cloudOfflineOutline, refreshOutline } from "ionicons/icons"
-import { useArticles, isNew } from "../composables/useArticles"
+import { useArticles } from "../composables/useArticles"
 import { categoryMap } from "../composables/categories"
+import { useReadNews } from "../composables/useReadNews"
 
 const ionRouter = useIonRouter()
 const { articles, loading, error, hasFetched, fetchArticles } = useArticles()
+const { load: loadReadNews, unreadCount, pruneReadIds } = useReadNews()
 
 // Calcule, pour chaque catégorie connue, son nombre d'articles, son nombre de nouveautés et sa dernière mise à jour
 // Masque les catégories vides et trie par publication la plus récente en premier
@@ -67,7 +69,7 @@ const categoriesWithStats = computed(() => {
         label: meta.label,
         icon: meta.icon,
         count: catArticles.length,
-        newCount: catArticles.filter((a) => isNew(a.published_at)).length,
+        unreadCount: unreadCount(catArticles),
         lastPublishedAt,
       }
     })
@@ -82,8 +84,10 @@ function openCategory(category) {
   })
 }
 
-onIonViewWillEnter(() => {
-  if (!hasFetched.value) fetchArticles()
+onIonViewWillEnter(async () => {
+  await loadReadNews()
+  if (!hasFetched.value) await fetchArticles()
+  pruneReadIds(articles.value)
 })
 </script>
 
@@ -95,14 +99,11 @@ onIonViewWillEnter(() => {
   flex-wrap: wrap;
 }
 
-.new-badge {
-  --background: #fff2cc;
-  --color: #6b5400;
+.unread-badge {
   font-size: 0.8rem;
   font-weight: 700;
-  border: 1px solid #e8c766;
   border-radius: 10px;
-  padding: 5px 10px;
+  min-width: 22px;
   margin-inline-end: 6px;
 }
 

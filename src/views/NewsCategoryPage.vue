@@ -6,6 +6,11 @@
           <ion-back-button text="" default-href="/news"></ion-back-button>
         </ion-buttons>
         <ion-title>{{ categoryLabel }}</ion-title>
+        <ion-buttons slot="end">
+          <ion-button v-if="hasUnread" @click="markAllRead">
+            <ion-icon :icon="checkmarkDoneOutline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-buttons>
       </ion-toolbar>
     </ion-header>
 
@@ -31,11 +36,12 @@
       </div>
 
       <ion-list v-else>
-        <ion-item button detail v-for="article in categoryArticles" :key="article.id" @click="openArticle(article)" :class="{ 'item--new': isNew(article.published_at) }">
+        <ion-item button detail v-for="article in categoryArticles" :key="article.id" @click="openArticle(article)" :class="{ 'item--unread': !isRead(article.id) }">
           <ion-label>
             <h2 class="article-title">{{ article.title }}</h2>
             <p class="article-meta">{{ article.author }} • {{ formatDate(article.published_at) }}</p>
           </ion-label>
+          <span slot="end" class="unread-dot" v-if="!isRead(article.id)"></span>
         </ion-item>
       </ion-list>
     </ion-content>
@@ -47,18 +53,26 @@ import { computed } from "vue"
 import { useRoute } from "vue-router"
 import { useIonRouter } from "@ionic/vue"
 import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonList, IonItem, IonLabel, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
-import { cloudOfflineOutline, refreshOutline } from "ionicons/icons"
-import { useArticles, isNew } from "../composables/useArticles"
+import { cloudOfflineOutline, refreshOutline, checkmarkDoneOutline } from "ionicons/icons"
+import { useArticles } from "../composables/useArticles"
 import { getCategoryLabel } from "../composables/categories"
+import { useReadNews } from "../composables/useReadNews"
 
 const route = useRoute()
 const ionRouter = useIonRouter()
 const { articles, loading, error, hasFetched, fetchArticles } = useArticles()
+const { load: loadReadNews, isRead, markAllAsRead } = useReadNews()
 
 const slugId = computed(() => Number(route.params.slugId))
 const categoryLabel = computed(() => getCategoryLabel(slugId.value))
 
 const categoryArticles = computed(() => articles.value.filter((a) => (a.slug_id ?? 0) === slugId.value))
+
+const hasUnread = computed(() => categoryArticles.value.some((a) => !isRead(a.id)))
+
+function markAllRead() {
+  markAllAsRead(categoryArticles.value.map((a) => a.id))
+}
 
 function formatDate(isoString) {
   return new Intl.DateTimeFormat("fr-FR", {
@@ -78,6 +92,7 @@ function openArticle(article) {
 
 onIonViewWillEnter(() => {
   if (!hasFetched.value) fetchArticles()
+  loadReadNews()
 })
 </script>
 
@@ -87,8 +102,19 @@ ion-item {
   font-family: sora;
 }
 
-.item--new {
-  --background: #fffbeb;
+.item--unread {
+  font-weight: 600;
+}
+
+.unread-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  min-width: 8px;
+  border-radius: 50%;
+  background: var(--ion-color-danger, #eb445a);
+  margin-inline: 8px;
+  align-self: center;
 }
 
 .article-title {
