@@ -3,23 +3,21 @@ import { Preferences } from "@capacitor/preferences"
 
 const STORAGE_KEY = "read_news_ids"
 
-// État partagé au niveau du module : toutes les vues qui importent ce composable
-// pointent vers la même instance réactive (équivalent d'un store, sans dépendance).
 const state = reactive({
   readIds: new Set(),
   loaded: false,
+  isFirstLaunch: false,
 })
 
 let loadingPromise = null
 
-// Hydrate le Set depuis le stockage persistant. Idempotent : peut être appelé
-// depuis App.vue, NewsPage, NewsCategoryPage... sans relire le storage à chaque fois.
 async function load() {
   if (state.loaded) return
   if (loadingPromise) return loadingPromise
 
   loadingPromise = (async () => {
     const { value } = await Preferences.get({ key: STORAGE_KEY })
+    state.isFirstLaunch = value === null
     state.readIds = new Set(value ? JSON.parse(value) : [])
     state.loaded = true
   })()
@@ -41,8 +39,6 @@ async function markAsRead(id) {
   await persist()
 }
 
-// Marque plusieurs articles comme lus en une seule écriture storage
-// (évite un persist() par article quand on fait "tout marquer comme lu")
 async function markAllAsRead(ids) {
   let changed = false
   for (const id of ids) {
@@ -59,13 +55,10 @@ function isRead(id) {
   return state.readIds.has(String(id))
 }
 
-// Nombre d'articles non lus dans une liste donnée (toutes news, ou une catégorie)
 function unreadCount(articles) {
   return articles.filter((a) => !isRead(a.id)).length
 }
 
-// Optionnel : à appeler après un fetchArticles() pour éviter que le stockage
-// grossisse indéfiniment avec des ids d'articles supprimés côté serveur.
 async function pruneReadIds(currentArticles) {
   const currentIds = new Set(currentArticles.map((a) => String(a.id)))
   const before = state.readIds.size
@@ -73,6 +66,22 @@ async function pruneReadIds(currentArticles) {
   if (state.readIds.size !== before) await persist()
 }
 
+async function seedFirstLaunch(articles) {
+  if (!state.isFirstLaunch) return
+  state.isFirstLaunch = false
+
+  const oneMonthAgo = new Date()
+  oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1)
+
+  for (const article of articles) {
+    if (new Date(article.published_at) < oneMonthAgo) {
+      state.readIds.add(String(article.id))
+    }
+  }
+
+  await persist()
+}
+
 export function useReadNews() {
-  return { state, load, markAsRead, markAllAsRead, isRead, unreadCount, pruneReadIds }
+  return { state, load, markAsRead, markAllAsRead, isRead, unreadCount, pruneReadIds, seedFirstLaunch }
 }
