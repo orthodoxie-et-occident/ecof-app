@@ -186,7 +186,7 @@ const saints = ref([])
 
 async function loadSaints(dateISO) {
   try {
-    const res = await fetch(`https://api.ecof.app/synaxar/${dateISO}`)
+    const res = await fetch(`https://api-v2.ecof.app/synaxar/date/${dateISO}`)
     if (!res.ok) throw new Error("Erreur de chargement du synaxaire")
     saints.value = await res.json()
   } catch (err) {
