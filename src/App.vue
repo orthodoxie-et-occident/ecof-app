@@ -51,14 +51,13 @@ const menuItems = [
 const ionRouter = useIonRouter()
 
 const { articles, hasFetched, fetchArticles } = useArticles()
-const { load: loadReadNews, unreadCount, seedFirstLaunch } = useReadNews()
+const { load: loadReadNews, unreadCount } = useReadNews()
 
 const newsUnreadCount = computed(() => unreadCount(articles.value))
 
 onMounted(async () => {
   await loadReadNews()
-  if (!hasFetched.value) await fetchArticles()
-  if (hasFetched.value) await seedFirstLaunch(articles.value)
+  if (!hasFetched.value) fetchArticles()
 })
 
 useBackButton(10, () => {

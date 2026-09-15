@@ -6,7 +6,6 @@ const STORAGE_KEY = "read_news_ids"
 const state = reactive({
   readIds: new Set(),
   loaded: false,
-  isFirstLaunch: false,
 })
 
 let loadingPromise = null
@@ -17,7 +16,6 @@ async function load() {
 
   loadingPromise = (async () => {
     const { value } = await Preferences.get({ key: STORAGE_KEY })
-    state.isFirstLaunch = value === null
     state.readIds = new Set(value ? JSON.parse(value) : [])
     state.loaded = true
   })()
@@ -56,7 +54,15 @@ function isRead(id) {
 }
 
 function unreadCount(articles) {
-  return articles.filter((a) => !isRead(a.id)).length
+  return articles.filter((a) => isReportable(a) && !isRead(a.id)).length
+}
+
+const REPORT_WINDOW_DAYS = 30
+
+function isReportable(article) {
+  const windowStart = new Date()
+  windowStart.setDate(windowStart.getDate() - REPORT_WINDOW_DAYS)
+  return new Date(article.published_at) >= windowStart
 }
 
 async function pruneReadIds(currentArticles) {
@@ -66,22 +72,6 @@ async function pruneReadIds(currentArticles) {
   if (state.readIds.size !== before) await persist()
 }
 
-async function seedFirstLaunch(articles) {
-  if (!state.isFirstLaunch) return
-  state.isFirstLaunch = false
-
-  const oneMonthAgo = new Date()
-  oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1)
-
-  for (const article of articles) {
-    if (new Date(article.published_at) < oneMonthAgo) {
-      state.readIds.add(String(article.id))
-    }
-  }
-
-  await persist()
-}
-
 export function useReadNews() {
-  return { state, load, markAsRead, markAllAsRead, isRead, unreadCount, pruneReadIds, seedFirstLaunch }
+  return { state, load, markAsRead, markAllAsRead, isRead, unreadCount, pruneReadIds, isReportable }
 }

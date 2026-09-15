@@ -44,7 +44,7 @@ import { cloudOfflineOutline, refreshOutline } from "ionicons/icons"
 import { useReadNews } from "../composables/useReadNews"
 
 const route = useRoute()
-const { markAsRead } = useReadNews()
+const { markAsRead, isReportable } = useReadNews()
 
 const article = ref(null)
 const loading = ref(true)
@@ -60,7 +60,9 @@ async function fetchArticle() {
     const res = await fetch(`https://api-v2.ecof.app/news/${id}`)
     if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
     article.value = await res.json()
-    await markAsRead(id)
+    // Inutile de persister l'id d'un article déjà hors fenêtre de report :
+    // il ne comptera jamais comme "non lu" de toute façon.
+    if (isReportable(article.value)) await markAsRead(id)
   } catch (err) {
     console.error(err.message)
     error.value = true

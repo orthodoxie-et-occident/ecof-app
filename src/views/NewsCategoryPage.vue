@@ -36,12 +36,12 @@
       </div>
 
       <ion-list v-else>
-        <ion-item button detail v-for="article in categoryArticles" :key="article.id" @click="openArticle(article)" :class="{ 'item--unread': !isRead(article.id) }">
+        <ion-item button detail v-for="article in categoryArticles" :key="article.id" @click="openArticle(article)" :class="{ 'item--unread': isUnread(article) }">
           <ion-label>
             <h2 class="article-title">{{ article.title }}</h2>
             <p class="article-meta">{{ article.author }} • {{ formatDate(article.published_at) }}</p>
           </ion-label>
-          <span slot="end" class="unread-dot" v-if="!isRead(article.id)"></span>
+          <span slot="end" class="unread-dot" v-if="isUnread(article)"></span>
         </ion-item>
       </ion-list>
     </ion-content>
@@ -61,17 +61,23 @@ import { useReadNews } from "../composables/useReadNews"
 const route = useRoute()
 const ionRouter = useIonRouter()
 const { articles, loading, error, hasFetched, fetchArticles } = useArticles()
-const { load: loadReadNews, isRead, markAllAsRead } = useReadNews()
+const { load: loadReadNews, isRead, markAllAsRead, isReportable } = useReadNews()
 
 const slugId = computed(() => Number(route.params.slugId))
 const categoryLabel = computed(() => getCategoryLabel(slugId.value))
 
 const categoryArticles = computed(() => articles.value.filter((a) => (a.slug_id ?? 0) === slugId.value))
 
-const hasUnread = computed(() => categoryArticles.value.some((a) => !isRead(a.id)))
+// Un article n'est affiché comme "non lu" que s'il est à la fois non lu ET
+// dans la fenêtre de report (< 1 mois) — les archives ne génèrent jamais de badge.
+function isUnread(article) {
+  return isReportable(article) && !isRead(article.id)
+}
+
+const hasUnread = computed(() => categoryArticles.value.some(isUnread))
 
 function markAllRead() {
-  markAllAsRead(categoryArticles.value.map((a) => a.id))
+  markAllAsRead(categoryArticles.value.filter(isUnread).map((a) => a.id))
 }
 
 function formatDate(isoString) {

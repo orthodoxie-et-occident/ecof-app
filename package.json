@@ -32,7 +32,7 @@
   "devDependencies": {
     "@capacitor/assets": "^3.0.5",
     "@capacitor/cli": "8.5.2",
-    "@types/node": "^26.5.1",
+    "@types/node": "^26.6.0",
     "@vitejs/plugin-legacy": "^8.2.3",
     "@vitejs/plugin-vue": "^6.0.9",
     "jsdom": "^30.0.1",
@@ -42,6 +42,6 @@
     "terser": "^5.51.2",
     "typescript": "^7.0.2",
     "vite": "^8.3.0",
-    "vitest": "^5.0.0"
+    "vitest": "^5.0.1"
   }
 }
