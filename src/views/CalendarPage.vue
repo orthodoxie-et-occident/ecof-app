@@ -64,7 +64,13 @@
             <h3 class="section-title">Synaxaire du jour</h3>
 
             <ion-list>
-              <ion-item v-for="saint in calendarData.synaxar" :key="saint.id" :button="saint.id !== 0" :detail="saint.id !== 0" @click="saint.id !== 0 && navigateToSaint(saint.id)">
+              <ion-item
+                v-for="saint in calendarData.sanctoral"
+                :key="saint.vies_id"
+                :button="saint.vies_id !== 0"
+                :detail="saint.vies_id !== 0"
+                @click="saint.vies_id !== 0 && navigateToSaint(saint.vies_id)"
+              >
                 <ion-label>
                   <h2>{{ saint.prefixe }} {{ saint.saint }}</h2>
                 </ion-label>
@@ -76,38 +82,18 @@
           <div v-if="hasReadings" class="section">
             <h3 class="section-title">Lectures du jour</h3>
 
-            <!-- TEMPORAL -->
-            <div v-if="calendarData.readings.temporal.length > 0">
-              <div v-for="block in calendarData.readings.temporal" :key="block.block_title">
-                <h4 class="subsection-title">
-                  {{ block.block_title }}
-                </h4>
+            <div v-for="block in calendarData.readings" :key="block.block_title">
+              <h4 class="subsection-title">
+                {{ block.block_title }}
+              </h4>
 
-                <ion-list>
-                  <ion-item v-for="reading in block.readings" :key="reading.id" button detail @click="navigateToReading(reading.id)">
-                    <ion-label>
-                      {{ reading.book_txt }}
-                    </ion-label>
-                  </ion-item>
-                </ion-list>
-              </div>
-            </div>
-
-            <!-- SANCTORAL -->
-            <div v-if="calendarData.readings.sanctoral.length > 0">
-              <div v-for="block in calendarData.readings.sanctoral" :key="block.block_title">
-                <h4 class="subsection-title">
-                  {{ block.block_title }}
-                </h4>
-
-                <ion-list>
-                  <ion-item v-for="reading in block.readings" :key="reading.id" button detail @click="navigateToReading(reading.id)">
-                    <ion-label>
-                      {{ reading.book_txt }}
-                    </ion-label>
-                  </ion-item>
-                </ion-list>
-              </div>
+              <ion-list>
+                <ion-item v-for="reading in block.readings" :key="reading.id" button detail @click="navigateToReading(reading.id)">
+                  <ion-label>
+                    {{ reading.book_txt }}
+                  </ion-label>
+                </ion-item>
+              </ion-list>
             </div>
           </div>
         </div>
@@ -173,7 +159,7 @@ const dateParam = computed(() => {
 
 const hasReadings = computed(() => {
   if (!calendarData.value) return false
-  return calendarData.value.readings.temporal.length > 0 || calendarData.value.readings.sanctoral.length > 0
+  return calendarData.value.readings.length > 0
 })
 
 const fetchCalendarData = async () => {
@@ -183,7 +169,7 @@ const fetchCalendarData = async () => {
   error.value = null
 
   try {
-    const response = await fetch(`https://api.ecof.app/calendar/${dateParam.value}`)
+    const response = await fetch(`https://api-v2.ecof.app/calendar/${dateParam.value}`)
 
     if (!response.ok) throw new Error(`${response.status}`)
     calendarData.value = await response.json()
