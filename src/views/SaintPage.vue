@@ -52,10 +52,13 @@
           <!-- Vie brève -->
           <div v-if="selectedTab === 'v_short'">
             <div v-if="saintData?.v_short">
-              <div v-if="saintData?.img" class="saint-image-container">
-                <img :src="saintData.img" class="saint-image" />
+              <div class="rich-text">
+                <h1>{{ saintTitle }}</h1>
+                <div v-if="saintData?.img" class="saint-image-container">
+                  <img :src="saintData.img" class="saint-image" />
+                </div>
+                <div v-html="saintData.v_short"></div>
               </div>
-              <div class="rich-text" v-html="saintData.v_short"></div>
             </div>
 
             <div v-else class="no-content">
@@ -66,12 +69,18 @@
 
           <!-- Synaxaire -->
           <div v-else-if="selectedTab === 'v_long'">
-            <div class="rich-text" v-html="saintData.v_long"></div>
+            <div class="rich-text">
+              <h1>{{ saintTitle }}</h1>
+              <div v-html="saintData.v_long"></div>
+            </div>
           </div>
 
           <!-- Vie liturgique -->
           <div v-else-if="selectedTab === 'v_liturgy'">
-            <div class="rich-text" v-html="saintData.v_liturgy"></div>
+            <div class="rich-text">
+              <h1>{{ saintTitle }}</h1>
+              <div v-html="saintData.v_liturgy"></div>
+            </div>
           </div>
         </div>
       </template>
@@ -96,6 +105,8 @@ const error = ref(null)
 const selectedTab = ref("v_short")
 
 const MOIS_FR = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
+
+const saintTitle = computed(() => saintData.value?.saint || saintData.value?.prefixe)
 
 const commemorationDate = computed(() => {
   const jour = saintData.value?.jour

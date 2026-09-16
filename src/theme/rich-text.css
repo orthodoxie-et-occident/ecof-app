@@ -83,6 +83,23 @@
   display: block;
 }
 
+.rich-text figure {
+  margin: 1.3em 0;
+}
+
+.rich-text figure img {
+  margin: 0 0 6px;
+}
+
+.rich-text figcaption {
+  font-family: bitter;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--ion-color-medium, #888);
+  text-align: center;
+  font-style: italic;
+}
+
 .rich-text code {
   font-family: monospace;
   background: var(--ion-color-light, #f4f4f4);
