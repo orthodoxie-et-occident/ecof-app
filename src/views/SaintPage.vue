@@ -7,7 +7,7 @@
         </ion-buttons>
 
         <ion-title>
-          <div class="title-main">{{ saintData?.saint || saintData?.prefixe }}</div>
+          <div class="title-main">Synaxaire</div>
           <div v-if="commemorationDate" class="title-date">{{ commemorationDate }}</div>
         </ion-title>
       </ion-toolbar>
