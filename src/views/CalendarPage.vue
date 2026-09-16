@@ -63,6 +63,13 @@
           <div class="section">
             <h3 class="section-title">Synaxaire du jour</h3>
 
+            <ion-item v-if="temporalTitle || temporalSubtitle" lines="none" class="temporal-header-item">
+              <ion-label class="ion-text-wrap">
+                <h2 v-if="temporalTitle">{{ temporalTitle }}</h2>
+                <p v-if="temporalSubtitle">{{ temporalSubtitle }}</p>
+              </ion-label>
+            </ion-item>
+
             <ion-list>
               <ion-item
                 v-for="saint in calendarData.sanctoral"
@@ -73,6 +80,12 @@
               >
                 <ion-label>
                   <h2>{{ saint.prefixe }} {{ saint.saint }}</h2>
+                </ion-label>
+              </ion-item>
+
+              <ion-item v-if="temporalContent">
+                <ion-label>
+                  <h2>{{ temporalContent }}</h2>
                 </ion-label>
               </ion-item>
             </ion-list>
@@ -162,6 +175,12 @@ const hasReadings = computed(() => {
   return calendarData.value.readings.length > 0
 })
 
+const temporalTitle = computed(() => calendarData.value?.temporal?.[0]?.title ?? null)
+
+const temporalSubtitle = computed(() => calendarData.value?.temporal?.[0]?.subtitle ?? null)
+
+const temporalContent = computed(() => calendarData.value?.temporal?.[0]?.content ?? null)
+
 const fetchCalendarData = async () => {
   if (!dateParam.value) return
 
@@ -230,6 +249,21 @@ watch(dateParam, fetchCalendarData)
   background: var(--ion-color-primary);
 }
 
+.temporal-header-item {
+  --background: transparent;
+  margin-bottom: 4px;
+}
+
+.temporal-header-item h2 {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--ion-color-dark);
+}
+
+.temporal-header-item p {
+  color: var(--ion-color-medium-shade);
+}
+
 .subsection-title {
   font-size: 1rem;
   font-weight: 600;
@@ -246,7 +280,12 @@ ion-list {
 ion-item {
   --padding-start: 16px;
   --inner-padding-end: 16px;
-  margin-bottom: 8px;
+  --min-height: 44px;
+}
+
+ion-item h2 {
+  font-size: 0.95rem;
+  line-height: 1.3;
 }
 
 .state-container {
