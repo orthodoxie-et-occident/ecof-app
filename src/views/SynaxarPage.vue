@@ -7,11 +7,13 @@
         </ion-buttons>
         <ion-title>Synaxaire</ion-title>
       </ion-toolbar>
+
+      <ion-toolbar color="primary">
+        <ion-searchbar v-model="searchTerm" placeholder="Recherche" :debounce="300"></ion-searchbar>
+      </ion-toolbar>
     </ion-header>
 
     <ion-content>
-      <ion-searchbar v-model="searchTerm" placeholder="Recherche" :debounce="300"></ion-searchbar>
-
       <div v-if="loading" class="state-container">
         <ion-spinner color="primary"></ion-spinner>
         <p>Chargement...</p>
