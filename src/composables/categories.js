@@ -3,7 +3,7 @@ import { helpCircleOutline, documentTextOutline, calendarOutline, phonePortraitO
 // Mapping des catégories connues (slug_id renvoyé par l'API)
 export const categoryMap = {
   0: { label: "Général", icon: helpCircleOutline },
-  1: { label: "Enseignement", icon: documentTextOutline },
+  1: { label: "Homélies", icon: documentTextOutline },
   2: { label: "Agenda", icon: calendarOutline },
   3: { label: "Application", icon: phonePortraitOutline },
 }

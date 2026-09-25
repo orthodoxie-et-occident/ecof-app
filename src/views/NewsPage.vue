@@ -31,7 +31,6 @@
           <ion-icon :icon="category.icon" slot="start" color="primary"></ion-icon>
           <ion-label>
             <h2>{{ category.label }}</h2>
-            <p>{{ category.count }} annonce{{ category.count > 1 ? "s" : "" }}</p>
           </ion-label>
           <ion-badge slot="end" color="danger" class="unread-badge" v-if="category.unreadCount > 0">{{ category.unreadCount }}</ion-badge>
         </ion-item>
@@ -53,8 +52,6 @@ const ionRouter = useIonRouter()
 const { articles, loading, error, hasFetched, fetchArticles } = useArticles()
 const { load: loadReadNews, unreadCount, pruneReadIds } = useReadNews()
 
-// Calcule, pour chaque catégorie connue, son nombre d'articles, son nombre de nouveautés et sa dernière mise à jour
-// Masque les catégories vides et trie par publication la plus récente en premier
 const categoriesWithStats = computed(() => {
   return Object.entries(categoryMap)
     .map(([slug_id, meta]) => {
@@ -92,13 +89,6 @@ onIonViewWillEnter(async () => {
 </script>
 
 <style scoped>
-.category-title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
 .unread-badge {
   font-size: 0.8rem;
   font-weight: 700;

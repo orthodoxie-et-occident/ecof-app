@@ -36,12 +36,14 @@
       </div>
 
       <ion-list v-else>
-        <ion-item button detail v-for="article in categoryArticles" :key="article.id" @click="openArticle(article)" :class="{ 'item--unread': isUnread(article) }">
+        <ion-item button detail v-for="article in categoryArticles" :key="article.id" @click="openArticle(article)">
           <ion-label>
-            <h2 class="article-title">{{ article.title }}</h2>
+            <h2 class="article-title">
+              {{ article.title }}
+            </h2>
             <p class="article-meta">{{ article.author }} • {{ formatDate(article.published_at) }}</p>
           </ion-label>
-          <span slot="end" class="unread-dot" v-if="isUnread(article)"></span>
+          <span v-if="isUnread(article)" slot="end" class="unread-dot"></span>
         </ion-item>
       </ion-list>
     </ion-content>
@@ -62,14 +64,10 @@ const route = useRoute()
 const ionRouter = useIonRouter()
 const { articles, loading, error, hasFetched, fetchArticles } = useArticles()
 const { load: loadReadNews, isRead, markAllAsRead, isReportable } = useReadNews()
-
 const slugId = computed(() => Number(route.params.slugId))
 const categoryLabel = computed(() => getCategoryLabel(slugId.value))
-
 const categoryArticles = computed(() => articles.value.filter((a) => (a.slug_id ?? 0) === slugId.value))
 
-// Un article n'est affiché comme "non lu" que s'il est à la fois non lu ET
-// dans la fenêtre de report (< 1 mois) — les archives ne génèrent jamais de badge.
 function isUnread(article) {
   return isReportable(article) && !isRead(article.id)
 }
@@ -91,13 +89,20 @@ function formatDate(isoString) {
 function openArticle(article) {
   ionRouter.push({
     name: "NewsDetail",
-    params: { id: article.id },
-    query: { label: categoryLabel.value },
+    params: {
+      id: article.id,
+    },
+    query: {
+      label: categoryLabel.value,
+    },
   })
 }
 
 onIonViewWillEnter(() => {
-  if (!hasFetched.value) fetchArticles()
+  if (!hasFetched.value) {
+    fetchArticles()
+  }
+
   loadReadNews()
 })
 </script>
@@ -106,10 +111,6 @@ onIonViewWillEnter(() => {
 ion-item {
   --min-height: 64px;
   font-family: sora;
-}
-
-.item--unread {
-  font-weight: 600;
 }
 
 .unread-dot {
