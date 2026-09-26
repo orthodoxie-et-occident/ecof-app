@@ -20,8 +20,8 @@ export async function checkForUpdate() {
     if (!isOutdated) return
 
     const alert = await alertController.create({
-      header: "Mise à jour disponible",
-      message: "Une nouvelle version est disponible. Voulez-vous la télécharger ?",
+      header: "Mise à jour",
+      message: `Vous êtes sur la version ${appInfo.version}, la version ${info.latestVersion} est disponible.`,
       buttons: [
         { text: "Plus tard", role: "cancel" },
         { text: "Mettre à jour", handler: () => Browser.open({ url: info.storeUrl }) },
