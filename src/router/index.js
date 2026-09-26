@@ -13,7 +13,6 @@ import SaintPage from "../views/SaintPage.vue"
 import ReadingPage from "../views/ReadingPage.vue"
 import SaintEphrem from "../views/prayers/miscellaneous/SaintEphrem.vue"
 import SaintPatrick from "../views/prayers/miscellaneous/SaintPatrick.vue"
-import MgrJean from "../views/prayers/miscellaneous/MgrJean.vue"
 import MiscellaneousPrayers from "../views/prayers/MiscellaneousPrayers.vue"
 import HoursPrayers from "../views/prayers/HoursPrayers.vue"
 import VespersPrayer from "../views/prayers/hours/VespersPrayer.vue"
@@ -48,7 +47,6 @@ const routes = [
   { path: "/prayers/miscellaneous/saint-ephrem", name: "SaintEphrem", component: SaintEphrem },
   { path: "/prayers/miscellaneous/notre-pere", name: "NotrePere", component: NotrePere },
   { path: "/prayers/miscellaneous/saint-patrick", name: "SaintPatrick", component: SaintPatrick },
-  { path: "/prayers/miscellaneous/mgr-jean", name: "MgrJean", component: MgrJean },
   { path: "/synaxar", name: "Synaxar", component: SynaxarPage },
   { path: "/saint/:id", name: "Saint", component: SaintPage },
   { path: "/reading/:id", name: "Reading", component: ReadingPage },
