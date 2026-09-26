@@ -30,6 +30,7 @@ import { IonApp, IonRouterOutlet, IonMenu, IonMenuToggle, IonHeader, IonToolbar,
 import { App } from "@capacitor/app"
 import { useArticles } from "./composables/useArticles"
 import { useReadNews } from "./composables/useReadNews"
+import { checkForUpdate } from "./composables/useVersionCheck"
 import synaxarImage from "@/assets/img/layout/saints.png"
 import parishImage from "@/assets/img/layout/ange.png"
 import newsImage from "@/assets/img/layout/ange-b.png"
@@ -58,24 +59,20 @@ const newsUnreadCount = computed(() => unreadCount(articles.value))
 onMounted(async () => {
   await loadReadNews()
   if (!hasFetched.value) fetchArticles()
+  checkForUpdate()
 })
 
 useBackButton(10, () => {
   const path = ionRouter.route?.value?.path || window.location.pathname
 
-  // 1. EXIT UNIQUEMENT SUR HOME
   if (path === "/") {
     App.exitApp()
     return
   }
-
-  // 2. BACK IONIC PROPRE
   if (ionRouter.canGoBack()) {
     ionRouter.back()
     return
   }
-
-  // 3. FALLBACK SAFE (évite blocage)
   ionRouter.push("/")
 })
 </script>
