@@ -23,6 +23,7 @@
     "@ionic/vue": "^9.0.5",
     "@ionic/vue-router": "^9.0.5",
     "@protomaps/basemaps": "^5.7.2",
+    "compare-versions": "^6.1.1",
     "ionicons": "^8.1.0",
     "maplibre-gl": "^6.11.2",
     "pmtiles": "^4.5.0",
