@@ -1,9 +1,9 @@
-import { helpCircleOutline, documentTextOutline, calendarOutline, phonePortraitOutline } from "ionicons/icons"
+import { helpCircleOutline, calendarOutline, phonePortraitOutline } from "ionicons/icons"
+import crozierIcon from "../assets/icons/crozier.svg"
 
-// Mapping des catégories connues (slug_id renvoyé par l'API)
 export const categoryMap = {
   0: { label: "Général", icon: helpCircleOutline },
-  1: { label: "Homélies", icon: documentTextOutline },
+  1: { label: "Homélies", iconSrc: crozierIcon },
   2: { label: "Agenda", icon: calendarOutline },
   3: { label: "Application", icon: phonePortraitOutline },
 }

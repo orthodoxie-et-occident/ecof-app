@@ -5,7 +5,7 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Annonces</ion-title>
+        <ion-title>Actualités</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -28,7 +28,8 @@
 
       <ion-list v-else>
         <ion-item button v-for="category in categoriesWithStats" :key="category.slug_id" @click="openCategory(category)" detail>
-          <ion-icon :icon="category.icon" slot="start" color="primary"></ion-icon>
+          <ion-icon v-if="category.icon" :icon="category.icon" slot="start" color="primary"></ion-icon>
+          <ion-icon v-else :src="category.iconSrc" slot="start" color="primary"></ion-icon>
           <ion-label>
             <h2>{{ category.label }}</h2>
           </ion-label>
@@ -65,6 +66,7 @@ const categoriesWithStats = computed(() => {
         slug_id: Number(slug_id),
         label: meta.label,
         icon: meta.icon,
+        iconSrc: meta.iconSrc,
         count: catArticles.length,
         unreadCount: unreadCount(catArticles),
         lastPublishedAt,
@@ -89,6 +91,10 @@ onIonViewWillEnter(async () => {
 </script>
 
 <style scoped>
+ion-item {
+  --min-height: 56px;
+}
+
 .unread-badge {
   font-size: 0.8rem;
   font-weight: 700;
