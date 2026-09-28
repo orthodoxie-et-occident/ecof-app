@@ -54,9 +54,6 @@
             <div v-if="saintData?.v_short">
               <div class="rich-text">
                 <h1>{{ saintTitle }}</h1>
-                <div v-if="saintData?.img" class="saint-image-container">
-                  <img :src="saintData.img" class="saint-image" />
-                </div>
                 <div v-html="saintData.v_short"></div>
               </div>
             </div>
@@ -193,20 +190,6 @@ onIonViewWillEnter(fetchSaintData)
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--ion-color-dark);
-}
-
-.saint-image-container {
-  margin: 1rem 0;
-  display: flex;
-  justify-content: center;
-}
-
-.saint-image {
-  width: 100%;
-  max-width: min(300px, 100%);
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .no-content {
