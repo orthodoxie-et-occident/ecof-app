@@ -14,14 +14,14 @@
     "knip": "knip"
   },
   "dependencies": {
-    "@capacitor/android": "8.5.2",
+    "@capacitor/android": "8.5.3",
     "@capacitor/app": "8.1.2",
     "@capacitor/browser": "^8.0.5",
-    "@capacitor/core": "8.5.2",
-    "@capacitor/ios": "^8.5.2",
+    "@capacitor/core": "8.5.3",
+    "@capacitor/ios": "^8.5.3",
     "@capacitor/preferences": "^8.0.1",
-    "@ionic/vue": "^9.0.6",
-    "@ionic/vue-router": "^9.0.6",
+    "@ionic/vue": "^9.0.7",
+    "@ionic/vue-router": "^9.0.7",
     "@protomaps/basemaps": "^5.7.2",
     "compare-versions": "^6.1.1",
     "ionicons": "^8.1.0",
@@ -29,11 +29,11 @@
     "pmtiles": "^4.5.0",
     "verovio": "^6.3.0",
     "vue": "^3.5.43",
-    "vue-router": "^5.3.1"
+    "vue-router": "^5.4.0"
   },
   "devDependencies": {
     "@capacitor/assets": "^3.0.5",
-    "@capacitor/cli": "8.5.2",
+    "@capacitor/cli": "8.5.3",
     "@types/node": "^26.6.4",
     "@vitejs/plugin-legacy": "^8.2.3",
     "@vitejs/plugin-vue": "^6.0.9",
