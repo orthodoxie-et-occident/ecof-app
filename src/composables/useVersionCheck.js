@@ -4,7 +4,7 @@ import { Capacitor } from "@capacitor/core"
 import { compare } from "compare-versions"
 import { alertController } from "@ionic/vue"
 
-const API_URL = "https://api-v2.ecof.app/version"
+const API_URL = "https://api.ecof.app/version"
 
 export async function checkForUpdate() {
   const platform = Capacitor.getPlatform()

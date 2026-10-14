@@ -62,7 +62,7 @@ const fetchReadingData = async () => {
 
   try {
     const readingId = route.params.id
-    const response = await fetch(`https://api-v2.ecof.app/reading/${readingId}`)
+    const response = await fetch(`https://api.ecof.app/reading/${readingId}`)
     if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`)
     const data = await response.json()
     readingData.value = data

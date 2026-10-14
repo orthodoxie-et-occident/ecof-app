@@ -188,7 +188,7 @@ const fetchCalendarData = async () => {
   error.value = null
 
   try {
-    const response = await fetch(`https://api-v2.ecof.app/calendar/${dateParam.value}`)
+    const response = await fetch(`https://api.ecof.app/calendar/${dateParam.value}`)
 
     if (!response.ok) throw new Error(`${response.status}`)
     calendarData.value = await response.json()

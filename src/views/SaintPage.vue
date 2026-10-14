@@ -118,7 +118,7 @@ const fetchSaintData = async () => {
 
   try {
     const saintId = route.params.id
-    const response = await fetch(`https://api-v2.ecof.app/synaxar/${saintId}`)
+    const response = await fetch(`https://api.ecof.app/synaxar/${saintId}`)
     if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`)
     const data = await response.json()
     saintData.value = data
