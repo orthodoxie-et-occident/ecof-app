@@ -26,6 +26,14 @@
         </section>
 
         <section class="about-section">
+          <h2>Calendrier liturgique</h2>
+          <p>
+            Le calendrier liturgique édité par l'<a href="https://eglise-catholique-orthodoxe-de-france.fr/" target="_blank">Église Catholique Orthodoxe de France</a> fait référence en cas de
+            divergence avec les informations de l'application. Il comporte en outre des informations non reprises dans celle-ci.
+          </p>
+        </section>
+
+        <section class="about-section">
           <h2>Bibliothèques</h2>
           <p>
             Le rendu des partitions musicales de cette application s'appuie sur
@@ -44,7 +52,7 @@
           <p>Pour toute question, suggestion ou contribution vous pouvez nous contacter à l'adresse <a href="mailto:contact@ecof.app">contact@ecof.app</a></p>
         </section>
 
-        <p class="version">Version 3.6.1</p>
+        <p class="version">Version 3.6.2</p>
       </div>
     </ion-content>
   </ion-page>
