@@ -32,7 +32,7 @@
           <ion-icon v-else :src="category.iconSrc" slot="start" color="primary"></ion-icon>
           <ion-label>
             <h2>{{ category.label }}</h2>
-            <p>{{ category.count }} annonce{{ category.count > 1 ? "s" : "" }} • Mis à jour le {{ formatDate(category.lastPublishedAt) }}</p>
+            <p>Mis à jour le {{ formatDate(category.lastPublishedAt) }}</p>
           </ion-label>
           <ion-badge slot="end" color="danger" class="unread-badge" v-if="category.unreadCount > 0">{{ category.unreadCount }}</ion-badge>
         </ion-item>
@@ -79,7 +79,7 @@ const categoriesWithStats = computed(() => {
 
 function formatDate(date) {
   return new Intl.DateTimeFormat("fr-FR", {
-    day: "numeric",
+    day: "2-digit",
     month: "short",
     year: "numeric",
   }).format(date)
