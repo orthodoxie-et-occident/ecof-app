@@ -24,6 +24,7 @@ import TiercePrayer from "../views/prayers/hours/TiercePrayer.vue"
 import SextPrayer from "../views/prayers/hours/SextPrayer.vue"
 import NonePrayer from "../views/prayers/hours/NonePrayer.vue"
 import NotrePere from "../views/prayers/miscellaneous/NotrePere.vue"
+import EspritSaint from "../views/prayers/miscellaneous/EspritSaint.vue"
 
 const routes = [
   { path: "/", name: "Parishes", component: ParishesPage },
@@ -47,6 +48,7 @@ const routes = [
   { path: "/prayers/miscellaneous/saint-ephrem", name: "SaintEphrem", component: SaintEphrem },
   { path: "/prayers/miscellaneous/notre-pere", name: "NotrePere", component: NotrePere },
   { path: "/prayers/miscellaneous/saint-patrick", name: "SaintPatrick", component: SaintPatrick },
+  { path: "/prayers/miscellaneous/esprit-saint", name: "EspritSaint", component: EspritSaint },
   { path: "/synaxar", name: "Synaxar", component: SynaxarPage },
   { path: "/saint/:id", name: "Saint", component: SaintPage },
   { path: "/reading/:id", name: "Reading", component: ReadingPage },

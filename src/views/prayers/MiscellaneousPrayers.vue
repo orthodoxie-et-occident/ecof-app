@@ -44,6 +44,12 @@ const prieres = [
     auteur: "Saint Patrick, archevêque d'Armagh, apôtre de l'Irlande",
     route: "/prayers/miscellaneous/saint-patrick",
   },
+  {
+    id: 4,
+    titre: "Prière à l'Esprit-Saint",
+    auteur: "Saint évêque Jean de Saint-Denis",
+    route: "/prayers/miscellaneous/esprit-saint",
+  },
 ]
 </script>
 
