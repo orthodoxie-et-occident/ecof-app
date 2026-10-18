@@ -13,30 +13,13 @@
       <div class="ion-padding-top">
         <ion-item lines="none" class="date-item">
           <ion-icon :icon="calendarOutline" slot="start" color="medium"></ion-icon>
-
-          <ion-label color="medium">
-            {{ formattedDate }}
-          </ion-label>
-
-          <ion-datetime-button datetime="datetime" slot="end"></ion-datetime-button>
+          <ion-datetime-button datetime="datetime">
+            <span slot="date-target">{{ formattedDate }}</span>
+          </ion-datetime-button>
         </ion-item>
 
         <ion-modal :keep-contents-mounted="true" ref="modal">
-          <ion-datetime
-            id="datetime"
-            presentation="date"
-            :value="selectedDate"
-            @ionChange="handleDateChange"
-            locale="fr-FR"
-            :first-day-of-week="1"
-            :format-options="{
-              date: {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-              },
-            }"
-          ></ion-datetime>
+          <ion-datetime id="datetime" presentation="date" :value="selectedDate" @ionChange="handleDateChange" locale="fr-FR" :first-day-of-week="1"></ion-datetime>
         </ion-modal>
 
         <!-- LOADING -->
@@ -158,7 +141,7 @@ const formattedDate = computed(() => {
   if (!selectedDate.value) return ""
   const str = new Date(selectedDate.value).toLocaleDateString("fr-FR", {
     weekday: "long",
-    day: "2-digit",
+    day: "numeric",
     month: "long",
   })
   return str.charAt(0).toUpperCase() + str.slice(1)
