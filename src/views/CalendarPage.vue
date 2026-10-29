@@ -12,14 +12,25 @@
     <ion-content>
       <div class="ion-padding-top">
         <ion-item lines="none" class="date-item">
-          <ion-icon :icon="calendarOutline" slot="start" color="medium"></ion-icon>
+          <ion-icon
+            :icon="calendarOutline"
+            slot="start"
+            color="medium"
+          ></ion-icon>
           <ion-datetime-button datetime="datetime">
             <span slot="date-target">{{ formattedDate }}</span>
           </ion-datetime-button>
         </ion-item>
 
         <ion-modal :keep-contents-mounted="true" ref="modal">
-          <ion-datetime id="datetime" presentation="date" :value="selectedDate" @ionChange="handleDateChange" locale="fr-FR" :first-day-of-week="1"></ion-datetime>
+          <ion-datetime
+            id="datetime"
+            presentation="date"
+            :value="selectedDate"
+            @ionChange="handleDateChange"
+            locale="fr-FR"
+            :first-day-of-week="1"
+          ></ion-datetime>
         </ion-modal>
 
         <!-- LOADING -->
@@ -33,7 +44,11 @@
           <div class="error-card">
             <ion-icon :icon="cloudOfflineOutline" class="error-icon"></ion-icon>
             <p class="error-title">Connexion impossible</p>
-            <ion-button fill="outline" color="primary" @click="fetchCalendarData">
+            <ion-button
+              fill="outline"
+              color="primary"
+              @click="fetchCalendarData"
+            >
               <ion-icon :icon="refreshOutline" slot="start"></ion-icon>
               Réessayer
             </ion-button>
@@ -46,7 +61,11 @@
           <div class="section">
             <h3 class="section-title">Synaxaire du jour</h3>
 
-            <ion-item v-if="temporalTitle || temporalSubtitle" lines="none" class="temporal-header-item">
+            <ion-item
+              v-if="temporalTitle || temporalSubtitle"
+              lines="none"
+              class="temporal-header-item"
+            >
               <ion-label class="ion-text-wrap">
                 <h2 v-if="temporalTitle">{{ temporalTitle }}</h2>
                 <p v-if="temporalSubtitle">{{ temporalSubtitle }}</p>
@@ -78,13 +97,22 @@
           <div v-if="hasReadings" class="section">
             <h3 class="section-title">Lectures du jour</h3>
 
-            <div v-for="block in calendarData.readings" :key="block.block_title">
+            <div
+              v-for="block in calendarData.readings"
+              :key="block.block_title"
+            >
               <h4 class="subsection-title">
                 {{ block.block_title }}
               </h4>
 
               <ion-list>
-                <ion-item v-for="reading in block.readings" :key="reading.id" button detail @click="navigateToReading(reading.id)">
+                <ion-item
+                  v-for="reading in block.readings"
+                  :key="reading.id"
+                  button
+                  detail
+                  @click="navigateToReading(reading.id)"
+                >
                   <ion-label>
                     {{ reading.book_txt }}
                   </ion-label>
@@ -119,7 +147,11 @@ import {
   onIonViewWillEnter,
 } from "@ionic/vue"
 
-import { calendarOutline, cloudOfflineOutline, refreshOutline } from "ionicons/icons"
+import {
+  calendarOutline,
+  cloudOfflineOutline,
+  refreshOutline,
+} from "ionicons/icons"
 import { ref, computed, watch } from "vue"
 import { useIonRouter } from "@ionic/vue"
 
@@ -158,11 +190,17 @@ const hasReadings = computed(() => {
   return calendarData.value.readings.length > 0
 })
 
-const temporalTitle = computed(() => calendarData.value?.temporal?.[0]?.title ?? null)
+const temporalTitle = computed(
+  () => calendarData.value?.temporal?.[0]?.title ?? null,
+)
 
-const temporalSubtitle = computed(() => calendarData.value?.temporal?.[0]?.subtitle ?? null)
+const temporalSubtitle = computed(
+  () => calendarData.value?.temporal?.[0]?.subtitle ?? null,
+)
 
-const temporalContent = computed(() => calendarData.value?.temporal?.[0]?.content ?? null)
+const temporalContent = computed(
+  () => calendarData.value?.temporal?.[0]?.content ?? null,
+)
 
 const fetchCalendarData = async () => {
   if (!dateParam.value) return
@@ -171,7 +209,9 @@ const fetchCalendarData = async () => {
   error.value = null
 
   try {
-    const response = await fetch(`https://api.ecof.app/calendar/${dateParam.value}`)
+    const response = await fetch(
+      `https://api.ecof.app/calendar/${dateParam.value}`,
+    )
 
     if (!response.ok) throw new Error(`${response.status}`)
     calendarData.value = await response.json()

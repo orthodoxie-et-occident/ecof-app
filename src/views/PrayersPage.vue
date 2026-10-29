@@ -31,7 +31,18 @@
 </template>
 
 <script setup>
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonList, IonItem, IonLabel } from "@ionic/vue"
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonTitle,
+  IonContent,
+  IonList,
+  IonItem,
+  IonLabel,
+} from "@ionic/vue"
 
 const sections = [
   {

@@ -10,14 +10,23 @@
     </ion-header>
 
     <ion-content>
-      <template v-for="(paroisses, departement) in paroissesByDept" :key="departement">
+      <template
+        v-for="(paroisses, departement) in paroissesByDept"
+        :key="departement"
+      >
         <ion-list-header>
           <ion-label>
             <h2>{{ departement }}</h2>
           </ion-label>
         </ion-list-header>
         <ion-list>
-          <ion-item button detail v-for="p in paroisses" :key="p.id" @click="showEvents(p.id, p.nom)">
+          <ion-item
+            button
+            detail
+            v-for="p in paroisses"
+            :key="p.id"
+            @click="showEvents(p.id, p.nom)"
+          >
             <ion-thumbnail slot="start">
               <img :src="p.img" :alt="p.nom" />
             </ion-thumbnail>
@@ -34,7 +43,20 @@
 
 <script setup>
 import { useIonRouter } from "@ionic/vue"
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonList, IonListHeader, IonItem, IonThumbnail, IonLabel } from "@ionic/vue"
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonTitle,
+  IonContent,
+  IonList,
+  IonListHeader,
+  IonItem,
+  IonThumbnail,
+  IonLabel,
+} from "@ionic/vue"
 import bordeauxImg from "@/assets/img/parishes/bordeaux.png"
 import montpellierImg from "@/assets/img/parishes/montpellier.png"
 import amboiseImg from "@/assets/img/parishes/amboise.png"
@@ -53,22 +75,116 @@ import lisieuxImg from "@/assets/img/parishes/lisieux.png"
 const ionRouter = useIonRouter()
 
 const paroissesByDept = {
-  "14 - CALVADOS": [{ id: "lisieux", nom: "Paroisse Notre-Dame en Normandie", ville: "Le Mesnil-Germain", img: lisieuxImg }],
-  "33 - GIRONDE": [{ id: "bordeaux", nom: "Paroisse de l'Exaltation de la Sainte Croix et Saint-Paulin de Nole", ville: "Bordeaux", img: bordeauxImg }],
-  "34 - HÉRAULT": [{ id: "montpellier", nom: "Paroisse de la Théophanie", ville: "Montpellier", img: montpellierImg }],
-  "37 - INDRE-ET-LOIRE": [{ id: "amboise", nom: "Paroisse du Moutier Saint-Martin", ville: "Amboise", img: amboiseImg }],
-  "38 - ISÈRE": [{ id: "grenoble", nom: "Paroisse de la Résurrection", ville: "Grenoble", img: grenobleImg }],
-  "44 - LOIRE-ATLANTIQUE": [{ id: "nantes", nom: "Paroisse de la Trinité et Saint-Clair", ville: "Nantes", img: nantesImg }],
-  "45 - LOIRET": [
-    { id: "orleans", nom: "Paroisse Saint-Avit", ville: "Orléans", img: orleansImg },
-    { id: "stloup", nom: "Chapelle Saint-Loup de Sens et Sainte-Radegonde", ville: "Saint-Loup-des-Vignes", img: stloupImg },
+  "14 - CALVADOS": [
+    {
+      id: "lisieux",
+      nom: "Paroisse Notre-Dame en Normandie",
+      ville: "Le Mesnil-Germain",
+      img: lisieuxImg,
+    },
   ],
-  "49 - MAINE-ET-LOIRE": [{ id: "angers", nom: "Paroisse Saint-Martin d'Anjou", ville: "Angers", img: angersImg }],
-  "56 - MORBIHAN": [{ id: "vannes", nom: "Chapelle Saint-Martin du Moustoir", ville: "Vannes", img: vannesImg }],
-  "69 - RHÔNE": [{ id: "lyon", nom: "Paroisse Sainte-Marie et Saint-Jean", ville: "Lyon", img: lyonImg }],
-  "75 - PARIS": [{ id: "paris", nom: "Cathédrale Saint Irénée", ville: "Paris", img: parisImg }],
-  "83 - VAR": [{ id: "stebaume", nom: "Paroisse Sainte Marie-Madeleine de la Sainte Baume", ville: "Plan d’Aups – Sainte-Baume", img: stebaumeImg }],
-  "86 - VIENNE": [{ id: "poitiers", nom: "Paroisse Saint-Savin et Saint-Cyprien", ville: "Poitiers", img: poitiersImg }],
+  "33 - GIRONDE": [
+    {
+      id: "bordeaux",
+      nom: "Paroisse de l'Exaltation de la Sainte Croix et Saint-Paulin de Nole",
+      ville: "Bordeaux",
+      img: bordeauxImg,
+    },
+  ],
+  "34 - HÉRAULT": [
+    {
+      id: "montpellier",
+      nom: "Paroisse de la Théophanie",
+      ville: "Montpellier",
+      img: montpellierImg,
+    },
+  ],
+  "37 - INDRE-ET-LOIRE": [
+    {
+      id: "amboise",
+      nom: "Paroisse du Moutier Saint-Martin",
+      ville: "Amboise",
+      img: amboiseImg,
+    },
+  ],
+  "38 - ISÈRE": [
+    {
+      id: "grenoble",
+      nom: "Paroisse de la Résurrection",
+      ville: "Grenoble",
+      img: grenobleImg,
+    },
+  ],
+  "44 - LOIRE-ATLANTIQUE": [
+    {
+      id: "nantes",
+      nom: "Paroisse de la Trinité et Saint-Clair",
+      ville: "Nantes",
+      img: nantesImg,
+    },
+  ],
+  "45 - LOIRET": [
+    {
+      id: "orleans",
+      nom: "Paroisse Saint-Avit",
+      ville: "Orléans",
+      img: orleansImg,
+    },
+    {
+      id: "stloup",
+      nom: "Chapelle Saint-Loup de Sens et Sainte-Radegonde",
+      ville: "Saint-Loup-des-Vignes",
+      img: stloupImg,
+    },
+  ],
+  "49 - MAINE-ET-LOIRE": [
+    {
+      id: "angers",
+      nom: "Paroisse Saint-Martin d'Anjou",
+      ville: "Angers",
+      img: angersImg,
+    },
+  ],
+  "56 - MORBIHAN": [
+    {
+      id: "vannes",
+      nom: "Chapelle Saint-Martin du Moustoir",
+      ville: "Vannes",
+      img: vannesImg,
+    },
+  ],
+  "69 - RHÔNE": [
+    {
+      id: "lyon",
+      nom: "Paroisse Sainte-Marie et Saint-Jean",
+      ville: "Lyon",
+      img: lyonImg,
+    },
+  ],
+  "75 - PARIS": [
+    {
+      id: "paris",
+      nom: "Cathédrale Saint Irénée",
+      ville: "Paris",
+      img: parisImg,
+    },
+  ],
+  "83 - VAR": [
+    {
+      id: "stebaume",
+      nom: "Paroisse Sainte Marie-Madeleine de la Sainte Baume",
+      ville: "Plan d’Aups – Sainte-Baume",
+      img: stebaumeImg,
+    },
+  ],
+  "86 - VIENNE": [
+    {
+      id: "poitiers",
+      nom: "Paroisse Saint-Savin et Saint-Cyprien",
+      ville: "Poitiers",
+      img: poitiersImg,
+    },
+  ],
 }
 
 const showEvents = (id, nom) => {

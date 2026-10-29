@@ -73,5 +73,14 @@ async function pruneReadIds(currentArticles) {
 }
 
 export function useReadNews() {
-  return { state, load, markAsRead, markAllAsRead, isRead, unreadCount, pruneReadIds, isReportable }
+  return {
+    state,
+    load,
+    markAsRead,
+    markAllAsRead,
+    isRead,
+    unreadCount,
+    pruneReadIds,
+    isReportable,
+  }
 }

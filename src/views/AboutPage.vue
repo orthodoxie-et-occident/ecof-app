@@ -14,22 +14,41 @@
         <section class="about-section">
           <h2>Ressources</h2>
           <p>
-            Les ressources utilisées pour cette application s'appuient sur la tradition liturgique de l'<a href="https://eglise-catholique-orthodoxe-de-france.fr/" target="_blank"
+            Les ressources utilisées pour cette application s'appuient sur la
+            tradition liturgique de l'<a
+              href="https://eglise-catholique-orthodoxe-de-france.fr/"
+              target="_blank"
               >Église Catholique Orthodoxe de France</a
             >.
           </p>
-          <p>Les lectures quotidiennes font usage de traductions libres de droits de la Bible&nbsp;:</p>
+          <p>
+            Les lectures quotidiennes font usage de traductions libres de droits
+            de la Bible&nbsp;:
+          </p>
           <ul>
-            <li><em>Bible Segond 1910</em>, en utilisant le vocable «&nbsp;le Seigneur&nbsp;» de préférence à «&nbsp;l'Éternel&nbsp;».</li>
-            <li><em>Bible Crampon 1923</em>, pour certains livres de l'Ancien Testament absents des Bibles protestantes, en remplaçant le vouvoiement de Dieu par le tutoiement.</li>
+            <li>
+              <em>Bible Segond 1910</em>, en utilisant le vocable «&nbsp;le
+              Seigneur&nbsp;» de préférence à «&nbsp;l'Éternel&nbsp;».
+            </li>
+            <li>
+              <em>Bible Crampon 1923</em>, pour certains livres de l'Ancien
+              Testament absents des Bibles protestantes, en remplaçant le
+              vouvoiement de Dieu par le tutoiement.
+            </li>
           </ul>
         </section>
 
         <section class="about-section">
           <h2>Calendrier liturgique</h2>
           <p>
-            Le calendrier liturgique édité par l'<a href="https://eglise-catholique-orthodoxe-de-france.fr/" target="_blank">Église Catholique Orthodoxe de France</a> fait référence en cas de
-            divergence avec les informations de l'application. Il comporte en outre des informations non reprises dans celle-ci.
+            Le calendrier liturgique édité par l'<a
+              href="https://eglise-catholique-orthodoxe-de-france.fr/"
+              target="_blank"
+              >Église Catholique Orthodoxe de France</a
+            >
+            fait référence en cas de divergence avec les informations de
+            l'application. Il comporte en outre des informations non reprises
+            dans celle-ci.
           </p>
         </section>
 
@@ -37,19 +56,33 @@
           <h2>Bibliothèques</h2>
           <p>
             Le rendu des partitions musicales de cette application s'appuie sur
-            <a href="https://www.verovio.org/" target="_blank">Verovio</a>, une bibliothèque open-source de gravure musicale développée par le
-            <a href="https://rism.digital/" target="_blank">RISM Digital Center</a>, distribuée sous <a href="https://www.gnu.org/licenses/lgpl-3.0.html" target="_blank">licence LGPL v3</a>.
+            <a href="https://www.verovio.org/" target="_blank">Verovio</a>, une
+            bibliothèque open-source de gravure musicale développée par le
+            <a href="https://rism.digital/" target="_blank"
+              >RISM Digital Center</a
+            >, distribuée sous
+            <a href="https://www.gnu.org/licenses/lgpl-3.0.html" target="_blank"
+              >licence LGPL v3</a
+            >.
           </p>
         </section>
 
         <section class="about-section">
           <h2>Contribuer</h2>
-          <p>Le contenu de l'application s'enrichit continuellement, toutes les contributions sont les bienvenues, notamment des ressources libres de droits sur la vie des saints.</p>
+          <p>
+            Le contenu de l'application s'enrichit continuellement, toutes les
+            contributions sont les bienvenues, notamment des ressources libres
+            de droits sur la vie des saints.
+          </p>
         </section>
 
         <section class="about-section">
           <h2>Contact</h2>
-          <p>Pour toute question, suggestion ou contribution vous pouvez nous contacter à l'adresse <a href="mailto:contact@ecof.app">contact@ecof.app</a></p>
+          <p>
+            Pour toute question, suggestion ou contribution vous pouvez nous
+            contacter à l'adresse
+            <a href="mailto:contact@ecof.app">contact@ecof.app</a>
+          </p>
         </section>
 
         <p class="version">Version 3.6.2</p>
@@ -59,7 +92,15 @@
 </template>
 
 <script setup>
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent } from "@ionic/vue"
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonTitle,
+  IonContent,
+} from "@ionic/vue"
 </script>
 
 <style scoped>
@@ -116,7 +157,10 @@ import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, Io
 a {
   color: var(--ion-color-dark);
   text-decoration: none;
-  background: linear-gradient(rgba(var(--ion-color-primary-rgb), 0.25), rgba(var(--ion-color-primary-rgb), 0.25));
+  background: linear-gradient(
+    rgba(var(--ion-color-primary-rgb), 0.25),
+    rgba(var(--ion-color-primary-rgb), 0.25)
+  );
   background-repeat: no-repeat;
   background-size: 100% 40%;
   background-position: 0 88%;

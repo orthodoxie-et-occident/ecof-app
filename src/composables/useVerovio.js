@@ -5,7 +5,9 @@ let toolkitPromise = null
 
 export function getVerovioToolkit() {
   if (!toolkitPromise) {
-    toolkitPromise = createVerovioModule().then((mod) => new VerovioToolkit(mod))
+    toolkitPromise = createVerovioModule().then(
+      (mod) => new VerovioToolkit(mod),
+    )
   }
   return toolkitPromise
 }

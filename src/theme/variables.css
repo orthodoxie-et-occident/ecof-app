@@ -1,5 +1,6 @@
 :root {
-  --ion-font-family: "sora", -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
+  --ion-font-family:
+    "sora", -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
 
   --ion-background-color: #ede8df;
 

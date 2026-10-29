@@ -36,12 +36,20 @@
       </div>
 
       <ion-list v-else>
-        <ion-item button detail v-for="article in categoryArticles" :key="article.id" @click="openArticle(article)">
+        <ion-item
+          button
+          detail
+          v-for="article in categoryArticles"
+          :key="article.id"
+          @click="openArticle(article)"
+        >
           <ion-label>
             <h2 class="article-title">
               {{ article.title }}
             </h2>
-            <p class="article-meta">{{ article.author }} • {{ formatDate(article.published_at) }}</p>
+            <p class="article-meta">
+              {{ article.author }} • {{ formatDate(article.published_at) }}
+            </p>
           </ion-label>
           <span v-if="isUnread(article)" slot="end" class="unread-dot"></span>
         </ion-item>
@@ -54,8 +62,27 @@
 import { computed } from "vue"
 import { useRoute } from "vue-router"
 import { useIonRouter } from "@ionic/vue"
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonList, IonItem, IonLabel, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
-import { cloudOfflineOutline, refreshOutline, checkmarkDoneOutline } from "ionicons/icons"
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonBackButton,
+  IonTitle,
+  IonContent,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonSpinner,
+  IonButton,
+  IonIcon,
+  onIonViewWillEnter,
+} from "@ionic/vue"
+import {
+  cloudOfflineOutline,
+  refreshOutline,
+  checkmarkDoneOutline,
+} from "ionicons/icons"
 import { useArticles } from "../composables/useArticles"
 import { getCategoryLabel } from "../composables/categories"
 import { useReadNews } from "../composables/useReadNews"
@@ -63,10 +90,17 @@ import { useReadNews } from "../composables/useReadNews"
 const route = useRoute()
 const ionRouter = useIonRouter()
 const { articles, loading, error, hasFetched, fetchArticles } = useArticles()
-const { load: loadReadNews, isRead, markAllAsRead, isReportable } = useReadNews()
+const {
+  load: loadReadNews,
+  isRead,
+  markAllAsRead,
+  isReportable,
+} = useReadNews()
 const slugId = computed(() => Number(route.params.slugId))
 const categoryLabel = computed(() => getCategoryLabel(slugId.value))
-const categoryArticles = computed(() => articles.value.filter((a) => (a.slug_id ?? 0) === slugId.value))
+const categoryArticles = computed(() =>
+  articles.value.filter((a) => (a.slug_id ?? 0) === slugId.value),
+)
 
 function isUnread(article) {
   return isReportable(article) && !isRead(article.id)

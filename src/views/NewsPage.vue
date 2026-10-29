@@ -27,14 +27,36 @@
       </div>
 
       <ion-list v-else>
-        <ion-item button v-for="category in categoriesWithStats" :key="category.slug_id" @click="openCategory(category)" detail>
-          <ion-icon v-if="category.icon" :icon="category.icon" slot="start" color="primary"></ion-icon>
-          <ion-icon v-else :src="category.iconSrc" slot="start" color="primary"></ion-icon>
+        <ion-item
+          button
+          v-for="category in categoriesWithStats"
+          :key="category.slug_id"
+          @click="openCategory(category)"
+          detail
+        >
+          <ion-icon
+            v-if="category.icon"
+            :icon="category.icon"
+            slot="start"
+            color="primary"
+          ></ion-icon>
+          <ion-icon
+            v-else
+            :src="category.iconSrc"
+            slot="start"
+            color="primary"
+          ></ion-icon>
           <ion-label>
             <h2>{{ category.label }}</h2>
             <p>Mis à jour le {{ formatDate(category.lastPublishedAt) }}</p>
           </ion-label>
-          <ion-badge slot="end" color="danger" class="unread-badge" v-if="category.unreadCount > 0">{{ category.unreadCount }}</ion-badge>
+          <ion-badge
+            slot="end"
+            color="danger"
+            class="unread-badge"
+            v-if="category.unreadCount > 0"
+            >{{ category.unreadCount }}</ion-badge
+          >
         </ion-item>
       </ion-list>
     </ion-content>
@@ -44,7 +66,23 @@
 <script setup>
 import { computed } from "vue"
 import { useIonRouter } from "@ionic/vue"
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, IonList, IonItem, IonLabel, IonBadge, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonTitle,
+  IonContent,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonBadge,
+  IonSpinner,
+  IonButton,
+  IonIcon,
+  onIonViewWillEnter,
+} from "@ionic/vue"
 import { cloudOfflineOutline, refreshOutline } from "ionicons/icons"
 import { useArticles } from "../composables/useArticles"
 import { categoryMap } from "../composables/categories"
@@ -57,7 +95,9 @@ const { load: loadReadNews, unreadCount, pruneReadIds } = useReadNews()
 const categoriesWithStats = computed(() => {
   return Object.entries(categoryMap)
     .map(([slug_id, meta]) => {
-      const catArticles = articles.value.filter((a) => (a.slug_id ?? 0) === Number(slug_id))
+      const catArticles = articles.value.filter(
+        (a) => (a.slug_id ?? 0) === Number(slug_id),
+      )
       const lastPublishedAt = catArticles.reduce((latest, a) => {
         const d = new Date(a.published_at)
         return !latest || d > latest ? d : latest

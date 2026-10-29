@@ -31,7 +31,11 @@
       </div>
 
       <div v-else class="events-wrapper">
-        <div v-for="(group, date) in groupedEvents" :key="date" class="day-group">
+        <div
+          v-for="(group, date) in groupedEvents"
+          :key="date"
+          class="day-group"
+        >
           <div class="day-header">
             <span class="day-name">{{ getDayName(date) }}</span>
             <span class="day-date">{{ getFullDate(date) }}</span>
@@ -49,8 +53,12 @@
             </div>
             <div class="event-content">
               <p class="event-title">{{ event.title }}</p>
-              <p v-if="event.location" class="event-meta">{{ event.location }}</p>
-              <p v-if="event.description" class="event-desc">{{ event.description }}</p>
+              <p v-if="event.location" class="event-meta">
+                {{ event.location }}
+              </p>
+              <p v-if="event.description" class="event-desc">
+                {{ event.description }}
+              </p>
             </div>
           </div>
         </div>
@@ -62,7 +70,19 @@
 <script setup>
 import { ref, computed } from "vue"
 import { useRoute } from "vue-router"
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonBackButton,
+  IonTitle,
+  IonContent,
+  IonSpinner,
+  IonButton,
+  IonIcon,
+  onIonViewWillEnter,
+} from "@ionic/vue"
 import { cloudOfflineOutline, refreshOutline } from "ionicons/icons"
 
 const route = useRoute()
@@ -83,7 +103,9 @@ async function fetchEvents() {
     const response = await fetch(`https://api.ecof.app/parish/${parishId}`)
     if (!response.ok) throw new Error("Impossible de récupérer les événements")
     const data = await response.json()
-    events.value = (data.events || []).sort((a, b) => a.start.localeCompare(b.start))
+    events.value = (data.events || []).sort((a, b) =>
+      a.start.localeCompare(b.start),
+    )
   } catch (err) {
     console.error(err.message)
     error.value = true
@@ -146,11 +168,23 @@ const groupedEvents = computed(() => {
 
 const hasContent = computed(() => Object.keys(groupedEvents.value).length > 0)
 
-const getDayName = (dateStr) => new Date(`${dateStr}T00:00:00`).toLocaleDateString("fr-FR", { weekday: "long" })
+const getDayName = (dateStr) =>
+  new Date(`${dateStr}T00:00:00`).toLocaleDateString("fr-FR", {
+    weekday: "long",
+  })
 
-const getFullDate = (dateStr) => new Date(`${dateStr}T00:00:00`).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })
+const getFullDate = (dateStr) =>
+  new Date(`${dateStr}T00:00:00`).toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  })
 
-const formatTime = (dateString) => new Date(dateString).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })
+const formatTime = (dateString) =>
+  new Date(dateString).toLocaleTimeString("fr-FR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  })
 </script>
 
 <style scoped>

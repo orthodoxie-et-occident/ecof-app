@@ -11,7 +11,10 @@ export async function checkForUpdate() {
   if (platform !== "ios" && platform !== "android") return
 
   try {
-    const [appInfo, versions] = await Promise.all([App.getInfo(), fetch(`${API_URL}`).then((r) => r.json())])
+    const [appInfo, versions] = await Promise.all([
+      App.getInfo(),
+      fetch(`${API_URL}`).then((r) => r.json()),
+    ])
 
     const info = versions[platform]
     if (!info) return
@@ -24,7 +27,10 @@ export async function checkForUpdate() {
       message: `Vous êtes sur la version ${appInfo.version} et la version ${info.latestVersion} est maintenant disponible.`,
       buttons: [
         { text: "Plus tard", role: "cancel" },
-        { text: "Mettre à jour", handler: () => Browser.open({ url: info.storeUrl }) },
+        {
+          text: "Mettre à jour",
+          handler: () => Browser.open({ url: info.storeUrl }),
+        },
       ],
     })
     await alert.present()

@@ -9,7 +9,11 @@
       </ion-toolbar>
 
       <ion-toolbar color="primary">
-        <ion-searchbar v-model="searchTerm" placeholder="Recherche" :debounce="300"></ion-searchbar>
+        <ion-searchbar
+          v-model="searchTerm"
+          placeholder="Recherche"
+          :debounce="300"
+        ></ion-searchbar>
       </ion-toolbar>
     </ion-header>
 
@@ -38,7 +42,13 @@
             </ion-label>
           </ion-list-header>
           <ion-list>
-            <ion-item button detail v-for="item in items" :key="item.id" @click="showSaintDetail(item)">
+            <ion-item
+              button
+              detail
+              v-for="item in items"
+              :key="item.id"
+              @click="showSaintDetail(item)"
+            >
               <ion-label>
                 <h2 class="saint-title">{{ item.saint }}</h2>
               </ion-label>
@@ -47,8 +57,16 @@
         </template>
       </template>
 
-      <ion-infinite-scroll v-if="!loading && !error" :disabled="allLoaded" @ionInfinite="loadMore">
-        <ion-infinite-scroll-content loading-spinner="crescent" loading-text="Chargement..."> </ion-infinite-scroll-content>
+      <ion-infinite-scroll
+        v-if="!loading && !error"
+        :disabled="allLoaded"
+        @ionInfinite="loadMore"
+      >
+        <ion-infinite-scroll-content
+          loading-spinner="crescent"
+          loading-text="Chargement..."
+        >
+        </ion-infinite-scroll-content>
       </ion-infinite-scroll>
     </ion-content>
   </ion-page>
@@ -127,9 +145,13 @@ const filteredSaints = computed(() => {
   return saints.value.filter((item) => item._normalized.includes(q))
 })
 
-const visibleSaints = computed(() => filteredSaints.value.slice(0, displayCount.value))
+const visibleSaints = computed(() =>
+  filteredSaints.value.slice(0, displayCount.value),
+)
 
-const allLoaded = computed(() => displayCount.value >= filteredSaints.value.length)
+const allLoaded = computed(
+  () => displayCount.value >= filteredSaints.value.length,
+)
 
 const groupedSaints = computed(() => {
   const groups = {}
@@ -146,13 +168,22 @@ watch(searchTerm, () => {
 })
 
 const loadMore = async (event) => {
-  const targetCount = Math.min(displayCount.value + PAGE_SIZE, filteredSaints.value.length)
+  const targetCount = Math.min(
+    displayCount.value + PAGE_SIZE,
+    filteredSaints.value.length,
+  )
 
   // Étend jusqu'à la fin de la lettre en cours pour éviter de la couper en deux
   let newCount = targetCount
   if (newCount < filteredSaints.value.length) {
-    const currentLetter = filteredSaints.value[newCount - 1]._normalized.charAt(0).toUpperCase() || "#"
-    while (newCount < filteredSaints.value.length && (filteredSaints.value[newCount]._normalized.charAt(0).toUpperCase() || "#") === currentLetter) {
+    const currentLetter =
+      filteredSaints.value[newCount - 1]._normalized.charAt(0).toUpperCase() ||
+      "#"
+    while (
+      newCount < filteredSaints.value.length &&
+      (filteredSaints.value[newCount]._normalized.charAt(0).toUpperCase() ||
+        "#") === currentLetter
+    ) {
       newCount++
     }
   }

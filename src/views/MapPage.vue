@@ -18,12 +18,25 @@
             <img :src="getDioceseImg(poi.diocese)" class="card-pin" />
             <div class="info">
               <strong>{{ poi.name }}</strong>
-              <span class="diocese-label" :class="poi.diocese === '1' ? 'link-gold' : 'link-purple'">{{ getDioceseLabel(poi.diocese) }}</span>
               <span
-                >{{ poi.adress }}<template v-if="poi.adress2 && poi.adress2 !== 'null'">, {{ poi.adress2 }}</template></span
+                class="diocese-label"
+                :class="poi.diocese === '1' ? 'link-gold' : 'link-purple'"
+                >{{ getDioceseLabel(poi.diocese) }}</span
+              >
+              <span
+                >{{ poi.adress
+                }}<template v-if="poi.adress2 && poi.adress2 !== 'null'"
+                  >, {{ poi.adress2 }}</template
+                ></span
               >
               <span>{{ poi.postcode }} {{ poi.city }}</span>
-              <a v-if="poi.website && poi.website !== 'null'" :href="poi.website" :class="poi.diocese === '1' ? 'link-gold' : 'link-purple'" target="_system">Visiter le site →</a>
+              <a
+                v-if="poi.website && poi.website !== 'null'"
+                :href="poi.website"
+                :class="poi.diocese === '1' ? 'link-gold' : 'link-purple'"
+                target="_system"
+                >Visiter le site →</a
+              >
             </div>
           </div>
           <button class="close" @click="poi = null">✕</button>
@@ -35,7 +48,17 @@
 
 <script setup>
 import { ref } from "vue"
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonContent, onIonViewDidEnter, onIonViewWillLeave } from "@ionic/vue"
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonTitle,
+  IonContent,
+  onIonViewDidEnter,
+  onIonViewWillLeave,
+} from "@ionic/vue"
 
 import * as maplibregl from "maplibre-gl"
 import "maplibre-gl/dist/maplibre-gl.css"
@@ -49,12 +72,26 @@ import markerDiocese1 from "@/assets/img/layout/pin1.png"
 import markerDiocese2 from "@/assets/img/layout/pin2.png"
 
 const DIOCESES = [
-  { id: "1", label: "Diocèse de Mgr Benoît de Pau", color: "#A88B2A", img: markerDiocese1, key: "m1" },
-  { id: "2", label: "Diocèse de Mgr Philippe de la Charité-sur-Loire", color: "#6B4EA3", img: markerDiocese2, key: "m2" },
+  {
+    id: "1",
+    label: "Diocèse de Mgr Benoît de Pau",
+    color: "#A88B2A",
+    img: markerDiocese1,
+    key: "m1",
+  },
+  {
+    id: "2",
+    label: "Diocèse de Mgr Philippe de la Charité-sur-Loire",
+    color: "#6B4EA3",
+    img: markerDiocese2,
+    key: "m2",
+  },
 ]
 
-const getDioceseImg = (id) => DIOCESES.find((d) => d.id === String(id))?.img ?? markerDiocese1
-const getDioceseLabel = (id) => DIOCESES.find((d) => d.id === String(id))?.label ?? ""
+const getDioceseImg = (id) =>
+  DIOCESES.find((d) => d.id === String(id))?.img ?? markerDiocese1
+const getDioceseLabel = (id) =>
+  DIOCESES.find((d) => d.id === String(id))?.label ?? ""
 
 const mapEl = ref(null)
 const poi = ref(null)
@@ -71,13 +108,15 @@ onIonViewDidEnter(async () => {
     attributionControl: false,
     style: {
       version: 8,
-      glyphs: "https://protomaps.github.io/basemaps-assets/fonts/{fontstack}/{range}.pbf",
+      glyphs:
+        "https://protomaps.github.io/basemaps-assets/fonts/{fontstack}/{range}.pbf",
       sprite: "https://protomaps.github.io/basemaps-assets/sprites/v4/light",
       sources: {
         pm: {
           type: "vector",
           url: "pmtiles://https://pub-a3414ad0b3f448e58648cf080ebd4e2d.r2.dev/europe_ouest.pmtiles",
-          attribution: '<a href="https://protomaps.com">Protomaps</a> © <a href="https://openstreetmap.org">OpenStreetMap</a>',
+          attribution:
+            '<a href="https://protomaps.com">Protomaps</a> © <a href="https://openstreetmap.org">OpenStreetMap</a>',
         },
       },
       layers: layers("pm", namedFlavor("light"), { lang: "fr" }),
@@ -93,8 +132,14 @@ onIonViewDidEnter(async () => {
     pitchWithRotate: false,
   })
 
-  mapInstance.addControl(new maplibregl.AttributionControl({ compact: true }), "top-right")
-  mapInstance.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-left")
+  mapInstance.addControl(
+    new maplibregl.AttributionControl({ compact: true }),
+    "top-right",
+  )
+  mapInstance.addControl(
+    new maplibregl.NavigationControl({ showCompass: false }),
+    "top-left",
+  )
 
   mapInstance.dragRotate.disable()
   mapInstance.touchZoomRotate.disableRotation()
@@ -119,7 +164,10 @@ onIonViewDidEnter(async () => {
           type: "FeatureCollection",
           features: raw.map((p) => ({
             type: "Feature",
-            geometry: { type: "Point", coordinates: [+p.longitude, +p.latitude] },
+            geometry: {
+              type: "Point",
+              coordinates: [+p.longitude, +p.latitude],
+            },
             properties: { ...p, diocese: String(p.diocese) },
           })),
         },
@@ -130,7 +178,12 @@ onIonViewDidEnter(async () => {
         type: "symbol",
         source: "poi",
         layout: {
-          "icon-image": ["match", ["get", "diocese"], ...DIOCESES.flatMap((d) => [d.id, d.key]), "m1"],
+          "icon-image": [
+            "match",
+            ["get", "diocese"],
+            ...DIOCESES.flatMap((d) => [d.id, d.key]),
+            "m1",
+          ],
           "icon-size": ["interpolate", ["linear"], ["zoom"], 4, 0.2, 14, 0.55],
           "icon-anchor": "bottom",
           "icon-allow-overlap": true,
@@ -177,8 +230,16 @@ onIonViewDidEnter(async () => {
         poi.value = null
       })
 
-      mapInstance.on("mouseenter", "poi-icons", () => (mapInstance.getCanvas().style.cursor = "pointer"))
-      mapInstance.on("mouseleave", "poi-icons", () => (mapInstance.getCanvas().style.cursor = ""))
+      mapInstance.on(
+        "mouseenter",
+        "poi-icons",
+        () => (mapInstance.getCanvas().style.cursor = "pointer"),
+      )
+      mapInstance.on(
+        "mouseleave",
+        "poi-icons",
+        () => (mapInstance.getCanvas().style.cursor = ""),
+      )
     } catch (err) {
       console.error("❌ Erreur :", err)
     }

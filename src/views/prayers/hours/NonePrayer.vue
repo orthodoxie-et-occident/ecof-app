@@ -3,7 +3,10 @@
     <ion-header>
       <ion-toolbar color="primary">
         <ion-buttons slot="start">
-          <ion-back-button text="" default-href="/prayers/hours"></ion-back-button>
+          <ion-back-button
+            text=""
+            default-href="/prayers/hours"
+          ></ion-back-button>
         </ion-buttons>
         <ion-title>None</ion-title>
       </ion-toolbar>
@@ -19,7 +22,16 @@
 </template>
 
 <script setup>
-import { IonPage, IonHeader, IonButtons, IonBackButton, IonToolbar, IonTitle, IonContent, IonIcon } from "@ionic/vue"
+import {
+  IonPage,
+  IonHeader,
+  IonButtons,
+  IonBackButton,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonIcon,
+} from "@ionic/vue"
 
 import { documentTextOutline } from "ionicons/icons"
 </script>

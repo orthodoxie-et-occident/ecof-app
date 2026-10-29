@@ -39,7 +39,19 @@
 <script setup>
 import { ref } from "vue"
 import { useRoute } from "vue-router"
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonSpinner, IonButton, IonIcon, onIonViewWillEnter } from "@ionic/vue"
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonBackButton,
+  IonTitle,
+  IonContent,
+  IonSpinner,
+  IonButton,
+  IonIcon,
+  onIonViewWillEnter,
+} from "@ionic/vue"
 import { cloudOfflineOutline, refreshOutline } from "ionicons/icons"
 import { useReadNews } from "../composables/useReadNews"
 

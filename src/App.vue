@@ -8,13 +8,27 @@
       </ion-header>
       <ion-content>
         <ion-list>
-          <ion-menu-toggle auto-hide="false" v-for="item in menuItems" :key="item.route">
+          <ion-menu-toggle
+            auto-hide="false"
+            v-for="item in menuItems"
+            :key="item.route"
+          >
             <ion-item button :router-link="item.route" router-direction="root">
               <ion-label class="menu-label">{{ item.label }}</ion-label>
-              <ion-badge v-if="item.route === '/news' && newsUnreadCount > 0" color="danger" class="menu-badge" slot="end">
+              <ion-badge
+                v-if="item.route === '/news' && newsUnreadCount > 0"
+                color="danger"
+                class="menu-badge"
+                slot="end"
+              >
                 {{ newsUnreadCount }}
               </ion-badge>
-              <img slot="end" :src="item.image" :alt="item.label" class="menu-img" />
+              <img
+                slot="end"
+                :src="item.image"
+                :alt="item.label"
+                class="menu-img"
+              />
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
@@ -26,7 +40,22 @@
 
 <script setup>
 import { computed, onMounted } from "vue"
-import { IonApp, IonRouterOutlet, IonMenu, IonMenuToggle, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel, IonBadge, useBackButton, useIonRouter } from "@ionic/vue"
+import {
+  IonApp,
+  IonRouterOutlet,
+  IonMenu,
+  IonMenuToggle,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonBadge,
+  useBackButton,
+  useIonRouter,
+} from "@ionic/vue"
 import { App } from "@capacitor/app"
 import { useArticles } from "./composables/useArticles"
 import { useReadNews } from "./composables/useReadNews"

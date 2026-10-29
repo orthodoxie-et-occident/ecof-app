@@ -8,7 +8,9 @@
 
         <ion-title>
           <div class="title-main">Synaxaire</div>
-          <div v-if="commemorationDate" class="title-date">{{ commemorationDate }}</div>
+          <div v-if="commemorationDate" class="title-date">
+            {{ commemorationDate }}
+          </div>
         </ion-title>
       </ion-toolbar>
     </ion-header>
@@ -88,7 +90,22 @@
 <script setup>
 import { ref, computed } from "vue"
 import { useRoute } from "vue-router"
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonBackButton, IonIcon, IonSpinner, IonButton, IonSegment, IonSegmentButton, IonLabel, onIonViewWillEnter } from "@ionic/vue"
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonButtons,
+  IonBackButton,
+  IonIcon,
+  IonSpinner,
+  IonButton,
+  IonSegment,
+  IonSegmentButton,
+  IonLabel,
+  onIonViewWillEnter,
+} from "@ionic/vue"
 import { cloudOfflineOutline, refreshOutline } from "ionicons/icons"
 import fileTextIcon from "@/assets/icons/file-text.svg"
 import bookAIcon from "@/assets/icons/book-a.svg"
@@ -101,9 +118,24 @@ const loading = ref(true)
 const error = ref(null)
 const selectedTab = ref("v_short")
 
-const MOIS_FR = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
+const MOIS_FR = [
+  "janvier",
+  "février",
+  "mars",
+  "avril",
+  "mai",
+  "juin",
+  "juillet",
+  "août",
+  "septembre",
+  "octobre",
+  "novembre",
+  "décembre",
+]
 
-const saintTitle = computed(() => saintData.value?.saint || saintData.value?.prefixe)
+const saintTitle = computed(
+  () => saintData.value?.saint || saintData.value?.prefixe,
+)
 
 const commemorationDate = computed(() => {
   const jour = saintData.value?.jour

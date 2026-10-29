@@ -1,4 +1,8 @@
-import { helpCircleOutline, calendarOutline, phonePortraitOutline } from "ionicons/icons"
+import {
+  helpCircleOutline,
+  calendarOutline,
+  phonePortraitOutline,
+} from "ionicons/icons"
 import crozierIcon from "../assets/icons/crozier.svg"
 
 export const categoryMap = {

@@ -11,7 +11,14 @@
 
     <ion-content>
       <ion-list>
-        <ion-item button v-for="priere in prieres" :key="priere.id" :router-link="priere.route" router-direction="forward" detail>
+        <ion-item
+          button
+          v-for="priere in prieres"
+          :key="priere.id"
+          :router-link="priere.route"
+          router-direction="forward"
+          detail
+        >
           <ion-label>
             <h2>{{ priere.titre }}</h2>
             <p>{{ priere.auteur }}</p>
@@ -23,7 +30,18 @@
 </template>
 
 <script setup>
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonList, IonItem, IonLabel } from "@ionic/vue"
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonBackButton,
+  IonTitle,
+  IonContent,
+  IonList,
+  IonItem,
+  IonLabel,
+} from "@ionic/vue"
 
 const prieres = [
   {
