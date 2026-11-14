@@ -81,7 +81,14 @@
                 @click="saint.vies_id !== 0 && navigateToSaint(saint.vies_id)"
               >
                 <ion-label>
-                  <h2>{{ saint.prefixe }} {{ saint.saint }}</h2>
+                  <h2>
+                    <template v-if="saint.principal === 1">
+                      <strong>{{ saint.prefixe }} {{ saint.saint }}</strong>
+                    </template>
+                    <template v-else>
+                      {{ saint.saint }}
+                    </template>
+                  </h2>
                 </ion-label>
               </ion-item>
 
