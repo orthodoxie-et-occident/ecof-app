@@ -4,7 +4,6 @@ import NewsPage from "../views/NewsPage.vue"
 import NewsCategoryPage from "../views/NewsCategoryPage.vue"
 import NewsDetailPage from "../views/NewsDetailPage.vue"
 import CalendarPage from "../views/CalendarPage.vue"
-import MapPage from "../views/MapPage.vue"
 import ParishesPage from "../views/ParishesPage.vue"
 import ParishPage from "../views/ParishPage.vue"
 import PrayersPage from "../views/PrayersPage.vue"
@@ -27,7 +26,9 @@ import NotrePere from "../views/prayers/miscellaneous/NotrePere.vue"
 import EspritSaint from "../views/prayers/miscellaneous/EspritSaint.vue"
 
 const routes = [
-  { path: "/", name: "Parishes", component: ParishesPage },
+  { path: "/", name: "Calendar", component: CalendarPage },
+  { path: "/calendar", redirect: "/" },
+  { path: "/parishes", name: "Parishes", component: ParishesPage },
   { path: "/news", name: "News", component: NewsPage },
   {
     path: "/news/category/:slugId",
@@ -36,8 +37,7 @@ const routes = [
   },
   { path: "/news/:id", name: "NewsDetail", component: NewsDetailPage },
   { path: "/parish/:id", name: "Parish", component: ParishPage },
-  { path: "/calendar", name: "Calendar", component: CalendarPage },
-  { path: "/map", name: "Map", component: MapPage },
+  { path: "/map", redirect: { path: "/parishes", query: { view: "map" } } },
   { path: "/prayers", name: "Prayers", component: PrayersPage },
   { path: "/prayers/hours", name: "HoursPrayers", component: HoursPrayers },
   { path: "/prayers/hours/vespers", name: "Vespers", component: VespersPrayer },

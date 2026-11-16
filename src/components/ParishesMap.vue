@@ -1,70 +1,51 @@
 <template>
-  <ion-page>
-    <ion-header>
-      <ion-toolbar color="primary">
-        <ion-buttons slot="start">
-          <ion-menu-button />
-        </ion-buttons>
-        <ion-title>Lieux de culte</ion-title>
-      </ion-toolbar>
-    </ion-header>
+  <div class="map-wrap">
+    <div ref="mapEl" class="map" />
 
-    <ion-content :scroll-y="false">
-      <div ref="mapEl" class="map" />
-
-      <transition name="slide">
-        <div v-if="poi" class="card">
-          <div class="card-body">
-            <img :src="getDioceseImg(poi.diocese)" class="card-pin" />
-            <div class="info">
-              <strong>{{ poi.name }}</strong>
-              <span
-                class="diocese-label"
-                :class="poi.diocese === '1' ? 'link-gold' : 'link-purple'"
-                >{{ getDioceseLabel(poi.diocese) }}</span
-              >
-              <span
-                >{{ poi.adress
-                }}<template v-if="poi.adress2 && poi.adress2 !== 'null'"
-                  >, {{ poi.adress2 }}</template
-                ></span
-              >
-              <span>{{ poi.postcode }} {{ poi.city }}</span>
-              <a
-                v-if="poi.website && poi.website !== 'null'"
-                :href="poi.website"
-                :class="poi.diocese === '1' ? 'link-gold' : 'link-purple'"
-                target="_system"
-                >Visiter le site →</a
-              >
-            </div>
+    <transition name="slide">
+      <div v-if="poi" class="card">
+        <div class="card-body">
+          <img :src="getDioceseImg(poi.diocese)" class="card-pin" />
+          <div class="info">
+            <strong>{{ poi.name }}</strong>
+            <span
+              class="diocese-label"
+              :class="poi.diocese === '1' ? 'link-gold' : 'link-purple'"
+              >{{ getDioceseLabel(poi.diocese) }}</span
+            >
+            <span
+              >{{ poi.adress
+              }}<template v-if="poi.adress2 && poi.adress2 !== 'null'"
+                >, {{ poi.adress2 }}</template
+              ></span
+            >
+            <span>{{ poi.postcode }} {{ poi.city }}</span>
+            <a
+              v-if="poi.website && poi.website !== 'null'"
+              :href="poi.website"
+              :class="poi.diocese === '1' ? 'link-gold' : 'link-purple'"
+              target="_system"
+              >Visiter le site →</a
+            >
           </div>
-          <button class="close" @click="poi = null">✕</button>
         </div>
-      </transition>
-    </ion-content>
-  </ion-page>
+        <button class="close" @click="poi = null">✕</button>
+      </div>
+    </transition>
+  </div>
 </template>
 
 <script setup>
-import { ref } from "vue"
-import {
-  IonPage,
-  IonHeader,
-  IonToolbar,
-  IonButtons,
-  IonMenuButton,
-  IonTitle,
-  IonContent,
-  onIonViewDidEnter,
-  onIonViewWillLeave,
-} from "@ionic/vue"
+import { ref, onMounted, onBeforeUnmount } from "vue"
 
 import * as maplibregl from "maplibre-gl"
 import "maplibre-gl/dist/maplibre-gl.css"
 import workerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url"
 
 maplibregl.setWorkerUrl(workerUrl)
+
+let protocolRegistered = false
+let poiCache = null // évite de re-télécharger à chaque bascule Liste/Carte
 
 import { Protocol } from "pmtiles"
 import { layers, namedFlavor } from "@protomaps/basemaps"
@@ -98,10 +79,13 @@ const poi = ref(null)
 let mapInstance = null
 let resizeObserver = null
 
-onIonViewDidEnter(async () => {
+onMounted(() => {
   if (mapInstance) return
 
-  maplibregl.addProtocol("pmtiles", new Protocol().tile)
+  if (!protocolRegistered) {
+    maplibregl.addProtocol("pmtiles", new Protocol().tile)
+    protocolRegistered = true
+  }
 
   mapInstance = new maplibregl.Map({
     container: mapEl.value,
@@ -156,7 +140,11 @@ onIonViewDidEnter(async () => {
         mapInstance.addImage(d.key, data, { pixelRatio: 2 })
       }
 
-      const raw = await fetch("https://api.ecof.app/map").then((r) => r.json())
+      const raw =
+        poiCache ??
+        (poiCache = await fetch("https://api.ecof.app/map").then((r) =>
+          r.json(),
+        ))
 
       mapInstance.addSource("poi", {
         type: "geojson",
@@ -246,7 +234,7 @@ onIonViewDidEnter(async () => {
   })
 })
 
-onIonViewWillLeave(() => {
+onBeforeUnmount(() => {
   resizeObserver?.disconnect()
   resizeObserver = null
   mapInstance?.remove()
@@ -256,6 +244,11 @@ onIonViewWillLeave(() => {
 </script>
 
 <style scoped>
+.map-wrap {
+  position: absolute;
+  inset: 0;
+}
+
 .map {
   position: absolute;
   inset: 0;

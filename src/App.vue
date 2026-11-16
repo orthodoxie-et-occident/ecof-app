@@ -65,16 +65,14 @@ import parishImage from "@/assets/img/layout/ange.png"
 import newsImage from "@/assets/img/layout/ange-b.png"
 import aboutImage from "@/assets/img/layout/about.png"
 import prayerImage from "@/assets/img/layout/seraphim.png"
-import mapImage from "@/assets/img/layout/pins.png"
 import calendarImage from "@/assets/img/layout/christ.png"
 
 const menuItems = [
-  { label: "Paroisses", route: "/", image: parishImage },
-  { label: "Calendrier", route: "/calendar", image: calendarImage },
+  { label: "Calendrier", route: "/", image: calendarImage },
+  { label: "Paroisses", route: "/parishes", image: parishImage },
   { label: "Actualités", route: "/news", image: newsImage },
   { label: "Prières", route: "/prayers", image: prayerImage },
   { label: "Synaxaire", route: "/synaxar", image: synaxarImage },
-  { label: "Carte", route: "/map", image: mapImage },
   { label: "À propos", route: "/about", image: aboutImage },
 ]
 

@@ -9,41 +9,64 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content>
-      <template
-        v-for="(paroisses, departement) in paroissesByDept"
-        :key="departement"
-      >
-        <ion-list-header>
-          <ion-label>
-            <h2>{{ departement }}</h2>
-          </ion-label>
-        </ion-list-header>
-        <ion-list>
-          <ion-item
-            button
-            detail
-            v-for="p in paroisses"
-            :key="p.id"
-            @click="showEvents(p.id, p.nom)"
-          >
-            <ion-thumbnail slot="start">
-              <img :src="p.img" :alt="p.nom" />
-            </ion-thumbnail>
+    <ion-content :scroll-y="mode === 'list'">
+      <ParishesMap v-if="mode === 'map'" />
+
+      <template v-else>
+        <template
+          v-for="(paroisses, departement) in paroissesByDept"
+          :key="departement"
+        >
+          <ion-list-header>
             <ion-label>
-              <h2>{{ p.nom }}</h2>
-              <p>{{ p.ville }}</p>
+              <h2>{{ departement }}</h2>
             </ion-label>
-          </ion-item>
-        </ion-list>
+          </ion-list-header>
+          <ion-list>
+            <ion-item
+              button
+              detail
+              v-for="p in paroisses"
+              :key="p.id"
+              @click="showEvents(p.id, p.nom)"
+            >
+              <ion-thumbnail slot="start">
+                <img :src="p.img" :alt="p.nom" />
+              </ion-thumbnail>
+              <ion-label>
+                <h2>{{ p.nom }}</h2>
+                <p>{{ p.ville }}</p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </template>
       </template>
     </ion-content>
+
+    <ion-footer>
+      <ion-tab-bar :selected-tab="mode">
+        <ion-tab-button tab="list" @click="mode = 'list'">
+          <ion-icon :icon="listOutline" />
+          <ion-label>Liste</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="map" @click="mode = 'map'">
+          <ion-icon :icon="mapOutline" />
+          <ion-label>Carte</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-footer>
   </ion-page>
 </template>
 
 <script setup>
-import { useIonRouter } from "@ionic/vue"
+import { ref, watch } from "vue"
+import { useRoute } from "vue-router"
 import {
+  useIonRouter,
+  IonFooter,
+  IonTabBar,
+  IonTabButton,
+  IonIcon,
   IonPage,
   IonHeader,
   IonToolbar,
@@ -72,7 +95,20 @@ import stebaumeImg from "@/assets/img/parishes/stebaume.png"
 import poitiersImg from "@/assets/img/parishes/poitiers2.png"
 import lisieuxImg from "@/assets/img/parishes/lisieux.png"
 
+import { listOutline, mapOutline } from "ionicons/icons"
+import ParishesMap from "@/components/ParishesMap.vue"
+
 const ionRouter = useIonRouter()
+const route = useRoute()
+
+// "list" | "map" — ?view=map permet d'ouvrir directement la carte
+const mode = ref(route.query.view === "map" ? "map" : "list")
+watch(
+  () => route.query.view,
+  (v) => {
+    if (route.path === "/parishes") mode.value = v === "map" ? "map" : "list"
+  },
+)
 
 const paroissesByDept = {
   "14 - CALVADOS": [
